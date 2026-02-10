@@ -20,11 +20,19 @@ import { sendEventToObservability, getCurrentTimestamp, getSourceApp } from '../
 import { notifyTaskComplete, notifyError, getSessionDurationMinutes } from '../lib/notifications';
 import { getLearningCategory, isLearningCapture } from '../lib/learning-utils';
 import { getPSTTimestamp, getPSTDate, getYearMonth, getISOTimestamp } from '../lib/time';
+import { getMemoryDir, detectProject } from '../lib/project-context';
 import type { ParsedTranscript, StructuredResponse } from '../../skills/PAI/Tools/TranscriptParser';
 
+// ============================================================================
+// PATH RESOLUTION - Context-Aware Memory Routing
+// ============================================================================
+// WORK/ directory routes to project-local when in a project
+// STATE/ directory always stays central (runtime state)
+// LEARNING/ categories: SYSTEM/ALGORITHM always central, others project-local
+// ============================================================================
 const BASE_DIR = getPaiDir();
-const WORK_DIR = join(BASE_DIR, 'MEMORY', 'WORK');
-const STATE_DIR = join(BASE_DIR, 'MEMORY', 'STATE');
+const WORK_DIR = getMemoryDir('WORK');  // Context-aware: project-local or central
+const STATE_DIR = join(BASE_DIR, 'MEMORY', 'STATE');  // Always central
 const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');
 
 // ============================================================================
@@ -297,7 +305,23 @@ async function captureWorkSummary(text: string, structured: StructuredResponse):
       const yearMonth = getYearMonth();
       const filename = generateFilename(description, 'LEARNING');
       const category = getLearningCategory(text);
-      const targetDir = join(BASE_DIR, 'MEMORY', 'LEARNING', category, yearMonth);
+
+      // Context-aware routing for learning directory
+      // SYSTEM/ALGORITHM categories always central, others can be project-local
+      const centralCategories = ['SYSTEM', 'ALGORITHM'];
+      let targetDir: string;
+
+      if (centralCategories.includes(category.toUpperCase())) {
+        targetDir = join(BASE_DIR, 'MEMORY', 'LEARNING', category, yearMonth);
+      } else {
+        const project = detectProject();
+        if (project) {
+          targetDir = join(project.memoryPath, 'LEARNING', category, yearMonth);
+          console.error(`[ResponseCapture] Project context: ${project.name} -> ${targetDir}`);
+        } else {
+          targetDir = join(BASE_DIR, 'MEMORY', 'LEARNING', category, yearMonth);
+        }
+      }
 
       if (!existsSync(targetDir)) {
         mkdirSync(targetDir, { recursive: true });

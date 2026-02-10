@@ -253,7 +253,8 @@
       "daidentity": "AI identity (name, voice)",
       "principal": "Your identity",
       "permissions": "Tool permissions",
-      "hooks": "Lifecycle event hooks"
+      "hooks": "Lifecycle event hooks",
+      "memory": "Project-specific memory system (v2.5). Automatic project detection based on CWD. ~/Projects/* detected as projects. Use .pai-root marker file for projects outside ~/Projects. WORK/ and RESEARCH/ go to project-local .pai-memory/. SYSTEM/ALGORITHM/SIGNALS/FAILURES stay central."
     }
   },
   "max_tokens": 4096,
@@ -263,6 +264,6 @@
     "hooks": 18,
     "signals": 10,
     "files": 44,
-    "updatedAt": "2026-02-10T16:53:39.385Z"
+    "updatedAt": "2026-02-10T17:24:47.665Z"
   }
 }

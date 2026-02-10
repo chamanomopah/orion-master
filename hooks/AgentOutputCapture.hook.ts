@@ -51,6 +51,7 @@ import { paiPath } from './lib/paths';
 import { sendEventToObservability, getCurrentTimestamp, getSourceApp } from './lib/observability';
 import { extractAgentInstanceId } from './lib/metadata-extraction';
 import { notifyBackgroundAgent } from './lib/notifications';
+import { getMemoryDir, detectProject } from './lib/project-context';
 
 /**
  * Get current timestamp in PST timezone
@@ -442,6 +443,7 @@ async function main() {
 }
 
 // UOCS: Capture agent output to history directory
+// RESEARCH/ routes to project-local when in a project (research often project-specific)
 async function captureAgentOutput(
   agentType: string,
   completionMessage: string,
@@ -451,7 +453,8 @@ async function captureAgentOutput(
   const { writeFileSync, mkdirSync, existsSync } = require('fs');
   const { join } = require('path');
 
-  const MEMORY_DIR = paiPath('MEMORY');
+  // Context-aware routing: RESEARCH goes to project-local when in project
+  const RESEARCH_BASE = getMemoryDir('RESEARCH');
 
   // Generate timestamp for filename (PST)
   const pstTimestamp = getPSTTimestamp();
@@ -461,6 +464,14 @@ async function captureAgentOutput(
     .replace(/ /, '-'); // YYYY-MM-DD-HHMMSS
 
   const yearMonth = timestamp.substring(0, 7); // YYYY-MM
+
+  // Log context detection for debugging
+  const project = detectProject();
+  if (project) {
+    console.error(`[AgentOutputCapture] Project context: ${project.name} -> ${RESEARCH_BASE}`);
+  } else {
+    console.error(`[AgentOutputCapture] Central mode -> ${RESEARCH_BASE}`);
+  }
 
   // Infer capture type from agent type
   // All agent outputs go to RESEARCH for simplicity (consolidated structure)
@@ -493,7 +504,7 @@ async function captureAgentOutput(
   const filename = `${timestamp}_AGENT-${agentType}_${captureType}_${description}.md`;
 
   // Ensure directory exists
-  const outputDir = join(MEMORY_DIR, category, yearMonth);
+  const outputDir = join(RESEARCH_BASE, yearMonth);
   if (!existsSync(outputDir)) {
     mkdirSync(outputDir, { recursive: true });
   }

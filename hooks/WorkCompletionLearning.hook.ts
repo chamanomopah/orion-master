@@ -55,13 +55,44 @@ import { join, dirname } from 'path';
 import { getISOTimestamp, getPSTDate } from './lib/time';
 import { getLearningCategory } from './lib/learning-utils';
 import { getPaiDir } from './lib/paths';
+import { detectProject } from './lib/project-context';
 
+// ============================================================================
+// PATH RESOLUTION - Context-Aware Memory Routing
+// ============================================================================
+// WORK/ directory routes to project-local when in a project
+// STATE/ directory always stays central
+// LEARNING/ categories:
+//   - SYSTEM, ALGORITHM, SIGNALS, FAILURES: always central (system-level)
+//   - Other categories: project-local when in project
+// ============================================================================
 const PAI_DIR = getPaiDir();
-const MEMORY_DIR = join(PAI_DIR, 'MEMORY');
-const STATE_DIR = join(MEMORY_DIR, 'STATE');
+const STATE_DIR = join(PAI_DIR, 'MEMORY', 'STATE');
 const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');
-const WORK_DIR = join(MEMORY_DIR, 'WORK');
-const LEARNING_DIR = join(MEMORY_DIR, 'LEARNING');
+const WORK_DIR = join(PAI_DIR, 'MEMORY', 'WORK');  // Legacy, for reading existing work
+const LEARNING_DIR = join(PAI_DIR, 'MEMORY', 'LEARNING');  // Base for routing
+
+/**
+ * Get the appropriate LEARNING directory for a category
+ * System-level categories stay central, others can be project-local
+ */
+function getLearningCategoryDir(category: string): string {
+  // Central categories that always go to ~/.claude/MEMORY
+  const centralCategories = ['SYSTEM', 'ALGORITHM', 'SIGNALS', 'FAILURES'];
+  if (centralCategories.includes(category.toUpperCase())) {
+    return join(PAI_DIR, 'MEMORY', 'LEARNING', category);
+  }
+
+  // Check if we're in a project
+  const project = detectProject();
+  if (project) {
+    // Project-local learning for project-specific insights
+    return join(project.memoryPath, 'LEARNING', category);
+  }
+
+  // Fall back to central
+  return join(PAI_DIR, 'MEMORY', 'LEARNING', category);
+}
 
 interface CurrentWork {
   session_id: string;
@@ -159,7 +190,9 @@ function getMonthDir(category: 'SYSTEM' | 'ALGORITHM'): string {
   const year = now.getFullYear();
   const month = String(now.getMonth() + 1).padStart(2, '0');
 
-  const monthDir = join(LEARNING_DIR, category, `${year}-${month}`);
+  // Use context-aware routing for learning directory
+  const categoryDir = getLearningCategoryDir(category);
+  const monthDir = join(categoryDir, `${year}-${month}`);
 
   if (!existsSync(monthDir)) {
     mkdirSync(monthDir, { recursive: true });

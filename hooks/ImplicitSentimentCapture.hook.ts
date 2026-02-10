@@ -69,6 +69,7 @@ import { getLearningCategory } from './lib/learning-utils';
 import { getISOTimestamp, getPSTComponents } from './lib/time';
 import { captureFailure } from '../skills/PAI/Tools/FailureCapture';
 import { getPaiDir } from './lib/paths';
+import { detectProject } from './lib/project-context';
 
 const PRINCIPAL_NAME = getPrincipal().name;
 const ASSISTANT_NAME = getIdentity().name;
@@ -279,10 +280,12 @@ async function analyzeSentiment(prompt: string, context: string): Promise<Sentim
 
 /**
  * Write implicit rating to ratings.jsonl
- * NOTE: Ratings are now stored in LEARNING/SIGNALS/ (consolidated from separate SIGNALS/)
+ * NOTE: Ratings are stored in LEARNING/SIGNALS/ which is always central
+ * (AI performance tracking is global, not project-specific)
  */
 function writeImplicitRating(entry: ImplicitRatingEntry): void {
   const baseDir = getPaiDir();
+  // SIGNALS always central - AI performance tracking is global
   const signalsDir = join(baseDir, 'MEMORY', 'LEARNING', 'SIGNALS');
   const ratingsFile = join(signalsDir, 'ratings.jsonl');
 
@@ -296,6 +299,7 @@ function writeImplicitRating(entry: ImplicitRatingEntry): void {
 
 /**
  * Capture low rating as learning opportunity
+ * Routes to project-local for project-specific categories, central for system categories
  */
 function captureLowRatingLearning(
   rating: number,
@@ -310,7 +314,23 @@ function captureLowRatingLearning(
 
   const yearMonth = `${year}-${month}`;
   const category = getLearningCategory(detailedContext, sentimentSummary);
-  const learningsDir = join(baseDir, 'MEMORY', 'LEARNING', category, yearMonth);
+
+  // Context-aware routing for learning directory
+  // SYSTEM/ALGORITHM categories always central, others can be project-local
+  const centralCategories = ['SYSTEM', 'ALGORITHM', 'FAILURES'];
+  let learningsDir: string;
+
+  if (centralCategories.includes(category.toUpperCase())) {
+    learningsDir = join(baseDir, 'MEMORY', 'LEARNING', category, yearMonth);
+  } else {
+    const project = detectProject();
+    if (project) {
+      learningsDir = join(project.memoryPath, 'LEARNING', category, yearMonth);
+      console.error(`[ImplicitSentimentCapture] Project context: ${project.name} -> ${learningsDir}`);
+    } else {
+      learningsDir = join(baseDir, 'MEMORY', 'LEARNING', category, yearMonth);
+    }
+  }
 
   if (!existsSync(learningsDir)) {
     mkdirSync(learningsDir, { recursive: true });

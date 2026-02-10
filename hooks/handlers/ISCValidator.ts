@@ -21,6 +21,7 @@
 import { existsSync, readFileSync, statSync } from 'fs';
 import { join } from 'path';
 import { getPaiDir } from '../lib/paths';
+import { getMemoryDir } from '../lib/project-context';
 import type { ParsedTranscript } from '../../skills/PAI/Tools/TranscriptParser';
 
 interface CurrentWork {
@@ -48,9 +49,15 @@ interface ValidationResult {
   errors: string[];
 }
 
+// ============================================================================
+// PATH RESOLUTION - Context-Aware Memory Routing
+// ============================================================================
+// WORK/ directory routes to project-local when in a project
+// STATE/ directory always stays central (runtime state)
+// ============================================================================
 const BASE_DIR = getPaiDir();
-const WORK_DIR = join(BASE_DIR, 'MEMORY', 'WORK');
-const STATE_DIR = join(BASE_DIR, 'MEMORY', 'STATE');
+const WORK_DIR = getMemoryDir('WORK');  // Context-aware: project-local or central
+const STATE_DIR = join(BASE_DIR, 'MEMORY', 'STATE');  // Always central
 const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');
 
 function readCurrentWork(): CurrentWork | null {

@@ -30,6 +30,7 @@ import { join } from 'path';
 import { execSync } from 'child_process';
 import { getPaiDir } from './lib/paths';
 import { getISOTimestamp, getPSTComponents } from './lib/time';
+import { detectProject } from './lib/project-context';
 
 interface HookInput {
   session_id: string;
@@ -78,12 +79,14 @@ function loadSoulFile(paiDir: string): string | null {
 
 /**
  * Load recent learnings from MEMORY/LEARNING/
+ * LEARNING/SYSTEM/ and LEARNING/ALGORITHM/ always central (system-level learnings)
  */
 function loadRecentLearnings(paiDir: string, daysBack: number = 3): string[] {
   const learnings: string[] = [];
-  const baseDir = join(paiDir, 'MEMORY/LEARNING');
+  // These categories are always central
+  const baseDir = join(paiDir, 'MEMORY', 'LEARNING');
 
-  // Check ALGORITHM and SYSTEM subdirs
+  // Check ALGORITHM and SYSTEM subdirs (always central)
   for (const subdir of ['ALGORITHM', 'SYSTEM']) {
     const { year, month } = getPSTComponents();
     const monthDir = join(baseDir, subdir, `${year}-${month}`);
@@ -212,9 +215,11 @@ function analyzeSoulEvolution(
 
 /**
  * Load or create evolution queue
+ * STATE/ always central (runtime state)
  */
 function loadEvolutionQueue(paiDir: string): EvolutionQueue {
-  const queuePath = join(paiDir, 'MEMORY/STATE/soul-evolution-queue.json');
+  // STATE is always central
+  const queuePath = join(paiDir, 'MEMORY', 'STATE/soul-evolution-queue.json');
 
   if (existsSync(queuePath)) {
     try {
@@ -230,9 +235,11 @@ function loadEvolutionQueue(paiDir: string): EvolutionQueue {
 
 /**
  * Save evolution queue
+ * STATE/ always central (runtime state)
  */
 function saveEvolutionQueue(paiDir: string, queue: EvolutionQueue): void {
-  const queuePath = join(paiDir, 'MEMORY/STATE/soul-evolution-queue.json');
+  // STATE is always central
+  const queuePath = join(paiDir, 'MEMORY', 'STATE/soul-evolution-queue.json');
   writeFileSync(queuePath, JSON.stringify(queue, null, 2));
 }
 

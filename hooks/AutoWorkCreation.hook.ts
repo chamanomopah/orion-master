@@ -28,6 +28,7 @@ import { getPSTComponents, getISOTimestamp } from './lib/time';
 import { inference } from '../skills/PAI/Tools/Inference';
 import { PLATFORM } from './lib/platform-paths';
 import { getPaiDir } from './lib/paths';
+import { getMemoryDir, detectProject } from './lib/project-context';
 
 interface HookInput {
   session_id: string;
@@ -50,9 +51,14 @@ interface PromptClassification {
   is_new_topic: boolean;
 }
 
-// Cross-platform path resolution using getPaiDir from lib/paths
+// ============================================================================
+// PATH RESOLUTION - Context-Aware Memory Routing
+// ============================================================================
+// WORK/ directory routes to project-local when in a project, otherwise central
+// STATE/ directory always stays central (runtime state is not project-specific)
+// ============================================================================
 const BASE_DIR = getPaiDir();
-const WORK_DIR = join(BASE_DIR, 'MEMORY', 'WORK');
+const WORK_DIR = getMemoryDir('WORK');
 const STATE_DIR = join(BASE_DIR, 'MEMORY', 'STATE');
 const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');
 
@@ -295,6 +301,14 @@ async function main() {
 
     if (!prompt || prompt.length < 2) {
       process.exit(0);
+    }
+
+    // Log context detection for debugging
+    const project = detectProject();
+    if (project) {
+      console.error(`[AutoWork] Project context: ${project.name} -> ${WORK_DIR}`);
+    } else {
+      console.error(`[AutoWork] Central mode -> ${WORK_DIR}`);
     }
 
     if (!existsSync(WORK_DIR)) mkdirSync(WORK_DIR, { recursive: true });

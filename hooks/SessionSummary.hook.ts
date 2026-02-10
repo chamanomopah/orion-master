@@ -51,13 +51,18 @@ import { writeFileSync, existsSync, readFileSync, unlinkSync } from 'fs';
 import { join } from 'path';
 import { getISOTimestamp } from './lib/time';
 import { getPaiDir } from './lib/paths';
+import { getMemoryDir, detectProject } from './lib/project-context';
 
-// Cross-platform path resolution
+// ============================================================================
+// PATH RESOLUTION - Context-Aware Memory Routing
+// ============================================================================
+// WORK/ directory routes to project-local when in a project
+// STATE/ directory always stays central (runtime state)
+// ============================================================================
 const PAI_DIR = getPaiDir();
-const MEMORY_DIR = join(PAI_DIR, 'MEMORY');
-const STATE_DIR = join(MEMORY_DIR, 'STATE');
+const STATE_DIR = join(PAI_DIR, 'MEMORY', 'STATE');
 const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');
-const WORK_DIR = join(MEMORY_DIR, 'WORK');
+const WORK_DIR = getMemoryDir('WORK');  // Context-aware: project-local or central
 
 interface CurrentWork {
   session_id: string;

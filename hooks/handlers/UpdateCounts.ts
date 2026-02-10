@@ -19,6 +19,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, statSync } from 'fs';
 import { join } from 'path';
 import { getPaiDir, getSettingsPath } from '../lib/paths';
+// Note: LEARNING/SIGNALS is always central (AI performance tracking is global)
 
 interface Counts {
   skills: number;
