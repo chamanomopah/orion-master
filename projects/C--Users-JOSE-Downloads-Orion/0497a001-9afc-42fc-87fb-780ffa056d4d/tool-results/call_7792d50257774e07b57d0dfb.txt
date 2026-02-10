@@ -1,0 +1,436 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * UpdateTabTitle.hook.ts - Tab Title + Voice Announcement (UserPromptSubmit)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Provides real-time visual feedback for user prompts. Uses AI inference
+     7→ * to generate a concise 3-5 word gerund phrase and updates the terminal tab title
+     8→ * with color coding to show task state.
+     9→ *
+    10→ * VOICE: Announces the inference-generated sentence when prompt is received
+    11→ * (e.g., "Checking the config.", "Fixing the bug."). Same as tab title.
+    12→ * Task completion voice happens via StopOrchestrator using the 🗣️ line.
+    13→ * Uses ElevenLabs TTS via the voice server on port 8888.
+    14→ *
+    15→ * TRIGGER: UserPromptSubmit
+    16→ *
+    17→ * INPUT:
+    18→ * - stdin: Hook input JSON with prompt, session_id, transcript_path
+    19→ *
+    20→ * OUTPUT:
+    21→ * - stdout: None
+    22→ * - stderr: Status and debug messages
+    23→ * - exit(0): Always (non-blocking)
+    24→ *
+    25→ * SIDE EFFECTS:
+    26→ * - Kitty remote control: Sets tab title and color
+    27→ * - Sonnet inference API call: Generates summary with current session context
+    28→ * - Reads transcript for CURRENT SESSION context (filtered)
+    29→ * - Voice server: Announces the inference-generated summary
+    30→ *
+    31→ * CONTEXT FILTERING:
+    32→ * Context is read from current session transcript but filtered to exclude:
+    33→ * - CONTEXT: summaries (overflow artifacts from previous sessions)
+    34→ * - System reminders and hook output
+    35→ * This prevents contamination from previous sessions while still allowing
+    36→ * context-aware summaries like "Fixing the auth bug" for short prompts.
+    37→ *
+    38→ * INTER-HOOK RELATIONSHIPS:
+    39→ * - DEPENDS ON: None
+    40→ * - COORDINATES WITH: SetQuestionTab (shares tab color management)
+    41→ * - COORDINATES WITH: StopOrchestrator/tab-state (resets color on completion)
+    42→ * - MUST RUN BEFORE: None
+    43→ * - MUST RUN AFTER: None
+    44→ *
+    45→ * TAB COLOR SCHEME (inactive tab only - active tab stays dark blue):
+    46→ * - Dark purple (#1E0A3C): AI inference/thinking (🧠 prefix)
+    47→ * - Dark orange (#804000): Actively working (⚙️ prefix)
+    48→ * - Dark teal (#085050): Waiting for user input (SetQuestionTab)
+    49→ * - Dark blue (#002B80): Active tab always uses this
+    50→ *
+    51→ * SUMMARY GENERATION:
+    52→ * 1. Immediately shows "Processing…" with purple color
+    53→ * 2. Uses Sonnet with conversation context to generate summary
+    54→ * 3. Validates summary (rejects garbage like "I appreciate...")
+    55→ * 4. Updates tab to gerund-based summary (e.g., "Debugging stuck hook")
+    56→ *
+    57→ * TAB/VOICE FORMAT (same for both):
+    58→ * - Complete gerund phrase, 3-5 words maximum
+    59→ * - Starts with gerund (-ing verb), ends with period
+    60→ * - Must be grammatically complete (no dangling prepositions)
+    61→ * - Examples: "Checking the config.", "Fixing tab hook.", "Adjusting visual styling."
+    62→ *
+    63→ * ERROR HANDLING:
+    64→ * - Inference failure: Falls back to "Processing"
+    65→ * - Invalid summary: Falls back to quickTitle
+    66→ * - Kitty unavailable: Silent failure (escape codes for other terminals)
+    67→ *
+    68→ * PERFORMANCE:
+    69→ * - Non-blocking: Yes (visual feedback)
+    70→ * - Typical execution: <2s (Sonnet inference for quality)
+    71→ * - Includes 5-second stdin timeout
+    72→ */
+    73→
+    74→import { execSync } from 'child_process';
+    75→import { inference } from '../skills/PAI/Tools/Inference';
+    76→import { isValidTabSummary, getTabFallback } from './lib/response-format';
+    77→
+    78→
+    79→// Tab colors - different states
+    80→const TAB_WORKING_BG = '#804000';      // Dark orange - actively working
+    81→const TAB_INFERENCE_BG = '#1E0A3C';    // Very dark purple - inference/AI thinking
+    82→const ACTIVE_TAB_BG = '#002B80';       // Dark blue - active tab base
+    83→const ACTIVE_TEXT = '#FFFFFF';          // White text for active
+    84→const INACTIVE_TEXT = '#A0A0A0';        // Gray text for inactive
+    85→
+    86→
+    87→interface HookInput {
+    88→  session_id: string;
+    89→  prompt: string;
+    90→  transcript_path: string;
+    91→  hook_event_name: string;
+    92→}
+    93→
+    94→/**
+    95→ * Read stdin with timeout
+    96→ */
+    97→async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
+    98→  return new Promise((resolve, reject) => {
+    99→    let data = '';
+   100→    const timer = setTimeout(() => reject(new Error('Timeout')), timeout);
+   101→    process.stdin.on('data', (chunk) => { data += chunk.toString(); });
+   102→    process.stdin.on('end', () => { clearTimeout(timer); resolve(data); });
+   103→    process.stdin.on('error', (err) => { clearTimeout(timer); reject(err); });
+   104→  });
+   105→}
+   106→
+   107→/**
+   108→ * Quick fallback - just a generic placeholder while inference runs
+   109→ * Short and non-generic
+   110→ */
+   111→function quickTitle(_prompt: string): string {
+   112→  return 'Thinking.';
+   113→}
+   114→
+   115→/**
+   116→ * Get recent conversation context from CURRENT SESSION transcript only.
+   117→ * Filters out CONTEXT: summaries (overflow artifacts from previous sessions).
+   118→ * Returns last N actual user messages for context.
+   119→ */
+   120→function getRecentContext(transcriptPath: string, maxTurns: number = 3): string {
+   121→  try {
+   122→    if (!transcriptPath) return '';
+   123→
+   124→    const { readFileSync } = require('fs');
+   125→    const content = readFileSync(transcriptPath, 'utf-8');
+   126→    const lines = content.trim().split('\n');
+   127→
+   128→    const turns: string[] = [];
+   129→
+   130→    for (const line of lines) {
+   131→      if (!line.trim()) continue;
+   132→      try {
+   133→        const entry = JSON.parse(line);
+   134→
+   135→        // Handle user messages (skip tool_result, only capture actual text)
+   136→        if (entry.type === 'user' && entry.message?.content) {
+   137→          let text = '';
+   138→          if (typeof entry.message.content === 'string') {
+   139→            text = entry.message.content;
+   140→          } else if (Array.isArray(entry.message.content)) {
+   141→            // Extract only text blocks, skip tool_result blocks
+   142→            text = entry.message.content
+   143→              .filter((c: any) => c.type === 'text')
+   144→              .map((c: any) => c.text)
+   145→              .join(' ');
+   146→          }
+   147→
+   148→          // CRITICAL: Skip CONTEXT: summaries - these are overflow artifacts from previous sessions
+   149→          if (text.trim().startsWith('CONTEXT:')) {
+   150→            console.error('[UpdateTabTitle] Skipping CONTEXT: summary (overflow artifact)');
+   151→            continue;
+   152→          }
+   153→
+   154→          // Skip system reminders and hook output
+   155→          if (text.includes('<system-reminder>') || text.includes('SessionStart:startup hook')) {
+   156→            continue;
+   157→          }
+   158→
+   159→          if (text.trim() && text.trim().length > 10) {
+   160→            turns.push(text.slice(0, 300));
+   161→          }
+   162→        }
+   163→      } catch {
+   164→        // Skip invalid JSON
+   165→      }
+   166→    }
+   167→
+   168→    // Get last N actual user turns (not overflow summaries)
+   169→    const recentTurns = turns.slice(-maxTurns);
+   170→    if (recentTurns.length === 0) return '';
+   171→
+   172→    return recentTurns.map(t => `User: ${t}`).join('\n');
+   173→  } catch (err) {
+   174→    console.error('[UpdateTabTitle] Error reading transcript:', err);
+   175→    return '';
+   176→  }
+   177→}
+   178→
+   179→const SYSTEM_PROMPT = `Create a 3-5 word COMPLETE SENTENCE summarizing the user's CURRENT MESSAGE.
+   180→
+   181→CRITICAL: Summarize ONLY the current message. If previous messages discuss a different topic, IGNORE THEM COMPLETELY. The current message is what matters.
+   182→
+   183→RULES:
+   184→1. Start with a gerund (-ing verb): Fixing, Checking, Updating, etc.
+   185→2. Include the specific OBJECT being acted on
+   186→3. MUST be a COMPLETE sentence (no dangling prepositions or articles)
+   187→4. End with a period
+   188→5. NEVER use generic subjects: "task", "work", "request", "response"
+   189→
+   190→GOOD (complete sentences):
+   191→- "Fixing the auth bug."
+   192→- "Checking tab title code."
+   193→- "Updating hook validation."
+   194→- "Reviewing the config file."
+   195→- "Drafting manager response letter."
+   196→
+   197→BAD (fragments or filler):
+   198→- "Fixing the" (incomplete - missing object)
+   199→- "Working on" (incomplete - missing what)
+   200→- "Processing your request." (generic filler)
+   201→- "I'll help you fix" (conversational)
+   202→- "Completing the task." (generic - WHAT task?)
+   203→
+   204→Output ONLY the sentence. Nothing else.`;
+   205→
+   206→interface SummaryResult {
+   207→  summary: string;
+   208→  fromInference: boolean;
+   209→}
+   210→
+   211→/**
+   212→ * Generate concise 3-5 word summary using Inference (standard/Sonnet).
+   213→ * Uses current session context to help with ambiguous short prompts like "fix it".
+   214→ * Returns both the summary and whether it came from inference (vs fallback).
+   215→ *
+   216→ * Context is filtered to exclude:
+   217→ * - CONTEXT: summaries (overflow artifacts from previous sessions)
+   218→ * - System reminders and hook output
+   219→ */
+   220→async function summarizePrompt(prompt: string, transcriptPath: string): Promise<SummaryResult> {
+   221→  // Only use context for very short prompts that need disambiguation
+   222→  // Long prompts (50+ chars) are self-explanatory — context just contaminates
+   223→  const promptLength = prompt.trim().length;
+   224→  const needsContext = promptLength < 50;
+   225→  const context = needsContext ? getRecentContext(transcriptPath, 1) : '';
+   226→
+   227→  // Build user prompt — current message is ALWAYS the focus
+   228→  // For short prompts: minimal context helps disambiguate ("fix it" → fix what?)
+   229→  // For long prompts: no context needed, the message speaks for itself
+   230→  let userPrompt: string;
+   231→  if (context) {
+   232→    // Put context FIRST, current message LAST (recency bias helps the model focus on it)
+   233→    userPrompt = `Previous context (ONLY use if current message is ambiguous):
+   234→${context}
+   235→
+   236→CURRENT MESSAGE — summarize THIS and ONLY this:
+   237→${prompt.slice(0, 800)}`;
+   238→  } else {
+   239→    userPrompt = prompt.slice(0, 1000);
+   240→  }
+   241→
+   242→  const result = await inference({
+   243→    systemPrompt: SYSTEM_PROMPT,
+   244→    userPrompt,
+   245→    timeout: 25000,
+   246→    level: 'standard',  // Sonnet for better characterization of complex prompts
+   247→  });
+   248→
+   249→  if (result.success && result.output) {
+   250→    // Clean up quotes, keep the period, limit to 5 words
+   251→    let summary = result.output.replace(/^["']|["']$/g, '').trim();
+   252→    const words = summary.split(/\s+/).slice(0, 5);
+   253→    summary = words.join(' ');
+   254→    // Ensure it ends with period
+   255→    if (!summary.endsWith('.')) summary += '.';
+   256→    return { summary, fromInference: true };
+   257→  }
+   258→
+   259→  return { summary: quickTitle(prompt), fromInference: false };
+   260→}
+   261→
+   262→type TabState = 'normal' | 'working' | 'inference';
+   263→
+   264→/**
+   265→ * Set terminal tab title and color based on state
+   266→ * Uses Kitty remote control if available (hooks run without TTY),
+   267→ * falls back to escape codes for other terminals
+   268→ */
+   269→function setTabTitle(title: string, state: TabState = 'normal'): void {
+   270→  try {
+   271→    // Add "…" suffix for active states
+   272→    const titleWithSuffix = state !== 'normal' ? `${title}…` : title;
+   273→    const truncated = titleWithSuffix.length > 50 ? titleWithSuffix.slice(0, 47) + '…' : titleWithSuffix;
+   274→    const escaped = truncated.replace(/'/g, "'\\''");
+   275→
+   276→    // Check if we're in Kitty (TERM=xterm-kitty or KITTY_LISTEN_ON set)
+   277→    const isKitty = process.env.TERM === 'xterm-kitty' || process.env.KITTY_LISTEN_ON;
+   278→
+   279→    if (isKitty) {
+   280→      // Use Kitty remote control - works even without TTY
+   281→      execSync(`kitty @ set-tab-title "${escaped}"`, { stdio: 'ignore', timeout: 2000 });
+   282→
+   283→      // Set color based on state
+   284→      if (state === 'inference') {
+   285→        // Purple for inference/AI thinking - active tab stays dark blue, inactive shows purple
+   286→        execSync(
+   287→          `kitten @ set-tab-color --self active_bg=${ACTIVE_TAB_BG} active_fg=${ACTIVE_TEXT} inactive_bg=${TAB_INFERENCE_BG} inactive_fg=${INACTIVE_TEXT}`,
+   288→          { stdio: 'ignore', timeout: 2000 }
+   289→        );
+   290→        console.error('[UpdateTabTitle] Set inference color (purple on inactive only)');
+   291→      } else if (state === 'working') {
+   292→        // Orange for actively working - active tab stays dark blue, inactive shows orange
+   293→        execSync(
+   294→          `kitten @ set-tab-color --self active_bg=${ACTIVE_TAB_BG} active_fg=${ACTIVE_TEXT} inactive_bg=${TAB_WORKING_BG} inactive_fg=${INACTIVE_TEXT}`,
+   295→          { stdio: 'ignore', timeout: 2000 }
+   296→        );
+   297→        console.error('[UpdateTabTitle] Set working color (orange on inactive only)');
+   298→      }
+   299→
+   300→      console.error('[UpdateTabTitle] Set via Kitty remote control');
+   301→    } else {
+   302→      // Fallback to escape codes for other terminals
+   303→      execSync(`printf '\\033]0;${escaped}\\007' >&2`, { stdio: ['pipe', 'pipe', 'inherit'] });
+   304→      execSync(`printf '\\033]2;${escaped}\\007' >&2`, { stdio: ['pipe', 'pipe', 'inherit'] });
+   305→      execSync(`printf '\\033]30;${escaped}\\007' >&2`, { stdio: ['pipe', 'pipe', 'inherit'] });
+   306→    }
+   307→  } catch (err) {
+   308→    console.error(`[UpdateTabTitle] Failed to set title: ${err}`);
+   309→  }
+   310→}
+   311→
+   312→/**
+   313→ * Announce prompt receipt via voice server (ElevenLabs TTS).
+   314→ * Summary is already a complete sentence from inference.
+   315→ */
+   316→async function announceVoice(summary: string): Promise<void> {
+   317→  const identity = await import('./lib/identity').then(m => m.getIdentity());
+   318→
+   319→  // Summary is already a complete sentence (e.g., "Fixing the bug now.")
+   320→  // Just ensure proper capitalization
+   321→  const message = summary.charAt(0).toUpperCase() + summary.slice(1);
+   322→
+   323→  const voiceId = identity.voiceId || 's3TPKV1kjDlVtZbl4Ksh';
+   324→  const voiceSettings = identity.voice;
+   325→
+   326→  try {
+   327→    const response = await fetch('http://localhost:8888/notify', {
+   328→      method: 'POST',
+   329→      headers: { 'Content-Type': 'application/json' },
+   330→      body: JSON.stringify({
+   331→        message: message,
+   332→        title: `${identity.name} says`,
+   333→        voice_enabled: true,
+   334→        voice_id: voiceId,
+   335→        voice_settings: voiceSettings ? {
+   336→          stability: voiceSettings.stability ?? 0.5,
+   337→          similarity_boost: voiceSettings.similarity_boost ?? 0.75,
+   338→          style: voiceSettings.style ?? 0.0,
+   339→          speed: voiceSettings.speed ?? 1.0,
+   340→          use_speaker_boost: voiceSettings.use_speaker_boost ?? true,
+   341→        } : undefined,
+   342→      }),
+   343→    });
+   344→
+   345→    if (!response.ok) {
+   346→      console.error('[UpdateTabTitle] Voice server error:', response.statusText);
+   347→    } else {
+   348→      console.error(`[UpdateTabTitle] Voice sent: "${message}"`);
+   349→    }
+   350→  } catch (err) {
+   351→    console.error('[UpdateTabTitle] Voice failed:', err);
+   352→  }
+   353→}
+   354→
+   355→async function main() {
+   356→  try {
+   357→    console.error('[UpdateTabTitle] Hook started');
+   358→    const input = await readStdinWithTimeout();
+   359→    const data: HookInput = JSON.parse(input);
+   360→    const prompt = data.prompt || '';
+   361→    console.error(`[UpdateTabTitle] Prompt: "${prompt.slice(0, 50)}..."`);
+   362→
+   363→    if (!prompt || prompt.length < 3) {
+   364→      console.error('[UpdateTabTitle] Prompt too short, exiting');
+   365→      process.exit(0);
+   366→    }
+   367→
+   368→    // Skip ratings (single digit 1-10) - preserve current tab title for the work context
+   369→    const trimmedPrompt = prompt.trim();
+   370→    if (/^([1-9]|10)$/.test(trimmedPrompt)) {
+   371→      console.error(`[UpdateTabTitle] Detected rating input (${trimmedPrompt}), preserving current tab title`);
+   372→      process.exit(0);
+   373→    }
+   374→
+   375→    // Set quick fallback title immediately with inference state (purple + "…")
+   376→    const quickFallback = quickTitle(prompt);
+   377→    console.error(`[UpdateTabTitle] Quick fallback: "${quickFallback}"`);
+   378→    setTabTitle(`🧠${quickFallback}`, 'inference');  // Brain = AI thinking/inference
+   379→
+   380→    // Get summary from Sonnet inference with conversation context
+   381→    console.error('[UpdateTabTitle] Calling Sonnet inference...');
+   382→    const { summary: rawSummary, fromInference } = await summarizePrompt(prompt, data.transcript_path);
+   383→    console.error(`[UpdateTabTitle] Raw summary: "${rawSummary}" (fromInference: ${fromInference})`);
+   384→
+   385→    // Validate summary - reject garbage, fragments, and generic subjects
+   386→    let summary = rawSummary;
+   387→    let usedFallback = !fromInference;
+   388→
+   389→    // Reject summaries that are entirely generic (e.g., "Completing the task.")
+   390→    // but allow specific uses like "Fixing task handler." where "task" is part of a specific noun
+   391→    const GENERIC_PHRASES = [
+   392→      /^completing (the )?task\.?$/i,
+   393→      /^working on (the )?(task|request|work)\.?$/i,
+   394→      /^processing (the )?(request|task|work)\.?$/i,
+   395→      /^handling (the )?(request|task|work)\.?$/i,
+   396→      /^finishing (the )?(task|work)\.?$/i,
+   397→      /task completion/i,
+   398→    ];
+   399→    const isGenericSummary = (s: string) => GENERIC_PHRASES.some(p => p.test(s.trim()));
+   400→
+   401→    if (!isValidTabSummary(rawSummary) || isGenericSummary(rawSummary)) {
+   402→      console.error(`[UpdateTabTitle] Invalid or generic summary: "${rawSummary}", using fallback`);
+   403→      summary = 'Working on task.';
+   404→      usedFallback = true;
+   405→    }
+   406→
+   407→    console.error(`[UpdateTabTitle] Final summary: "${summary}" (fallback: ${usedFallback})`);
+   408→
+   409→    // Update tab with SHORT title (5 words max - gerund + topic) + working state
+   410→    const shortTitle = summary.split(/\s+/).slice(0, 5).join(' ');
+   411→    setTabTitle(`⚙️${shortTitle}`, 'working');  // Orange = actively working on task
+   412→
+   413→    // Voice announcement - speaks the inference-generated summary (e.g., "Checking config")
+   414→    // ONLY announce if we got a REAL summary from inference, NOT fallbacks
+   415→    if (!usedFallback && isValidTabSummary(shortTitle)) {
+   416→      await announceVoice(shortTitle);
+   417→      console.error(`[UpdateTabTitle] Voice announced: "${shortTitle}"`);
+   418→    } else {
+   419→      console.error(`[UpdateTabTitle] Skipped voice - using fallback (fromInference=${fromInference}, usedFallback=${usedFallback})`);
+   420→    }
+   421→
+   422→    console.error('[UpdateTabTitle] Complete');
+   423→
+   424→    process.exit(0);
+   425→  } catch (err) {
+   426→    console.error(`[UpdateTabTitle] Error: ${err}`);
+   427→    process.exit(0);
+   428→  }
+   429→}
+   430→
+   431→main();
+   432→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

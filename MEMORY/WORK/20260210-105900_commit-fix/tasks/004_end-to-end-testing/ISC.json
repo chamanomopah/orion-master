@@ -1,0 +1,10 @@
+{
+  "taskId": "004_end-to-end-testing",
+  "status": "PENDING",
+  "effortLevel": "THOROUGH",
+  "criteria": [],
+  "antiCriteria": [],
+  "satisfaction": null,
+  "createdAt": "2026-02-10T11:12:37-03:00",
+  "updatedAt": "2026-02-10T11:20:27-03:00"
+}

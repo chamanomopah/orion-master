@@ -1,0 +1,12 @@
+[
+  {
+    "content": "User greeted",
+    "status": "pending",
+    "activeForm": "Checking if user greeted"
+  },
+  {
+    "content": "Response acknowledges greeting",
+    "status": "pending",
+    "activeForm": "Checking if response acknowledges greeting"
+  }
+]

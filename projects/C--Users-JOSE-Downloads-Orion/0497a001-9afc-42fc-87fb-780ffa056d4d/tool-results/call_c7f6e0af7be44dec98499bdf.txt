@@ -1,0 +1,362 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * AutoWorkCreation.hook.ts - Session/Task Management (UserPromptSubmit)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Creates and manages the session/task hierarchy for each Claude Code session.
+     7→ * - SESSION: One directory per Claude Code session (the primitive)
+     8→ * - TASK: Subdirectories for distinct work items within a session
+     9→ *
+    10→ * Each task has its own algorithm execution context (ISC.json, THREAD.md).
+    11→ *
+    12→ * TRIGGER: UserPromptSubmit
+    13→ *
+    14→ * STRUCTURE CREATED:
+    15→ * WORK/{timestamp}_{session-title}/
+    16→ * ├── META.yaml                    # Session metadata
+    17→ * ├── tasks/
+    18→ * │   ├── 001_{task-slug}/
+    19→ * │   │   ├── ISC.json             # Task's Ideal State Criteria
+    20→ * │   │   └── THREAD.md            # Task's algorithm log (includes metadata in frontmatter)
+    21→ * │   └── current -> 001_...       # Symlink to active task
+    22→ * └── scratch/                     # Temporary files
+    23→ */
+    24→
+    25→import { mkdirSync, existsSync, readFileSync, writeFileSync, symlinkSync, unlinkSync, lstatSync } from 'fs';
+    26→import { join } from 'path';
+    27→import { getPSTComponents, getISOTimestamp } from './lib/time';
+    28→import { inference } from '../skills/PAI/Tools/Inference';
+    29→
+    30→interface HookInput {
+    31→  session_id: string;
+    32→  prompt?: string;
+    33→  user_prompt?: string;
+    34→}
+    35→
+    36→interface CurrentWork {
+    37→  session_id: string;
+    38→  session_dir: string;
+    39→  current_task: string;
+    40→  task_count: number;
+    41→  created_at: string;
+    42→}
+    43→
+    44→interface PromptClassification {
+    45→  type: 'work' | 'question' | 'conversational';
+    46→  title: string;
+    47→  effort: 'TRIVIAL' | 'QUICK' | 'STANDARD' | 'THOROUGH';
+    48→  is_new_topic: boolean;
+    49→}
+    50→
+    51→const BASE_DIR = process.env.PAI_DIR || join(process.env.HOME!, '.claude');
+    52→const WORK_DIR = join(BASE_DIR, 'MEMORY', 'WORK');
+    53→const STATE_DIR = join(BASE_DIR, 'MEMORY', 'STATE');
+    54→const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');
+    55→
+    56→const CLASSIFICATION_PROMPT = `Classify this user request. Return ONLY valid JSON:
+    57→{
+    58→  "type": "work" | "question" | "conversational",
+    59→  "title": "<3-8 word title>",
+    60→  "effort": "TRIVIAL" | "QUICK" | "STANDARD" | "THOROUGH",
+    61→  "is_new_topic": true | false
+    62→}
+    63→
+    64→DEFINITIONS:
+    65→- type: work (task/imperative), question (info request), conversational (greeting/thanks)
+    66→- effort: TRIVIAL (<5 min), QUICK (5-30 min), STANDARD (30 min - 2 hrs), THOROUGH (2+ hrs)
+    67→- is_new_topic: true if this is a distinctly different topic from previous context, false if continuation
+    68→
+    69→CONTEXT FOR is_new_topic:
+    70→- true: "Now let's work on authentication" (new domain)
+    71→- true: "Different question - how do I..." (explicit topic change)
+    72→- false: "Also update the..." (continuation)
+    73→- false: "What about..." (follow-up on same topic)
+    74→- false: "Proceed" or "Yes" (confirmation)`;
+    75→
+    76→async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
+    77→  return new Promise((resolve, reject) => {
+    78→    let data = '';
+    79→    const timer = setTimeout(() => reject(new Error('Timeout')), timeout);
+    80→    process.stdin.on('data', (chunk) => { data += chunk.toString(); });
+    81→    process.stdin.on('end', () => { clearTimeout(timer); resolve(data); });
+    82→    process.stdin.on('error', (err) => { clearTimeout(timer); reject(err); });
+    83→  });
+    84→}
+    85→
+    86→function readCurrentWork(): CurrentWork | null {
+    87→  try {
+    88→    if (!existsSync(CURRENT_WORK_FILE)) return null;
+    89→    return JSON.parse(readFileSync(CURRENT_WORK_FILE, 'utf-8'));
+    90→  } catch {
+    91→    return null;
+    92→  }
+    93→}
+    94→
+    95→function writeCurrentWork(state: CurrentWork): void {
+    96→  if (!existsSync(STATE_DIR)) mkdirSync(STATE_DIR, { recursive: true });
+    97→  writeFileSync(CURRENT_WORK_FILE, JSON.stringify(state, null, 2), 'utf-8');
+    98→}
+    99→
+   100→function slugify(text: string, maxLen: number = 40): string {
+   101→  return text
+   102→    .toLowerCase()
+   103→    .replace(/[^a-z0-9\s-]/g, '')
+   104→    .replace(/\s+/g, '-')
+   105→    .replace(/-+/g, '-')
+   106→    .substring(0, maxLen)
+   107→    .replace(/-$/, '') || 'task';
+   108→}
+   109→
+   110→function generateSessionDirName(title: string): string {
+   111→  const { year, month, day, hours, minutes, seconds } = getPSTComponents();
+   112→  const timestamp = `${year}${month}${day}-${hours}${minutes}${seconds}`;
+   113→  return `${timestamp}_${slugify(title, 50)}`;
+   114→}
+   115→
+   116→/**
+   117→ * Create session directory structure
+   118→ */
+   119→function createSessionDirectory(sessionDirName: string, sessionId: string, title: string): string {
+   120→  const sessionPath = join(WORK_DIR, sessionDirName);
+   121→  const timestamp = getISOTimestamp();
+   122→
+   123→  // Create session structure
+   124→  mkdirSync(join(sessionPath, 'tasks'), { recursive: true });
+   125→  mkdirSync(join(sessionPath, 'scratch'), { recursive: true });
+   126→
+   127→  // Session META.yaml
+   128→  const meta = `id: "${sessionDirName}"
+   129→title: "${title}"
+   130→session_id: "${sessionId}"
+   131→created_at: "${timestamp}"
+   132→status: "ACTIVE"
+   133→`;
+   134→  writeFileSync(join(sessionPath, 'META.yaml'), meta, 'utf-8');
+   135→
+   136→  console.error(`[AutoWork] Created session: ${sessionPath}`);
+   137→  return sessionPath;
+   138→}
+   139→
+   140→/**
+   141→ * Create task directory with ISC.json and THREAD.md (with frontmatter metadata)
+   142→ */
+   143→function createTaskDirectory(
+   144→  sessionPath: string,
+   145→  taskNumber: number,
+   146→  title: string,
+   147→  effort: string,
+   148→  prompt: string
+   149→): string {
+   150→  const taskId = String(taskNumber).padStart(3, '0');
+   151→  const taskSlug = slugify(title);
+   152→  const taskDirName = `${taskId}_${taskSlug}`;
+   153→  const taskPath = join(sessionPath, 'tasks', taskDirName);
+   154→  const timestamp = getISOTimestamp();
+   155→
+   156→  mkdirSync(taskPath, { recursive: true });
+   157→
+   158→  // Task THREAD.md with frontmatter metadata (no separate META.yaml)
+   159→  const thread = `---
+   160→taskId: "${taskDirName}"
+   161→title: "${title}"
+   162→effortLevel: "${effort}"
+   163→status: "IN_PROGRESS"
+   164→createdAt: "${timestamp}"
+   165→prompt: |
+   166→  ${prompt.substring(0, 500).replace(/\n/g, '\n  ')}
+   167→---
+   168→
+   169→# Algorithm Thread: ${title}
+   170→
+   171→## Phase Log
+   172→
+   173→### 👀 OBSERVE Phase
+   174→_Pending..._
+   175→
+   176→### 🧠 THINK Phase
+   177→_Pending..._
+   178→
+   179→### 📋 PLAN Phase
+   180→_Pending..._
+   181→
+   182→### 🔨 BUILD Phase
+   183→_Pending..._
+   184→
+   185→### ▶️ EXECUTE Phase
+   186→_Pending..._
+   187→
+   188→### ✅ VERIFY Phase
+   189→_Pending..._
+   190→
+   191→### 🎓 LEARN Phase
+   192→_Pending..._
+   193→
+   194→---
+   195→
+   196→## ISC Evolution
+   197→
+   198→_Criteria updates logged here..._
+   199→
+   200→---
+   201→
+   202→## Key Observations
+   203→
+   204→_Important observations during execution..._
+   205→`;
+   206→  writeFileSync(join(taskPath, 'THREAD.md'), thread, 'utf-8');
+   207→
+   208→  // Task ISC.json with proper scaffold
+   209→  const isc = {
+   210→    taskId: taskDirName,
+   211→    status: 'PENDING',
+   212→    effortLevel: effort,
+   213→    criteria: [],
+   214→    antiCriteria: [],
+   215→    satisfaction: null,
+   216→    createdAt: timestamp,
+   217→    updatedAt: timestamp,
+   218→  };
+   219→  writeFileSync(join(taskPath, 'ISC.json'), JSON.stringify(isc, null, 2), 'utf-8');
+   220→
+   221→  // Update 'current' symlink
+   222→  const currentLink = join(sessionPath, 'tasks', 'current');
+   223→  try {
+   224→    if (existsSync(currentLink) || lstatSync(currentLink)) {
+   225→      unlinkSync(currentLink);
+   226→    }
+   227→  } catch { /* ignore if doesn't exist */ }
+   228→  symlinkSync(taskDirName, currentLink);
+   229→
+   230→  console.error(`[AutoWork] Created task: ${taskPath}`);
+   231→  return taskDirName;
+   232→}
+   233→
+   234→async function classifyPrompt(prompt: string, hasExistingSession: boolean): Promise<PromptClassification> {
+   235→  const trimmed = prompt.trim();
+   236→
+   237→  // Quick heuristics
+   238→  if (trimmed.length < 15 && /^(yes|no|ok|okay|thanks|proceed|continue|go ahead|sure|got it)$/i.test(trimmed)) {
+   239→    return { type: 'conversational', title: '', effort: 'TRIVIAL', is_new_topic: false };
+   240→  }
+   241→
+   242→  // Use inference for classification
+   243→  try {
+   244→    const contextNote = hasExistingSession
+   245→      ? '\n\nNOTE: There is an existing session with prior tasks. Consider if this is a continuation or new topic.'
+   246→      : '\n\nNOTE: This is the first prompt in a new session. is_new_topic should be true.';
+   247→
+   248→    const result = await inference({
+   249→      systemPrompt: CLASSIFICATION_PROMPT + contextNote,
+   250→      userPrompt: prompt,
+   251→      expectJson: true,
+   252→      timeout: 10000,
+   253→      level: 'fast',
+   254→    });
+   255→
+   256→    if (result.success && result.parsed) {
+   257→      const parsed = result.parsed as PromptClassification;
+   258→      return {
+   259→        type: parsed.type || 'work',
+   260→        title: parsed.title || prompt.substring(0, 50),
+   261→        effort: parsed.effort || 'STANDARD',
+   262→        is_new_topic: hasExistingSession ? (parsed.is_new_topic ?? false) : true,
+   263→      };
+   264→    }
+   265→  } catch (err) {
+   266→    console.error(`[AutoWork] Classification failed: ${err}`);
+   267→  }
+   268→
+   269→  // Fallback
+   270→  return {
+   271→    type: 'work',
+   272→    title: prompt.substring(0, 50).replace(/[^a-zA-Z0-9\s]/g, '').trim(),
+   273→    effort: 'STANDARD',
+   274→    is_new_topic: !hasExistingSession,
+   275→  };
+   276→}
+   277→
+   278→async function main() {
+   279→  try {
+   280→    const input = await readStdinWithTimeout();
+   281→    const data: HookInput = JSON.parse(input);
+   282→    const prompt = data.prompt || data.user_prompt || '';
+   283→    const sessionId = data.session_id || 'unknown';
+   284→
+   285→    if (!prompt || prompt.length < 2) {
+   286→      process.exit(0);
+   287→    }
+   288→
+   289→    if (!existsSync(WORK_DIR)) mkdirSync(WORK_DIR, { recursive: true });
+   290→
+   291→    let currentWork = readCurrentWork();
+   292→    const isExistingSession = currentWork && currentWork.session_id === sessionId;
+   293→
+   294→    const classification = await classifyPrompt(prompt, !!isExistingSession);
+   295→
+   296→    // Skip task creation for pure conversational
+   297→    if (classification.type === 'conversational' && !classification.is_new_topic) {
+   298→      console.error('[AutoWork] Conversational continuation, no new task');
+   299→      process.exit(0);
+   300→    }
+   301→
+   302→    if (!isExistingSession) {
+   303→      // New session: create session directory + first task
+   304→      const title = classification.title || prompt.substring(0, 50);
+   305→      const sessionDirName = generateSessionDirName(title);
+   306→      const sessionPath = createSessionDirectory(sessionDirName, sessionId, title);
+   307→
+   308→      const taskDirName = createTaskDirectory(
+   309→        sessionPath,
+   310→        1,
+   311→        title,
+   312→        classification.effort,
+   313→        prompt
+   314→      );
+   315→
+   316→      currentWork = {
+   317→        session_id: sessionId,
+   318→        session_dir: sessionDirName,
+   319→        current_task: taskDirName,
+   320→        task_count: 1,
+   321→        created_at: getISOTimestamp(),
+   322→      };
+   323→      writeCurrentWork(currentWork);
+   324→
+   325→      console.error(`[AutoWork] New session with task: ${taskDirName}`);
+   326→    } else if (classification.is_new_topic) {
+   327→      // Existing session, new topic: create new task
+   328→      const sessionPath = join(WORK_DIR, currentWork!.session_dir);
+   329→      const newTaskNumber = currentWork!.task_count + 1;
+   330→      const title = classification.title || prompt.substring(0, 50);
+   331→
+   332→      const taskDirName = createTaskDirectory(
+   333→        sessionPath,
+   334→        newTaskNumber,
+   335→        title,
+   336→        classification.effort,
+   337→        prompt
+   338→      );
+   339→
+   340→      currentWork!.current_task = taskDirName;
+   341→      currentWork!.task_count = newTaskNumber;
+   342→      writeCurrentWork(currentWork!);
+   343→
+   344→      console.error(`[AutoWork] New task in session: ${taskDirName}`);
+   345→    } else {
+   346→      // Continuation of current task - no new task needed
+   347→      console.error(`[AutoWork] Continuing task: ${currentWork!.current_task}`);
+   348→    }
+   349→
+   350→    process.exit(0);
+   351→  } catch (err) {
+   352→    console.error(`[AutoWork] Error: ${err}`);
+   353→    process.exit(0);
+   354→  }
+   355→}
+   356→
+   357→main();
+   358→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

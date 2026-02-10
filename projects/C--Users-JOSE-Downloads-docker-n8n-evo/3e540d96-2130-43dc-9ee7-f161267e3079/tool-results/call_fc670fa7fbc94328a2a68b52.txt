@@ -1,0 +1,2933 @@
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extglob.ProcessName : O termo 'extglob.ProcessName' n�o � reconhecido como nome de cmdlet, fun��o, arquivo de script 
+ou programa oper�vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu�do, veja se o caminho est� correto 
+e tente novamente.
+No linha:1 caractere:30
++ Get-Process | Where-Object { extglob.ProcessName -like '*ssh*' } | Se ...
++                              ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (extglob.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException

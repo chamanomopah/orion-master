@@ -1,0 +1,11 @@
+{
+  "id": "5",
+  "subject": "InferenceDependenciesSpecialist",
+  "description": "You are the Inference & Dependencies Specialist. Your mission:\n\nInvestigate the AI inference system ",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": [],
+  "metadata": {
+    "_internal": true
+  }
+}

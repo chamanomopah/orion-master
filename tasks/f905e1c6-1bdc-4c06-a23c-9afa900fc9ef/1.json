@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Implementar subdomínios temporários no script de túneis",
+  "description": "Atualizar start-all-tunnels.ps1 para usar subdomínios temporários com suffixo aleatório até que os subdomínios originais sejam liberados no Serveo",
+  "activeForm": "Atualizando script com subdomínios temporários",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

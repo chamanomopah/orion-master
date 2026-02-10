@@ -1,0 +1,10 @@
+{
+  "taskId": "005_retrieve-task-output",
+  "status": "PENDING",
+  "effortLevel": "QUICK",
+  "criteria": [],
+  "antiCriteria": [],
+  "satisfaction": null,
+  "createdAt": "2026-02-10T11:20:33-03:00",
+  "updatedAt": "2026-02-10T11:21:27-03:00"
+}

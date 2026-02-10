@@ -1,0 +1,9 @@
+{
+  "id": "7",
+  "subject": "Vibe Companion dashboard instalado e rodando",
+  "description": "Vibe Companion instalado via Bun, servidor WebSocket rodando na porta 3456, dashboard acessível em localhost:3456, conectando e mostrando sessões do Claude Code CLI.",
+  "activeForm": "Instalando e configurando Vibe Companion",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

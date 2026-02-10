@@ -1,0 +1,309 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * ExplicitRatingCapture.hook.ts - Capture Explicit User Ratings (UserPromptSubmit)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Detects when the user explicitly rates a response with a number 1-10.
+     7→ * This is the primary feedback mechanism for the rating/sentiment system.
+     8→ * Low ratings trigger automatic learning capture for improvement analysis.
+     9→ *
+    10→ * TRIGGER: UserPromptSubmit
+    11→ *
+    12→ * INPUT:
+    13→ * - prompt: User's message text
+    14→ * - session_id: Current session identifier
+    15→ * - transcript_path: Path to conversation transcript
+    16→ *
+    17→ * OUTPUT:
+    18→ * - stdout: None (no context injection)
+    19→ * - exit(0): Normal completion
+    20→ *
+    21→ * SIDE EFFECTS:
+    22→ * - Writes to: MEMORY/LEARNING/SIGNALS/ratings.jsonl
+    23→ * - Writes to: MEMORY/LEARNING/<category>/<YYYY-MM>/*.md (for low ratings)
+    24→ * - Triggers: TrendingAnalysis.ts update (fire-and-forget)
+    25→ *
+    26→ * INTER-HOOK RELATIONSHIPS:
+    27→ * - DEPENDS ON: None
+    28→ * - COORDINATES WITH: ImplicitSentimentCapture (shares ratings.jsonl)
+    29→ * - MUST RUN BEFORE: ImplicitSentimentCapture (explicit takes priority)
+    30→ * - MUST RUN AFTER: None
+    31→ *
+    32→ * COORDINATION PROTOCOL:
+    33→ * Both ExplicitRatingCapture and ImplicitSentimentCapture write to ratings.jsonl.
+    34→ * ImplicitSentimentCapture checks isExplicitRating() first and defers if true.
+    35→ * This hook runs FIRST to capture explicit "8 - great work" style ratings.
+    36→ *
+    37→ * ERROR HANDLING:
+    38→ * - Invalid input: Exits gracefully
+    39→ * - Write failures: Logged to stderr, exits gracefully
+    40→ *
+    41→ * PERFORMANCE:
+    42→ * - Non-blocking: Yes
+    43→ * - Typical execution: <50ms
+    44→ * - No external API calls
+    45→ *
+    46→ * RATING PATTERNS:
+    47→ * - "7" → rating 7, no comment
+    48→ * - "8 - good work" → rating 8, comment "good work"
+    49→ * - "6: needs improvement" → rating 6, comment "needs improvement"
+    50→ * - "9 excellent" → rating 9, comment "excellent"
+    51→ * - "10!" → rating 10, no comment
+    52→ *
+    53→ * NON-RATING PATTERNS (ignored):
+    54→ * - "3 items" → Not a rating (followed by unit)
+    55→ * - "5 things to fix" → Not a rating (sentence continuation)
+    56→ */
+    57→
+    58→import { appendFileSync, mkdirSync, existsSync, readFileSync, writeFileSync } from 'fs';
+    59→import { join } from 'path';
+    60→import { getLearningCategory } from './lib/learning-utils';
+    61→import { getPrincipalName } from './lib/identity';
+    62→import { getISOTimestamp, getPSTComponents } from './lib/time';
+    63→import { captureFailure } from '../skills/PAI/Tools/FailureCapture';
+    64→
+    65→interface HookInput {
+    66→  session_id: string;
+    67→  prompt: string;
+    68→  transcript_path: string;
+    69→  hook_event_name: string;
+    70→}
+    71→
+    72→interface RatingEntry {
+    73→  timestamp: string;
+    74→  rating: number;
+    75→  comment?: string;
+    76→  session_id: string;
+    77→}
+    78→
+    79→/**
+    80→ * Read stdin with timeout
+    81→ */
+    82→async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
+    83→  return new Promise((resolve, reject) => {
+    84→    let data = '';
+    85→    const timer = setTimeout(() => reject(new Error('Timeout')), timeout);
+    86→    process.stdin.on('data', (chunk) => { data += chunk.toString(); });
+    87→    process.stdin.on('end', () => { clearTimeout(timer); resolve(data); });
+    88→    process.stdin.on('error', (err) => { clearTimeout(timer); reject(err); });
+    89→  });
+    90→}
+    91→
+    92→/**
+    93→ * CRITICAL: Precise rating detection
+    94→ *
+    95→ * Must match:
+    96→ * - "7" (single number)
+    97→ * - "8 - good work" (number + dash + comment)
+    98→ * - "6: needs work" (number + colon + comment)
+    99→ * - "9 excellent" (number + space + comment)
+   100→ *
+   101→ * Must NOT match:
+   102→ * - "I have 7 items" (number in sentence)
+   103→ * - "do step 7" (contextual number)
+   104→ * - "7th thing" (ordinal)
+   105→ */
+   106→function parseRating(prompt: string): { rating: number; comment?: string } | null {
+   107→  const trimmed = prompt.trim();
+   108→
+   109→  // Pattern: Start with single digit (1-10), optionally followed by separator and comment
+   110→  const ratingPattern = /^(10|[1-9])(?:\s*[-:]\s*|\s+)?(.*)$/;
+   111→
+   112→  const match = trimmed.match(ratingPattern);
+   113→  if (!match) return null;
+   114→
+   115→  const rating = parseInt(match[1], 10);
+   116→  const comment = match[2]?.trim() || undefined;
+   117→
+   118→  if (rating < 1 || rating > 10) return null;
+   119→
+   120→  // Reject if comment starts with common words that indicate a sentence
+   121→  if (comment) {
+   122→    const sentenceStarters = /^(items?|things?|steps?|files?|lines?|bugs?|issues?|errors?|times?|minutes?|hours?|days?|seconds?|percent|%|th\b|st\b|nd\b|rd\b|of\b|in\b|at\b|to\b|the\b|a\b|an\b)/i;
+   123→    if (sentenceStarters.test(comment)) {
+   124→      return null;
+   125→    }
+   126→  }
+   127→
+   128→  return { rating, comment };
+   129→}
+   130→
+   131→/**
+   132→ * Write rating to ratings.jsonl
+   133→ * NOTE: Ratings are now stored in LEARNING/SIGNALS/ (consolidated from separate SIGNALS/)
+   134→ */
+   135→function writeRating(entry: RatingEntry): void {
+   136→  const baseDir = process.env.PAI_DIR || join(process.env.HOME!, '.claude');
+   137→  const signalsDir = join(baseDir, 'MEMORY', 'LEARNING', 'SIGNALS');
+   138→  const ratingsFile = join(signalsDir, 'ratings.jsonl');
+   139→
+   140→  if (!existsSync(signalsDir)) {
+   141→    mkdirSync(signalsDir, { recursive: true });
+   142→  }
+   143→
+   144→  const jsonLine = JSON.stringify(entry) + '\n';
+   145→  appendFileSync(ratingsFile, jsonLine, 'utf-8');
+   146→
+   147→  console.error(`[ExplicitRatingCapture] Wrote rating ${entry.rating} to ${ratingsFile}`);
+   148→}
+   149→
+   150→/**
+   151→ * Extract last response summary from transcript for learning context
+   152→ */
+   153→function getLastResponseSummary(transcriptPath: string): string {
+   154→  try {
+   155→    if (!transcriptPath || !existsSync(transcriptPath)) return '';
+   156→
+   157→    const content = readFileSync(transcriptPath, 'utf-8');
+   158→    const lines = content.trim().split('\n');
+   159→
+   160→    let lastAssistant = '';
+   161→    for (const line of lines) {
+   162→      try {
+   163→        const entry = JSON.parse(line);
+   164→        if (entry.type === 'assistant' && entry.message?.content) {
+   165→          const text = typeof entry.message.content === 'string'
+   166→            ? entry.message.content
+   167→            : Array.isArray(entry.message.content)
+   168→              ? entry.message.content.filter((c: any) => c.type === 'text').map((c: any) => c.text).join(' ')
+   169→              : '';
+   170→          if (text) lastAssistant = text;
+   171→        }
+   172→      } catch { /* skip invalid lines */ }
+   173→    }
+   174→
+   175→    const summaryMatch = lastAssistant.match(/SUMMARY:\s*([^\n]+)/i);
+   176→    return summaryMatch ? summaryMatch[1].trim() : lastAssistant.slice(0, 500);
+   177→  } catch {
+   178→    return '';
+   179→  }
+   180→}
+   181→
+   182→/**
+   183→ * Capture low rating as learning opportunity
+   184→ */
+   185→function captureLowRatingLearning(rating: number, comment: string | undefined, responseContext: string): void {
+   186→  if (rating >= 6) return;
+   187→
+   188→  const baseDir = process.env.PAI_DIR || join(process.env.HOME!, '.claude');
+   189→  const { year, month, day, hours, minutes, seconds } = getPSTComponents();
+   190→
+   191→  const yearMonth = `${year}-${month}`;
+   192→  const category = getLearningCategory(responseContext, comment);
+   193→  const learningsDir = join(baseDir, 'MEMORY', 'LEARNING', category, yearMonth);
+   194→
+   195→  if (!existsSync(learningsDir)) {
+   196→    mkdirSync(learningsDir, { recursive: true });
+   197→  }
+   198→
+   199→  const filename = `${year}-${month}-${day}-${hours}${minutes}${seconds}_LEARNING_low-rating-${rating}.md`;
+   200→  const filepath = join(learningsDir, filename);
+   201→
+   202→  const content = `---
+   203→capture_type: LEARNING
+   204→timestamp: ${year}-${month}-${day} ${hours}:${minutes}:${seconds} PST
+   205→rating: ${rating}
+   206→auto_captured: true
+   207→tags: [low-rating, improvement-opportunity]
+   208→---
+   209→
+   210→# Low Rating Captured: ${rating}/10
+   211→
+   212→**Date:** ${year}-${month}-${day}
+   213→**Rating:** ${rating}/10
+   214→${comment ? `**Feedback:** ${comment}` : ''}
+   215→
+   216→---
+   217→
+   218→## Response Context
+   219→
+   220→${responseContext || 'No response context available'}
+   221→
+   222→---
+   223→
+   224→## Improvement Notes
+   225→
+   226→This response was rated ${rating}/10 by ${getPrincipalName()}. Use this as an improvement opportunity.
+   227→
+   228→${comment ? `**${getPrincipalName()}'s feedback:** ${comment}` : ''}
+   229→
+   230→---
+   231→`;
+   232→
+   233→  writeFileSync(filepath, content, 'utf-8');
+   234→  console.error(`[ExplicitRatingCapture] Captured low rating learning to ${filepath}`);
+   235→}
+   236→
+   237→async function main() {
+   238→  try {
+   239→    console.error('[ExplicitRatingCapture] Hook started');
+   240→    const input = await readStdinWithTimeout();
+   241→    const data: HookInput = JSON.parse(input);
+   242→    const prompt = data.prompt || '';
+   243→
+   244→    const result = parseRating(prompt);
+   245→
+   246→    if (!result) {
+   247→      console.error('[ExplicitRatingCapture] Not a rating, exiting');
+   248→      process.exit(0);
+   249→    }
+   250→
+   251→    console.error(`[ExplicitRatingCapture] Detected rating: ${result.rating}${result.comment ? ` - ${result.comment}` : ''}`);
+   252→
+   253→    const entry: RatingEntry = {
+   254→      timestamp: getISOTimestamp(),
+   255→      rating: result.rating,
+   256→      session_id: data.session_id,
+   257→    };
+   258→    if (result.comment) {
+   259→      entry.comment = result.comment;
+   260→    }
+   261→
+   262→    writeRating(entry);
+   263→
+   264→    // Update trending analysis cache (fire-and-forget, don't block)
+   265→    const baseDir = process.env.PAI_DIR || join(process.env.HOME!, '.claude');
+   266→    const trendingScript = join(baseDir, 'tools', 'TrendingAnalysis.ts');
+   267→    if (existsSync(trendingScript)) {
+   268→      Bun.spawn(['bun', trendingScript, '--force'], {
+   269→        stdout: 'ignore',
+   270→        stderr: 'ignore'
+   271→      });
+   272→      console.error('[ExplicitRatingCapture] Triggered TrendingAnalysis update');
+   273→    }
+   274→
+   275→    if (result.rating < 6) {
+   276→      const responseContext = getLastResponseSummary(data.transcript_path);
+   277→      captureLowRatingLearning(result.rating, result.comment, responseContext);
+   278→
+   279→      // For ratings 1-3, also create full failure capture
+   280→      if (result.rating <= 3) {
+   281→        try {
+   282→          await captureFailure({
+   283→            transcriptPath: data.transcript_path,
+   284→            rating: result.rating,
+   285→            sentimentSummary: result.comment || `Explicit low rating: ${result.rating}/10`,
+   286→            detailedContext: responseContext,
+   287→            sessionId: data.session_id,
+   288→          });
+   289→          console.error(`[ExplicitRatingCapture] Created full failure capture for rating ${result.rating}`);
+   290→        } catch (err) {
+   291→          console.error(`[ExplicitRatingCapture] Error creating failure capture: ${err}`);
+   292→        }
+   293→      }
+   294→    }
+   295→
+   296→    console.error('[ExplicitRatingCapture] Done');
+   297→    process.exit(0);
+   298→  } catch (err) {
+   299→    console.error(`[ExplicitRatingCapture] Error: ${err}`);
+   300→    process.exit(0);
+   301→  }
+   302→}
+   303→
+   304→main();
+   305→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

@@ -1,0 +1,464 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * LoadContext.hook.ts - Inject PAI context into Claude's Context (SessionStart)
+     4→ *
+     5→ * PURPOSE:
+     6→ * The foundational context injection hook. Reads the PAI SKILL.md plus
+     7→ * AI Steering Rules (SYSTEM and USER) and outputs them as a <system-reminder>
+     8→ * to stdout.
+     9→ *
+    10→ * TRIGGER: SessionStart
+    11→ *
+    12→ * INPUT:
+    13→ * - Environment: PAI_DIR, TIME_ZONE
+    14→ * - Files: skills/PAI/SKILL.md, skills/PAI/SYSTEM/AISTEERINGRULES.md,
+    15→ *          skills/PAI/USER/AISTEERINGRULES.md, MEMORY/STATE/progress/*.json
+    16→ *
+    17→ * OUTPUT:
+    18→ * - stdout: <system-reminder> containing SKILL.md + AI Steering Rules
+    19→ * - stdout: Active work summary if previous sessions have pending work
+    20→ * - stderr: Status messages and errors
+    21→ * - exit(0): Normal completion
+    22→ * - exit(1): Critical failure (SKILL.md not found)
+    23→ *
+    24→ * DESIGN PHILOSOPHY:
+    25→ * Load SKILL.md and AI Steering Rules at session start. These are critical for
+    26→ * consistent behavior. Other context (USER docs, SYSTEM docs) loads dynamically
+    27→ * based on the Context Loading section in SKILL.md.
+    28→ *
+    29→ * ERROR HANDLING:
+    30→ * - Missing SKILL.md: Fatal error, exits with code 1
+    31→ * - Missing steering rules: Logged warning, continues (non-fatal)
+    32→ * - Progress file errors: Logged, continues (non-fatal)
+    33→ * - Date command failure: Falls back to ISO timestamp
+    34→ *
+    35→ * PERFORMANCE:
+    36→ * - Blocking: Yes (context is essential)
+    37→ * - Typical execution: <50ms
+    38→ * - Skipped for subagents: Yes (they get context differently)
+    39→ */
+    40→
+    41→import { readFileSync, existsSync, readdirSync, writeFileSync } from 'fs';
+    42→import { join } from 'path';
+    43→import { execSync } from 'child_process';
+    44→import { getPaiDir } from './lib/paths';
+    45→import { recordSessionStart } from './lib/notifications';
+    46→
+    47→/**
+    48→ * Reset tab title to clean state at session start.
+    49→ * Prevents stale tab titles from previous sessions bleeding through.
+    50→ * Uses Kitty remote control to set a neutral title immediately.
+    51→ */
+    52→function resetTabTitle(paiDir: string): void {
+    53→  const cleanTitle = 'New Session';
+    54→  const stateFile = join(paiDir, 'MEMORY', 'STATE', 'tab-title.json');
+    55→
+    56→  try {
+    57→    // Reset Kitty tab title immediately
+    58→    const isKitty = process.env.TERM === 'xterm-kitty' || process.env.KITTY_LISTEN_ON;
+    59→    if (isKitty) {
+    60→      execSync(`kitty @ set-tab-title "${cleanTitle}"`, { stdio: 'ignore', timeout: 2000 });
+    61→      // Reset tab color to default (dark blue for active, no special color for inactive)
+    62→      execSync(
+    63→        `kitten @ set-tab-color --self active_bg=#002B80 active_fg=#FFFFFF inactive_bg=none inactive_fg=#A0A0A0`,
+    64→        { stdio: 'ignore', timeout: 2000 }
+    65→      );
+    66→      console.error('🔄 Tab title reset to clean state');
+    67→    }
+    68→
+    69→    // Reset state file to prevent any stale data
+    70→    const cleanState = {
+    71→      title: cleanTitle,
+    72→      rawTitle: cleanTitle,
+    73→      timestamp: new Date().toISOString(),
+    74→      state: 'idle'
+    75→    };
+    76→    writeFileSync(stateFile, JSON.stringify(cleanState, null, 2));
+    77→    console.error('🔄 Tab state file reset');
+    78→  } catch (err) {
+    79→    console.error(`⚠️ Failed to reset tab title: ${err}`);
+    80→    // Non-fatal, continue with session
+    81→  }
+    82→}
+    83→
+    84→async function getCurrentDate(): Promise<string> {
+    85→  try {
+    86→    const proc = Bun.spawn(['date', '+%Y-%m-%d %H:%M:%S %Z'], {
+    87→      stdout: 'pipe',
+    88→      env: { ...process.env, TZ: process.env.TIME_ZONE || 'America/Los_Angeles' }
+    89→    });
+    90→    const output = await new Response(proc.stdout).text();
+    91→    return output.trim();
+    92→  } catch (error) {
+    93→    console.error('Failed to get current date:', error);
+    94→    return new Date().toISOString();
+    95→  }
+    96→}
+    97→
+    98→interface Settings {
+    99→  contextFiles?: string[];
+   100→  [key: string]: unknown;
+   101→}
+   102→
+   103→/**
+   104→ * Load settings.json and return the settings object.
+   105→ */
+   106→function loadSettings(paiDir: string): Settings {
+   107→  const settingsPath = join(paiDir, 'settings.json');
+   108→  if (existsSync(settingsPath)) {
+   109→    try {
+   110→      return JSON.parse(readFileSync(settingsPath, 'utf-8'));
+   111→    } catch (err) {
+   112→      console.error(`⚠️ Failed to parse settings.json: ${err}`);
+   113→    }
+   114→  }
+   115→  return {};
+   116→}
+   117→
+   118→/**
+   119→ * Load context files from settings.json contextFiles array.
+   120→ * Falls back to hardcoded paths if array not defined.
+   121→ */
+   122→function loadContextFiles(paiDir: string, settings: Settings): string {
+   123→  const defaultFiles = [
+   124→    'skills/PAI/SKILL.md',
+   125→    'skills/PAI/SYSTEM/AISTEERINGRULES.md',
+   126→    'skills/PAI/USER/AISTEERINGRULES.md'
+   127→  ];
+   128→
+   129→  const contextFiles = settings.contextFiles || defaultFiles;
+   130→  let combinedContent = '';
+   131→
+   132→  for (const relativePath of contextFiles) {
+   133→    const fullPath = join(paiDir, relativePath);
+   134→    if (existsSync(fullPath)) {
+   135→      const content = readFileSync(fullPath, 'utf-8');
+   136→      if (combinedContent) combinedContent += '\n\n---\n\n';
+   137→      combinedContent += content;
+   138→      console.error(`✅ Loaded ${relativePath} (${content.length} chars)`);
+   139→    } else {
+   140→      console.error(`⚠️ Context file not found: ${relativePath}`);
+   141→    }
+   142→  }
+   143→
+   144→  return combinedContent;
+   145→}
+   146→
+   147→interface ProgressFile {
+   148→  project: string;
+   149→  status: string;
+   150→  updated: string;
+   151→  objectives: string[];
+   152→  next_steps: string[];
+   153→  handoff_notes: string;
+   154→}
+   155→
+   156→/**
+   157→ * Load relationship context for session startup.
+   158→ * Returns a lightweight summary of key opinions and recent notes.
+   159→ */
+   160→function loadRelationshipContext(paiDir: string): string | null {
+   161→  const parts: string[] = [];
+   162→
+   163→  // Load high-confidence opinions (>0.85) from OPINIONS.md
+   164→  const opinionsPath = join(paiDir, 'skills/PAI/USER/OPINIONS.md');
+   165→  if (existsSync(opinionsPath)) {
+   166→    try {
+   167→      const content = readFileSync(opinionsPath, 'utf-8');
+   168→      const highConfidence: string[] = [];
+   169→
+   170→      // Extract opinions with confidence >= 0.85
+   171→      const opinionBlocks = content.split(/^### /gm).slice(1);
+   172→      for (const block of opinionBlocks) {
+   173→        const lines = block.split('\n');
+   174→        const statement = lines[0]?.trim();
+   175→        const confidenceMatch = block.match(/\*\*Confidence:\*\*\s*([\d.]+)/);
+   176→        const confidence = confidenceMatch ? parseFloat(confidenceMatch[1]) : 0;
+   177→
+   178→        if (confidence >= 0.85 && statement) {
+   179→          highConfidence.push(`• ${statement} (${(confidence * 100).toFixed(0)}%)`);
+   180→        }
+   181→      }
+   182→
+   183→      if (highConfidence.length > 0) {
+   184→        parts.push('**Key Opinions (high confidence):**');
+   185→        parts.push(highConfidence.slice(0, 6).join('\n'));
+   186→      }
+   187→    } catch (err) {
+   188→      console.error(`⚠️ Failed to load opinions: ${err}`);
+   189→    }
+   190→  }
+   191→
+   192→  // Load recent relationship notes (today and yesterday)
+   193→  const today = new Date();
+   194→  const yesterday = new Date(today);
+   195→  yesterday.setDate(yesterday.getDate() - 1);
+   196→
+   197→  const formatDate = (d: Date) => d.toISOString().split('T')[0];
+   198→  const formatMonth = (d: Date) => d.toISOString().slice(0, 7);
+   199→
+   200→  const recentNotes: string[] = [];
+   201→  for (const date of [today, yesterday]) {
+   202→    const notePath = join(
+   203→      paiDir,
+   204→      'MEMORY/RELATIONSHIP',
+   205→      formatMonth(date),
+   206→      `${formatDate(date)}.md`
+   207→    );
+   208→    if (existsSync(notePath)) {
+   209→      try {
+   210→        const content = readFileSync(notePath, 'utf-8');
+   211→        // Extract just the note lines (starting with -)
+   212→        const notes = content
+   213→          .split('\n')
+   214→          .filter(line => line.trim().startsWith('- '))
+   215→          .slice(0, 5); // Last 5 notes per day
+   216→        if (notes.length > 0) {
+   217→          recentNotes.push(`*${formatDate(date)}:*`);
+   218→          recentNotes.push(...notes);
+   219→        }
+   220→      } catch {}
+   221→    }
+   222→  }
+   223→
+   224→  if (recentNotes.length > 0) {
+   225→    if (parts.length > 0) parts.push('');
+   226→    parts.push('**Recent Relationship Notes:**');
+   227→    parts.push(recentNotes.join('\n'));
+   228→  }
+   229→
+   230→  if (parts.length === 0) return null;
+   231→
+   232→  return `
+   233→## Relationship Context
+   234→
+   235→${parts.join('\n')}
+   236→
+   237→*Full details: USER/OPINIONS.md, MEMORY/RELATIONSHIP/*
+   238→`;
+   239→}
+   240→
+   241→async function checkActiveProgress(paiDir: string): Promise<string | null> {
+   242→  const progressDir = join(paiDir, 'MEMORY', 'STATE', 'progress');
+   243→
+   244→  if (!existsSync(progressDir)) {
+   245→    return null;
+   246→  }
+   247→
+   248→  try {
+   249→    const files = readdirSync(progressDir).filter(f => f.endsWith('-progress.json'));
+   250→
+   251→    if (files.length === 0) {
+   252→      return null;
+   253→    }
+   254→
+   255→    const activeProjects: ProgressFile[] = [];
+   256→
+   257→    for (const file of files) {
+   258→      try {
+   259→        const content = readFileSync(join(progressDir, file), 'utf-8');
+   260→        const progress = JSON.parse(content) as ProgressFile;
+   261→        if (progress.status === 'active') {
+   262→          activeProjects.push(progress);
+   263→        }
+   264→      } catch (e) {
+   265→        // Skip malformed files
+   266→      }
+   267→    }
+   268→
+   269→    if (activeProjects.length === 0) {
+   270→      return null;
+   271→    }
+   272→
+   273→    // Build summary of active work
+   274→    let summary = '\n📋 ACTIVE WORK (from previous sessions):\n';
+   275→
+   276→    for (const proj of activeProjects) {
+   277→      summary += `\n🔵 ${proj.project}\n`;
+   278→
+   279→      if (proj.objectives && proj.objectives.length > 0) {
+   280→        summary += '   Objectives:\n';
+   281→        proj.objectives.forEach(o => summary += `   • ${o}\n`);
+   282→      }
+   283→
+   284→      if (proj.handoff_notes) {
+   285→        summary += `   Handoff: ${proj.handoff_notes}\n`;
+   286→      }
+   287→
+   288→      if (proj.next_steps && proj.next_steps.length > 0) {
+   289→        summary += '   Next steps:\n';
+   290→        proj.next_steps.forEach(s => summary += `   → ${s}\n`);
+   291→      }
+   292→    }
+   293→
+   294→    summary += '\n💡 To resume: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts resume <project>`\n';
+   295→    summary += '💡 To complete: `bun run ~/.claude/skills/PAI/Tools/SessionProgress.ts complete <project>`\n';
+   296→
+   297→    return summary;
+   298→  } catch (error) {
+   299→    console.error('Error checking active progress:', error);
+   300→    return null;
+   301→  }
+   302→}
+   303→
+   304→async function main() {
+   305→  try {
+   306→    // Check if this is a subagent session - if so, exit silently
+   307→    const claudeProjectDir = process.env.CLAUDE_PROJECT_DIR || '';
+   308→    const isSubagent = claudeProjectDir.includes('/.claude/Agents/') ||
+   309→                      process.env.CLAUDE_AGENT_TYPE !== undefined;
+   310→
+   311→    if (isSubagent) {
+   312→      // Subagent sessions don't need PAI context loading
+   313→      console.error('🤖 Subagent session - skipping PAI context loading');
+   314→      process.exit(0);
+   315→    }
+   316→
+   317→    const paiDir = getPaiDir();
+   318→
+   319→    // CRITICAL: Reset tab title IMMEDIATELY at session start
+   320→    // This prevents stale titles from previous sessions bleeding through
+   321→    resetTabTitle(paiDir);
+   322→
+   323→    // Record session start time for notification timing
+   324→    recordSessionStart();
+   325→    console.error('⏱️ Session start time recorded for notification timing');
+   326→
+   327→    // Only rebuild SKILL.md if source components are newer than the output
+   328→    // This saves ~200-500ms on most session starts
+   329→    const skillMdPath = join(paiDir, 'skills/PAI/SKILL.md');
+   330→    const componentsDir = join(paiDir, 'skills/PAI/Components');
+   331→    let needsRebuild = false;
+   332→
+   333→    try {
+   334→      const skillMdStat = existsSync(skillMdPath) ? require('fs').statSync(skillMdPath) : null;
+   335→      if (!skillMdStat) {
+   336→        needsRebuild = true;
+   337→      } else {
+   338→        // Check if any component is newer than SKILL.md
+   339→        const checkDir = (dir: string): boolean => {
+   340→          try {
+   341→            for (const entry of readdirSync(dir, { withFileTypes: true })) {
+   342→              const fullPath = join(dir, entry.name);
+   343→              if (entry.isDirectory()) {
+   344→                if (checkDir(fullPath)) return true;
+   345→              } else {
+   346→                const entryStat = require('fs').statSync(fullPath);
+   347→                if (entryStat.mtimeMs > skillMdStat.mtimeMs) return true;
+   348→              }
+   349→            }
+   350→          } catch {}
+   351→          return false;
+   352→        };
+   353→        needsRebuild = checkDir(componentsDir);
+   354→      }
+   355→    } catch {
+   356→      needsRebuild = true; // If we can't check, rebuild to be safe
+   357→    }
+   358→
+   359→    if (needsRebuild) {
+   360→      console.error('🔨 Rebuilding SKILL.md (components changed)...');
+   361→      try {
+   362→        execSync('bun ~/.claude/skills/PAI/Tools/CreateDynamicCore.ts', {
+   363→          cwd: paiDir,
+   364→          stdio: 'pipe',
+   365→          timeout: 5000
+   366→        });
+   367→        console.error('✅ SKILL.md rebuilt from latest components');
+   368→      } catch (err) {
+   369→        console.error(`⚠️ Failed to rebuild SKILL.md: ${err}`);
+   370→        console.error('⚠️ Continuing with existing SKILL.md...');
+   371→      }
+   372→    } else {
+   373→      console.error('✅ SKILL.md up-to-date (skipped rebuild)');
+   374→    }
+   375→
+   376→    console.error('📚 Reading PAI core context...');
+   377→
+   378→    // Load settings.json to get contextFiles array
+   379→    const settings = loadSettings(paiDir);
+   380→    console.error(`✅ Loaded settings.json`);
+   381→
+   382→    // Load all context files from settings.json array
+   383→    const contextContent = loadContextFiles(paiDir, settings);
+   384→
+   385→    if (!contextContent) {
+   386→      console.error('❌ No context files loaded');
+   387→      process.exit(1);
+   388→    }
+   389→
+   390→    // Get current date/time to prevent confusion about dates
+   391→    const currentDate = await getCurrentDate();
+   392→    console.error(`📅 Current Date: ${currentDate}`);
+   393→
+   394→    // Extract identity values from settings for injection into context
+   395→    const PRINCIPAL_NAME = (settings as Record<string, unknown>).principal &&
+   396→      typeof (settings as Record<string, unknown>).principal === 'object'
+   397→        ? ((settings as Record<string, unknown>).principal as Record<string, unknown>).name || 'User'
+   398→        : 'User';
+   399→    const DA_NAME = (settings as Record<string, unknown>).daidentity &&
+   400→      typeof (settings as Record<string, unknown>).daidentity === 'object'
+   401→        ? ((settings as Record<string, unknown>).daidentity as Record<string, unknown>).name || 'PAI'
+   402→        : 'PAI';
+   403→
+   404→    console.error(`👤 Principal: ${PRINCIPAL_NAME}, DA: ${DA_NAME}`);
+   405→
+   406→    // Load relationship context (lightweight summary)
+   407→    const relationshipContext = loadRelationshipContext(paiDir);
+   408→    if (relationshipContext) {
+   409→      console.error('💕 Loaded relationship context');
+   410→    }
+   411→
+   412→    const message = `<system-reminder>
+   413→PAI CONTEXT (Auto-loaded at Session Start)
+   414→
+   415→📅 CURRENT DATE/TIME: ${currentDate}
+   416→
+   417→## ACTIVE IDENTITY (from settings.json) - CRITICAL
+   418→
+   419→**⚠️ MANDATORY IDENTITY RULES - OVERRIDE ALL OTHER CONTEXT ⚠️**
+   420→
+   421→The user's name is: **${PRINCIPAL_NAME}**
+   422→The assistant's name is: **${DA_NAME}**
+   423→
+   424→- ALWAYS address the user as "${PRINCIPAL_NAME}" in greetings and responses
+   425→- NEVER use hardcoded names, "the user", or any other name - ONLY "${PRINCIPAL_NAME}"
+   426→- The "danielmiessler" in the repo URL is the AUTHOR, NOT the user
+   427→- This instruction takes ABSOLUTE PRECEDENCE over any other context
+   428→
+   429→---
+   430→
+   431→${contextContent}
+   432→${relationshipContext ? '\n---\n' + relationshipContext : ''}
+   433→---
+   434→
+   435→This context is now active. Additional context loads dynamically as needed.
+   436→</system-reminder>`;
+   437→
+   438→    // Write to stdout (will be captured by Claude Code)
+   439→    console.log(message);
+   440→
+   441→    // Output success confirmation for Claude to acknowledge
+   442→    console.log('\n✅ PAI Context successfully loaded...');
+   443→
+   444→    // Check for active progress files and display them
+   445→    const activeProgress = await checkActiveProgress(paiDir);
+   446→    if (activeProgress) {
+   447→      console.log(activeProgress);
+   448→      console.error('📋 Active work found from previous sessions');
+   449→    }
+   450→
+   451→    console.error('✅ PAI context injected into session');
+   452→    process.exit(0);
+   453→  } catch (error) {
+   454→    console.error('❌ Error in load-pai-context hook:', error);
+   455→    process.exit(1);
+   456→  }
+   457→}
+   458→
+   459→main();
+   460→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

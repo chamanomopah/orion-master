@@ -1,0 +1,161 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * StopOrchestrator.hook.ts - Single Entry Point for Stop Hooks
+     4→ *
+     5→ * PURPOSE:
+     6→ * Orchestrates all Stop event handlers by reading and parsing the transcript
+     7→ * ONCE, then distributing the parsed data to isolated handlers. This prevents
+     8→ * multiple redundant transcript reads and ensures data consistency.
+     9→ *
+    10→ * TRIGGER: Stop (fires after Claude generates a response)
+    11→ *
+    12→ * INPUT:
+    13→ * - session_id: Current session identifier
+    14→ * - transcript_path: Path to the JSONL transcript file
+    15→ * - hook_event_name: "Stop"
+    16→ *
+    17→ * OUTPUT:
+    18→ * - stdout: None (no context injection)
+    19→ * - exit(0): Normal completion
+    20→ *
+    21→ * SIDE EFFECTS:
+    22→ * - Voice handler: Announces completion via voice server
+    23→ * - Capture handler: Updates WORK/ directory with response
+    24→ * - TabState handler: Resets tab title/color to default
+    25→ * - SystemIntegrity handler: Detects PAI changes and spawns background maintenance
+    26→ * - RebuildSkill handler: Rebuilds SKILL.md if Components/ modified
+    27→ *
+    28→ * INTER-HOOK RELATIONSHIPS:
+    29→ * - DEPENDS ON: UpdateTabTitle (expects tab to be in working state)
+    30→ * - COORDINATES WITH: AutoWorkCreation (updates work created by it)
+    31→ * - MUST RUN BEFORE: None
+    32→ * - MUST RUN AFTER: Claude's response generation
+    33→ *
+    34→ * HANDLERS (in hooks/handlers/):
+    35→ * - VoiceNotification.ts: Extracts 🗣️ line, sends to voice server
+    36→ * - ResponseCapture.ts: Updates current-work.json and WORK/ items
+    37→ * - TabState.ts: Resets Kitty tab to default UL blue
+    38→ * - SystemIntegrity.ts: Detects PAI changes, spawns IntegrityMaintenance.ts
+    39→ * - RebuildSkill.ts: Auto-rebuilds SKILL.md from Components/ if modified
+    40→ *
+    41→ * ERROR HANDLING:
+    42→ * - Missing transcript: Exits gracefully
+    43→ * - Parse failures: Logged, exits gracefully
+    44→ * - Handler failures: Isolated via Promise.allSettled (one failure doesn't affect others)
+    45→ *
+    46→ * PERFORMANCE:
+    47→ * - Non-blocking: Yes
+    48→ * - Typical execution: <200ms
+    49→ * - Optimization: Single transcript read vs. 3+ separate reads
+    50→ *
+    51→ * ARCHITECTURE NOTES:
+    52→ * Before this orchestrator, each Stop handler read the transcript independently:
+    53→ * - 4 transcript reads → 1 (3x I/O reduction)
+    54→ * - Guaranteed consistency (all handlers see same data)
+    55→ * - Isolated failures (Promise.allSettled)
+    56→ */
+    57→
+    58→import { parseTranscript } from '../skills/PAI/Tools/TranscriptParser';
+    59→import { handleVoice } from './handlers/VoiceNotification';
+    60→import { handleCapture } from './handlers/ResponseCapture';
+    61→import { handleTabState } from './handlers/TabState';
+    62→import { handleSystemIntegrity } from './handlers/SystemIntegrity';
+    63→import { handleISCValidation } from './handlers/ISCValidator';
+    64→import { handleRebuildSkill } from './handlers/RebuildSkill';
+    65→import { handleUpdateCounts } from './handlers/UpdateCounts';
+    66→
+    67→interface HookInput {
+    68→  session_id: string;
+    69→  transcript_path: string;
+    70→  hook_event_name: string;
+    71→}
+    72→
+    73→async function readStdin(): Promise<HookInput | null> {
+    74→  try {
+    75→    const decoder = new TextDecoder();
+    76→    const reader = Bun.stdin.stream().getReader();
+    77→    let input = '';
+    78→
+    79→    const timeoutPromise = new Promise<void>((resolve) => {
+    80→      setTimeout(() => resolve(), 500);
+    81→    });
+    82→
+    83→    const readPromise = (async () => {
+    84→      while (true) {
+    85→        const { done, value } = await reader.read();
+    86→        if (done) break;
+    87→        input += decoder.decode(value, { stream: true });
+    88→      }
+    89→    })();
+    90→
+    91→    await Promise.race([readPromise, timeoutPromise]);
+    92→
+    93→    if (input.trim()) {
+    94→      return JSON.parse(input) as HookInput;
+    95→    }
+    96→  } catch (error) {
+    97→    console.error('[StopOrchestrator] Error reading stdin:', error);
+    98→  }
+    99→  return null;
+   100→}
+   101→
+   102→async function main() {
+   103→  const hookInput = await readStdin();
+   104→
+   105→  if (!hookInput || !hookInput.transcript_path) {
+   106→    console.error('[StopOrchestrator] No transcript path provided');
+   107→    process.exit(0);
+   108→  }
+   109→
+   110→  // SINGLE READ, SINGLE PARSE
+   111→  const parsed = parseTranscript(hookInput.transcript_path);
+   112→
+   113→  console.error(`[StopOrchestrator] Parsed transcript: ${parsed.plainCompletion.slice(0, 50)}...`);
+   114→
+   115→  // Run non-blocking handlers first
+   116→  const [voiceResult, captureResult, tabResult, integrityResult, rebuildResult, countsResult] = await Promise.allSettled([
+   117→    handleVoice(parsed, hookInput.session_id),
+   118→    handleCapture(parsed, hookInput),
+   119→    handleTabState(parsed),
+   120→    handleSystemIntegrity(parsed, hookInput),
+   121→    handleRebuildSkill(),
+   122→    handleUpdateCounts(),
+   123→  ]);
+   124→
+   125→  // Log any handler failures
+   126→  const handlerNames = ['Voice', 'Capture', 'TabState', 'SystemIntegrity', 'RebuildSkill', 'UpdateCounts'];
+   127→  [voiceResult, captureResult, tabResult, integrityResult, rebuildResult, countsResult].forEach((result, index) => {
+   128→    if (result.status === 'rejected') {
+   129→      console.error(`[StopOrchestrator] ${handlerNames[index]} handler failed:`, result.reason);
+   130→    }
+   131→  });
+   132→
+   133→  // Run ISC validation (potentially blocking)
+   134→  try {
+   135→    const iscResult = await handleISCValidation(parsed, hookInput);
+   136→
+   137→    if (iscResult.shouldBlock && iscResult.blockReason) {
+   138→      // Output blocking decision to stdout (Claude Code reads this)
+   139→      console.log(JSON.stringify({
+   140→        decision: 'block',
+   141→        reason: iscResult.blockReason,
+   142→      }));
+   143→      console.error('[StopOrchestrator] ISC validation BLOCKED response');
+   144→      process.exit(0);
+   145→    }
+   146→  } catch (err) {
+   147→    console.error('[StopOrchestrator] ISCValidator handler failed:', err);
+   148→  }
+   149→
+   150→  process.exit(0);
+   151→}
+   152→
+   153→main().catch((error) => {
+   154→  console.error('[StopOrchestrator] Fatal error:', error);
+   155→  process.exit(0);
+   156→});
+   157→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

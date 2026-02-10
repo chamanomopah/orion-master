@@ -1,0 +1,9 @@
+{
+  "id": "8",
+  "subject": "Sistema testado end-to-end com playground LiveKit",
+  "description": "Teste completo: conectar ao playground LiveKit, iniciar sessão Claude Code via voz, enviar prompt, verificar arquivo criado, checar status no dashboard Vibe Companion, encerrar sessão. Todas as 9 validações do checklist passam.",
+  "activeForm": "Testando sistema end-to-end",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

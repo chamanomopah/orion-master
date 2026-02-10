@@ -1,0 +1,126 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * SessionSummary.hook.ts - Mark Work Complete and Clear State (SessionEnd)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Finalizes a Claude Code session by marking the current work directory as
+     7→ * COMPLETED and clearing the session state. This ensures clean session boundaries
+     8→ * and accurate work tracking.
+     9→ *
+    10→ * TRIGGER: SessionEnd
+    11→ *
+    12→ * INPUT:
+    13→ * - stdin: Hook input JSON (session_id, transcript_path)
+    14→ * - Files: MEMORY/STATE/current-work.json
+    15→ *
+    16→ * OUTPUT:
+    17→ * - stdout: None
+    18→ * - stderr: Status messages
+    19→ * - exit(0): Always (non-blocking)
+    20→ *
+    21→ * SIDE EFFECTS:
+    22→ * - Updates: MEMORY/WORK/<dir>/META.yaml (status: COMPLETED, completed_at timestamp)
+    23→ * - Deletes: MEMORY/STATE/current-work.json (clears session state)
+    24→ *
+    25→ * INTER-HOOK RELATIONSHIPS:
+    26→ * - DEPENDS ON: AutoWorkCreation (expects WORK/ structure and current-work.json)
+    27→ * - COORDINATES WITH: WorkCompletionLearning (both run at SessionEnd)
+    28→ * - MUST RUN BEFORE: None (final cleanup)
+    29→ * - MUST RUN AFTER: WorkCompletionLearning (learning capture uses state before clear)
+    30→ *
+    31→ * STATE TRANSITIONS:
+    32→ * - META.yaml status: "ACTIVE" → "COMPLETED"
+    33→ * - META.yaml completed_at: null → ISO timestamp
+    34→ * - current-work.json: exists → deleted
+    35→ *
+    36→ * DESIGN NOTES:
+    37→ * - Does NOT write to SESSIONS/ directory (WORK/ is the primary tracking system)
+    38→ * - Deleting current-work.json signals a clean slate for next session
+    39→ *
+    40→ * ERROR HANDLING:
+    41→ * - No current work: Logs message, exits gracefully
+    42→ * - Missing META.yaml: Skips update, continues to state clear
+    43→ * - File operation failures: Logged to stderr
+    44→ *
+    45→ * PERFORMANCE:
+    46→ * - Non-blocking: Yes
+    47→ * - Typical execution: <50ms
+    48→ */
+    49→
+    50→import { writeFileSync, existsSync, readFileSync, unlinkSync } from 'fs';
+    51→import { join } from 'path';
+    52→import { getISOTimestamp } from './lib/time';
+    53→
+    54→const MEMORY_DIR = join(process.env.HOME!, '.claude', 'MEMORY');
+    55→const STATE_DIR = join(MEMORY_DIR, 'STATE');
+    56→const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');
+    57→const WORK_DIR = join(MEMORY_DIR, 'WORK');
+    58→
+    59→interface CurrentWork {
+    60→  session_id: string;
+    61→  work_dir: string;
+    62→  created_at: string;
+    63→  item_count: number;
+    64→}
+    65→
+    66→/**
+    67→ * Mark work directory as completed and clear session state
+    68→ */
+    69→function clearSessionWork(): void {
+    70→  try {
+    71→    if (!existsSync(CURRENT_WORK_FILE)) {
+    72→      console.error('[SessionSummary] No current work to complete');
+    73→      return;
+    74→    }
+    75→
+    76→    // Read current work state
+    77→    const content = readFileSync(CURRENT_WORK_FILE, 'utf-8');
+    78→    const currentWork: CurrentWork = JSON.parse(content);
+    79→
+    80→    // Mark work directory as COMPLETED
+    81→    if (currentWork.work_dir) {
+    82→      const metaPath = join(WORK_DIR, currentWork.work_dir, 'META.yaml');
+    83→      if (existsSync(metaPath)) {
+    84→        let metaContent = readFileSync(metaPath, 'utf-8');
+    85→        metaContent = metaContent.replace(/^status: "ACTIVE"$/m, 'status: "COMPLETED"');
+    86→        metaContent = metaContent.replace(/^completed_at: null$/m, `completed_at: "${getISOTimestamp()}"`);
+    87→        writeFileSync(metaPath, metaContent, 'utf-8');
+    88→        console.error(`[SessionSummary] Marked work directory as COMPLETED: ${currentWork.work_dir}`);
+    89→      }
+    90→    }
+    91→
+    92→    // Delete state file
+    93→    unlinkSync(CURRENT_WORK_FILE);
+    94→    console.error('[SessionSummary] Cleared session work state');
+    95→  } catch (error) {
+    96→    console.error(`[SessionSummary] Error clearing session work: ${error}`);
+    97→  }
+    98→}
+    99→
+   100→async function main() {
+   101→  try {
+   102→    // Read input from stdin (not strictly needed but matches hook pattern)
+   103→    const input = await Bun.stdin.text();
+   104→    if (!input || input.trim() === '') {
+   105→      process.exit(0);
+   106→    }
+   107→
+   108→    // Mark work as complete and clear state
+   109→    // NOTE: Does NOT write to SESSIONS/ - WORK/ is the primary system
+   110→    clearSessionWork();
+   111→
+   112→    console.error('[SessionSummary] Session ended, work marked complete');
+   113→    process.exit(0);
+   114→  } catch (error) {
+   115→    // Silent failure - don't disrupt workflow
+   116→    console.error(`[SessionSummary] SessionEnd hook error: ${error}`);
+   117→    process.exit(0);
+   118→  }
+   119→}
+   120→
+   121→main();
+   122→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

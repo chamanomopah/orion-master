@@ -1,0 +1,327 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * WorkCompletionLearning.hook.ts - Extract Learnings from Completed Work (SessionEnd)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Bridges the WORK/ system to the LEARNING/ system. When a session ends with
+     7→ * significant work completed, this hook captures the work metadata (files changed,
+     8→ * tools used, ideal state criteria) and creates a learning file for future reference.
+     9→ * This ensures insights compound over time rather than being lost.
+    10→ *
+    11→ * TRIGGER: SessionEnd
+    12→ *
+    13→ * INPUT:
+    14→ * - stdin: Hook input JSON (session_id, transcript_path)
+    15→ * - Files: MEMORY/STATE/current-work.json, MEMORY/WORK/<dir>/META.yaml
+    16→ *
+    17→ * OUTPUT:
+    18→ * - stdout: None
+    19→ * - stderr: Status messages
+    20→ * - exit(0): Always (non-blocking)
+    21→ *
+    22→ * SIDE EFFECTS:
+    23→ * - Creates: MEMORY/LEARNING/<category>/<YYYY-MM>/<datetime>_work_<slug>.md
+    24→ * - Reads: Current work state and work directory metadata
+    25→ *
+    26→ * INTER-HOOK RELATIONSHIPS:
+    27→ * - DEPENDS ON: AutoWorkCreation (expects WORK/ structure)
+    28→ * - COORDINATES WITH: SessionSummary (both run at SessionEnd)
+    29→ * - MUST RUN BEFORE: SessionSummary (captures before state is cleared)
+    30→ * - MUST RUN AFTER: Stop handlers (captures completed work)
+    31→ *
+    32→ * SIGNIFICANT WORK CRITERIA:
+    33→ * A learning is only captured if:
+    34→ * - Files were changed, OR
+    35→ * - Multiple items exist in work directory, OR
+    36→ * - Work was manually created (source: MANUAL)
+    37→ *
+    38→ * LEARNING CATEGORIES:
+    39→ * - ALGORITHM: Insights about process/approach improvement
+    40→ * - SYSTEM: Technical system improvements
+    41→ * (Determined by getLearningCategory utility)
+    42→ *
+    43→ * ERROR HANDLING:
+    44→ * - No active work: Silent exit
+    45→ * - Missing META.yaml: Silent exit
+    46→ * - Write failures: Logged to stderr, silent exit
+    47→ *
+    48→ * PERFORMANCE:
+    49→ * - Non-blocking: Yes (fire-and-forget at session end)
+    50→ * - Typical execution: <100ms
+    51→ */
+    52→
+    53→import { writeFileSync, existsSync, readFileSync, mkdirSync } from 'fs';
+    54→import { join, dirname } from 'path';
+    55→import { getISOTimestamp, getPSTDate } from './lib/time';
+    56→import { getLearningCategory } from './lib/learning-utils';
+    57→
+    58→const MEMORY_DIR = join(process.env.HOME!, '.claude', 'MEMORY');
+    59→const STATE_DIR = join(MEMORY_DIR, 'STATE');
+    60→const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');
+    61→const WORK_DIR = join(MEMORY_DIR, 'WORK');
+    62→const LEARNING_DIR = join(MEMORY_DIR, 'LEARNING');
+    63→
+    64→interface CurrentWork {
+    65→  session_id: string;
+    66→  work_dir: string;
+    67→  created_at: string;
+    68→  item_count: number;
+    69→}
+    70→
+    71→interface WorkMeta {
+    72→  id: string;
+    73→  title: string;
+    74→  created_at: string;
+    75→  completed_at: string | null;
+    76→  source: string;
+    77→  status: string;
+    78→  session_id: string;
+    79→  lineage: {
+    80→    tools_used: string[];
+    81→    files_changed: string[];
+    82→    agents_spawned: string[];
+    83→  };
+    84→}
+    85→
+    86→function parseYaml(content: string): WorkMeta {
+    87→  // Simple YAML parser for our specific format
+    88→  const meta: any = {};
+    89→  const lines = content.split('\n');
+    90→  let currentKey = '';
+    91→  let inArray = false;
+    92→  let arrayKey = '';
+    93→
+    94→  for (const line of lines) {
+    95→    const trimmed = line.trim();
+    96→    if (!trimmed || trimmed.startsWith('#')) continue;
+    97→
+    98→    // Handle array items
+    99→    if (trimmed.startsWith('- ') && inArray) {
+   100→      const value = trimmed.slice(2).replace(/^["']|["']$/g, '');
+   101→      if (arrayKey === 'lineage') {
+   102→        // Nested array in lineage
+   103→        const lastKey = Object.keys(meta.lineage).pop();
+   104→        if (lastKey) meta.lineage[lastKey].push(value);
+   105→      } else {
+   106→        meta[arrayKey].push(value);
+   107→      }
+   108→      continue;
+   109→    }
+   110→
+   111→    // Handle key: value pairs
+   112→    const match = trimmed.match(/^([a-z_]+):\s*(.*)$/);
+   113→    if (match) {
+   114→      const [, key, value] = match;
+   115→      currentKey = key;
+   116→
+   117→      if (key === 'lineage') {
+   118→        meta.lineage = { tools_used: [], files_changed: [], agents_spawned: [] };
+   119→        inArray = false;
+   120→        continue;
+   121→      }
+   122→
+   123→      if (value === '[]') {
+   124→        if (meta.lineage) {
+   125→          meta.lineage[key] = [];
+   126→        } else {
+   127→          meta[key] = [];
+   128→        }
+   129→        inArray = false;
+   130→      } else if (value === '') {
+   131→        if (meta.lineage && ['tools_used', 'files_changed', 'agents_spawned'].includes(key)) {
+   132→          meta.lineage[key] = [];
+   133→          arrayKey = 'lineage';
+   134→          inArray = true;
+   135→        } else {
+   136→          meta[key] = [];
+   137→          arrayKey = key;
+   138→          inArray = true;
+   139→        }
+   140→      } else {
+   141→        const cleanValue = value.replace(/^["']|["']$/g, '');
+   142→        if (meta.lineage && ['tools_used', 'files_changed', 'agents_spawned'].includes(key)) {
+   143→          meta.lineage[key] = cleanValue === 'null' ? [] : [cleanValue];
+   144→        } else {
+   145→          meta[key] = cleanValue === 'null' ? null : cleanValue;
+   146→        }
+   147→        inArray = false;
+   148→      }
+   149→    }
+   150→  }
+   151→
+   152→  return meta as WorkMeta;
+   153→}
+   154→
+   155→function getMonthDir(category: 'SYSTEM' | 'ALGORITHM'): string {
+   156→  const now = new Date();
+   157→  const year = now.getFullYear();
+   158→  const month = String(now.getMonth() + 1).padStart(2, '0');
+   159→
+   160→  const monthDir = join(LEARNING_DIR, category, `${year}-${month}`);
+   161→
+   162→  if (!existsSync(monthDir)) {
+   163→    mkdirSync(monthDir, { recursive: true });
+   164→  }
+   165→
+   166→  return monthDir;
+   167→}
+   168→
+   169→function writeLearning(workMeta: WorkMeta, idealContent: string): void {
+   170→  const category = getLearningCategory(workMeta.title);
+   171→  const monthDir = getMonthDir(category);
+   172→
+   173→  const dateStr = getPSTDate();
+   174→  const timeStr = new Date().toISOString().split('T')[1].slice(0, 5).replace(':', '');
+   175→  const titleSlug = workMeta.title
+   176→    .toLowerCase()
+   177→    .replace(/[^a-z0-9]+/g, '-')
+   178→    .slice(0, 30);
+   179→
+   180→  const filename = `${dateStr}_${timeStr}_work_${titleSlug}.md`;
+   181→  const filepath = join(monthDir, filename);
+   182→
+   183→  // Don't overwrite existing learnings
+   184→  if (existsSync(filepath)) {
+   185→    console.error(`[WorkCompletionLearning] Learning already exists: ${filename}`);
+   186→    return;
+   187→  }
+   188→
+   189→  // Calculate session duration
+   190→  let duration = 'Unknown';
+   191→  if (workMeta.created_at && workMeta.completed_at) {
+   192→    const start = new Date(workMeta.created_at);
+   193→    const end = new Date(workMeta.completed_at);
+   194→    const minutes = Math.round((end.getTime() - start.getTime()) / 60000);
+   195→    if (minutes < 60) {
+   196→      duration = `${minutes} minutes`;
+   197→    } else {
+   198→      const hours = Math.floor(minutes / 60);
+   199→      const mins = minutes % 60;
+   200→      duration = `${hours}h ${mins}m`;
+   201→    }
+   202→  }
+   203→
+   204→  const content = `# Work Completion Learning
+   205→
+   206→**Title:** ${workMeta.title}
+   207→**Duration:** ${duration}
+   208→**Category:** ${category}
+   209→**Session:** ${workMeta.session_id}
+   210→
+   211→---
+   212→
+   213→## Ideal State Criteria
+   214→
+   215→${idealContent || 'Not specified'}
+   216→
+   217→## What Was Done
+   218→
+   219→- **Files Changed:** ${workMeta.lineage?.files_changed?.length || 0}
+   220→- **Tools Used:** ${workMeta.lineage?.tools_used?.join(', ') || 'None tracked'}
+   221→- **Agents Spawned:** ${workMeta.lineage?.agents_spawned?.length || 0}
+   222→
+   223→## Insights
+   224→
+   225→*This work session completed successfully. Consider what made it effective:*
+   226→
+   227→- Was the approach straightforward or did it require iteration?
+   228→- Were there any blockers or surprises?
+   229→- What patterns from this work apply to future tasks?
+   230→
+   231→---
+   232→
+   233→*Auto-captured by WorkCompletionLearning hook at session end*
+   234→`;
+   235→
+   236→  writeFileSync(filepath, content);
+   237→  console.error(`[WorkCompletionLearning] Created learning: ${filename}`);
+   238→}
+   239→
+   240→async function main() {
+   241→  try {
+   242→    // Read input from stdin (required for hook pattern)
+   243→    const input = await Bun.stdin.text();
+   244→    if (!input || input.trim() === '') {
+   245→      process.exit(0);
+   246→    }
+   247→
+   248→    // Check if there's an active work session
+   249→    if (!existsSync(CURRENT_WORK_FILE)) {
+   250→      console.error('[WorkCompletionLearning] No active work session');
+   251→      process.exit(0);
+   252→    }
+   253→
+   254→    // Read current work state
+   255→    const currentWork: CurrentWork = JSON.parse(readFileSync(CURRENT_WORK_FILE, 'utf-8'));
+   256→
+   257→    if (!currentWork.work_dir) {
+   258→      console.error('[WorkCompletionLearning] No work directory in current session');
+   259→      process.exit(0);
+   260→    }
+   261→
+   262→    // Read work directory metadata
+   263→    const workPath = join(WORK_DIR, currentWork.work_dir);
+   264→    const metaPath = join(workPath, 'META.yaml');
+   265→
+   266→    if (!existsSync(metaPath)) {
+   267→      console.error('[WorkCompletionLearning] No META.yaml found');
+   268→      process.exit(0);
+   269→    }
+   270→
+   271→    const metaContent = readFileSync(metaPath, 'utf-8');
+   272→    const workMeta = parseYaml(metaContent);
+   273→
+   274→    // Update completed_at if not set
+   275→    if (!workMeta.completed_at) {
+   276→      workMeta.completed_at = getISOTimestamp();
+   277→    }
+   278→
+   279→    // Read ISC.json if it exists
+   280→    const iscPath = join(workPath, 'ISC.json');
+   281→    let idealContent = '';
+   282→    if (existsSync(iscPath)) {
+   283→      try {
+   284→        const iscData = JSON.parse(readFileSync(iscPath, 'utf-8'));
+   285→        // Format ISC for human-readable learning
+   286→        if (iscData.current?.criteria?.length > 0) {
+   287→          idealContent = '**Criteria:**\n' + iscData.current.criteria.map((c: string) => `- ${c}`).join('\n');
+   288→        }
+   289→        if (iscData.current?.antiCriteria?.length > 0) {
+   290→          idealContent += '\n\n**Anti-Criteria:**\n' + iscData.current.antiCriteria.map((c: string) => `- ${c}`).join('\n');
+   291→        }
+   292→        if (iscData.satisfaction) {
+   293→          const s = iscData.satisfaction;
+   294→          idealContent += `\n\n**Satisfaction:** ${s.satisfied}/${s.total} satisfied, ${s.partial} partial, ${s.failed} failed`;
+   295→        }
+   296→      } catch {
+   297→        // Ignore parse errors
+   298→      }
+   299→    }
+   300→
+   301→    // Check if this was significant work (has files changed or was manually created)
+   302→    const hasSignificantWork = (
+   303→      (workMeta.lineage?.files_changed?.length || 0) > 0 ||
+   304→      currentWork.item_count > 1 ||
+   305→      workMeta.source === 'MANUAL'
+   306→    );
+   307→
+   308→    if (hasSignificantWork) {
+   309→      writeLearning(workMeta, idealContent);
+   310→    } else {
+   311→      console.error('[WorkCompletionLearning] Trivial work session, skipping learning capture');
+   312→    }
+   313→
+   314→    process.exit(0);
+   315→  } catch (error) {
+   316→    // Silent failure - don't disrupt workflow
+   317→    console.error(`[WorkCompletionLearning] Error: ${error}`);
+   318→    process.exit(0);
+   319→  }
+   320→}
+   321→
+   322→main();
+   323→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

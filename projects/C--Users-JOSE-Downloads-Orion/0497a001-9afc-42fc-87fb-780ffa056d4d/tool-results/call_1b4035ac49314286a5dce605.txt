@@ -1,0 +1,66 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * QuestionAnswered.hook.ts - Reset Tab After Question Answered (PostToolUse)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Resets the terminal tab from question state (teal) back to working state (orange)
+     7→ * after the user answers an AskUserQuestion prompt. This bridges the gap where
+     8→ * question answers don't trigger UserPromptSubmit (they're tool results, not prompts).
+     9→ *
+    10→ * TRIGGER: PostToolUse (matcher: AskUserQuestion)
+    11→ *
+    12→ * INPUT:
+    13→ * - stdin: Hook input JSON with tool_input containing the user's answer
+    14→ *
+    15→ * OUTPUT:
+    16→ * - stdout: None
+    17→ * - stderr: Status message
+    18→ * - exit(0): Always (non-blocking)
+    19→ *
+    20→ * SIDE EFFECTS:
+    21→ * - Kitty remote control: Sets tab color to orange (#804000)
+    22→ * - Kitty remote control: Sets tab title to working format
+    23→ *
+    24→ * INTER-HOOK RELATIONSHIPS:
+    25→ * - DEPENDS ON: SetQuestionTab (runs before this, sets teal)
+    26→ * - COORDINATES WITH: UpdateTabTitle (shares tab color scheme)
+    27→ * - MUST RUN AFTER: SetQuestionTab (resets its teal color)
+    28→ *
+    29→ * TAB COLOR SCHEME (inactive tab only - active tab stays dark blue):
+    30→ * - Dark teal (#085050): Waiting for user input (SetQuestionTab)
+    31→ * - Dark orange (#804000): Actively working (this hook + UpdateTabTitle)
+    32→ * - Dark purple (#1E0A3C): AI inference/thinking (UpdateTabTitle)
+    33→ * - Dark blue (#002B80): Active tab always uses this
+    34→ *
+    35→ * ERROR HANDLING:
+    36→ * - Kitty unavailable: Silent failure
+    37→ */
+    38→
+    39→const TAB_WORKING_BG = '#804000';      // Dark orange - actively working
+    40→const ACTIVE_TAB_BG = '#002B80';       // Dark blue - active tab always
+    41→const ACTIVE_TEXT = '#FFFFFF';
+    42→const INACTIVE_TEXT = '#A0A0A0';
+    43→
+    44→async function main() {
+    45→  try {
+    46→    // Set tab color: active stays dark blue, inactive shows orange
+    47→    await Bun.$`kitten @ set-tab-color --self active_bg=${ACTIVE_TAB_BG} active_fg=${ACTIVE_TEXT} inactive_bg=${TAB_WORKING_BG} inactive_fg=${INACTIVE_TEXT}`.quiet();
+    48→
+    49→    // Set working title
+    50→    await Bun.$`kitty @ set-tab-title "⚙️Processing answer…"`.quiet();
+    51→
+    52→    console.error('[QuestionAnswered] Tab reset to working state (orange on inactive only)');
+    53→  } catch (error) {
+    54→    // Silently fail if kitty remote control is not available
+    55→    console.error('[QuestionAnswered] Kitty remote control unavailable');
+    56→  }
+    57→
+    58→  process.exit(0);
+    59→}
+    60→
+    61→main();
+    62→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

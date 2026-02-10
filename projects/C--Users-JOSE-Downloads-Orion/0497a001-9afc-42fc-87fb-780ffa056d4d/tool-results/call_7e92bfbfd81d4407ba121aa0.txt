@@ -1,0 +1,98 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * CheckVersion.hook.ts - Check for Claude Code Updates (SessionStart)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Compares the installed Claude Code version against the latest available on npm.
+     7→ * If an update is available, displays a notification to stderr. This keeps the
+     8→ * system current without interrupting workflow.
+     9→ *
+    10→ * TRIGGER: SessionStart
+    11→ *
+    12→ * INPUT:
+    13→ * - None (reads version info from CLI and npm)
+    14→ *
+    15→ * OUTPUT:
+    16→ * - stdout: None
+    17→ * - stderr: Update notification if newer version available
+    18→ * - exit(0): Always (non-blocking)
+    19→ *
+    20→ * SIDE EFFECTS:
+    21→ * - Network request to npm registry (brief)
+    22→ * - Spawns two child processes for version checks
+    23→ *
+    24→ * INTER-HOOK RELATIONSHIPS:
+    25→ * - DEPENDS ON: None
+    26→ * - COORDINATES WITH: None (fully independent)
+    27→ * - MUST RUN BEFORE: None (informational only)
+    28→ * - MUST RUN AFTER: None
+    29→ *
+    30→ * ERROR HANDLING:
+    31→ * - Network failures: Silent exit (doesn't block session)
+    32→ * - Parse failures: Returns 'unknown', silent exit
+    33→ *
+    34→ * PERFORMANCE:
+    35→ * - Non-blocking: Yes
+    36→ * - Typical execution: <500ms
+    37→ * - Skipped for subagents: Yes
+    38→ */
+    39→
+    40→async function getCurrentVersion(): Promise<string> {
+    41→  try {
+    42→    const proc = Bun.spawn(['claude', '--version'], {
+    43→      stdout: 'pipe',
+    44→      stderr: 'pipe'
+    45→    });
+    46→    const output = await new Response(proc.stdout).text();
+    47→    const match = output.match(/(\d+\.\d+\.\d+)/);
+    48→    return match ? match[1] : 'unknown';
+    49→  } catch {
+    50→    return 'unknown';
+    51→  }
+    52→}
+    53→
+    54→async function getLatestVersion(): Promise<string> {
+    55→  try {
+    56→    const proc = Bun.spawn(['npm', 'view', '@anthropic-ai/claude-code', 'version'], {
+    57→      stdout: 'pipe',
+    58→      stderr: 'pipe'
+    59→    });
+    60→    const output = await new Response(proc.stdout).text();
+    61→    return output.trim() || 'unknown';
+    62→  } catch {
+    63→    return 'unknown';
+    64→  }
+    65→}
+    66→
+    67→async function main() {
+    68→  try {
+    69→    // Skip for subagents
+    70→    const claudeProjectDir = process.env.CLAUDE_PROJECT_DIR || '';
+    71→    const isSubagent = claudeProjectDir.includes('/.claude/Agents/') ||
+    72→                      process.env.CLAUDE_AGENT_TYPE !== undefined;
+    73→
+    74→    if (isSubagent) {
+    75→      process.exit(0);
+    76→    }
+    77→
+    78→    const [currentVersion, latestVersion] = await Promise.all([
+    79→      getCurrentVersion(),
+    80→      getLatestVersion()
+    81→    ]);
+    82→
+    83→    if (currentVersion !== 'unknown' && latestVersion !== 'unknown' && currentVersion !== latestVersion) {
+    84→      console.error(`💡 Update available: CC ${currentVersion} → ${latestVersion}`);
+    85→    }
+    86→
+    87→    process.exit(0);
+    88→  } catch {
+    89→    process.exit(0);
+    90→  }
+    91→}
+    92→
+    93→main();
+    94→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

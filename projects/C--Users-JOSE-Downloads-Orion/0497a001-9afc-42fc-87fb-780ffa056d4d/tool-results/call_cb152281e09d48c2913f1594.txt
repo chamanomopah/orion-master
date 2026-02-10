@@ -1,0 +1,546 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * AgentOutputCapture.hook.ts - Capture Subagent Results (SubagentStop)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Captures output from completed subagents (Task tool invocations) and persists
+     7→ * them to MEMORY/RESEARCH/ for future reference. Also sends push notifications
+     8→ * for background agents and observability events.
+     9→ *
+    10→ * TRIGGER: SubagentStop (fires when a Task tool subagent completes)
+    11→ *
+    12→ * INPUT:
+    13→ * - session_id: Parent session identifier
+    14→ * - transcript_path: Path to the transcript JSONL file
+    15→ *
+    16→ * OUTPUT:
+    17→ * - stdout: None (no context injection)
+    18→ * - exit(0): Normal completion
+    19→ *
+    20→ * SIDE EFFECTS:
+    21→ * - Writes to: MEMORY/RESEARCH/<YYYY-MM>/AGENT-<type>_*.md
+    22→ * - Writes to: hooks/subagent-stop-debug.log (debug mode)
+    23→ * - Sends: Observability event to dashboard server
+    24→ * - Sends: Push notification via ntfy for background agents
+    25→ *
+    26→ * INTER-HOOK RELATIONSHIPS:
+    27→ * - DEPENDS ON: None
+    28→ * - COORDINATES WITH: Observability dashboard (if running)
+    29→ * - MUST RUN BEFORE: None
+    30→ * - MUST RUN AFTER: Task tool completion
+    31→ *
+    32→ * ERROR HANDLING:
+    33→ * - Missing transcript: Exits gracefully (exit 0)
+    34→ * - Parse errors: Logged to debug file, exits gracefully
+    35→ * - External service failures: Silently ignored (fire-and-forget)
+    36→ *
+    37→ * PERFORMANCE:
+    38→ * - Non-blocking: Yes
+    39→ * - Typical execution: <500ms
+    40→ * - Retry logic: 2 attempts with 200ms delay for transcript availability
+    41→ *
+    42→ * AGENT OUTPUT FORMAT:
+    43→ * Searches for completion messages in two formats:
+    44→ * - NEW: 🗣️ AgentName: [completion message]
+    45→ * - LEGACY: 🎯 COMPLETED: [AGENT:type] [message]
+    46→ */
+    47→
+    48→import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'fs';
+    49→import { join } from 'path';
+    50→import { paiPath } from './lib/paths';
+    51→import { sendEventToObservability, getCurrentTimestamp, getSourceApp } from './lib/observability';
+    52→import { extractAgentInstanceId } from './lib/metadata-extraction';
+    53→import { notifyBackgroundAgent } from './lib/notifications';
+    54→
+    55→/**
+    56→ * Get current timestamp in PST timezone
+    57→ * Format: YYYY-MM-DD HH:MM:SS PST
+    58→ */
+    59→function getPSTTimestamp(): string {
+    60→  const date = new Date();
+    61→  const pstDate = new Date(date.toLocaleString('en-US', { timeZone: process.env.TIME_ZONE || 'America/Los_Angeles' }));
+    62→
+    63→  const year = pstDate.getFullYear();
+    64→  const month = String(pstDate.getMonth() + 1).padStart(2, '0');
+    65→  const day = String(pstDate.getDate()).padStart(2, '0');
+    66→  const hours = String(pstDate.getHours()).padStart(2, '0');
+    67→  const minutes = String(pstDate.getMinutes()).padStart(2, '0');
+    68→  const seconds = String(pstDate.getSeconds()).padStart(2, '0');
+    69→
+    70→  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} PST`;
+    71→}
+    72→
+    73→function getPSTDate(): string {
+    74→  const date = new Date();
+    75→  const pstDate = new Date(date.toLocaleString('en-US', { timeZone: process.env.TIME_ZONE || 'America/Los_Angeles' }));
+    76→
+    77→  const year = pstDate.getFullYear();
+    78→  const month = String(pstDate.getMonth() + 1).padStart(2, '0');
+    79→  const day = String(pstDate.getDate()).padStart(2, '0');
+    80→
+    81→  return `${year}-${month}-${day}`;
+    82→}
+    83→
+    84→async function delay(ms: number): Promise<void> {
+    85→  return new Promise(resolve => setTimeout(resolve, ms));
+    86→}
+    87→
+    88→async function findTaskResult(transcriptPath: string, maxAttempts: number = 2): Promise<{ result: string | null, agentType: string | null, description: string | null, toolInput: any | null }> {
+    89→  console.error(`📂 Looking for Task result in transcript: ${transcriptPath}`);
+    90→
+    91→  // If the provided transcript path doesn't exist, try to find the most recent agent transcript
+    92→  let actualTranscriptPath = transcriptPath;
+    93→
+    94→  // PERFORMANCE FIX: Reduced from 6 attempts (10+ seconds) to 2 attempts (~500ms)
+    95→  // The transcript should already exist when SubagentStop fires
+    96→  // If it doesn't exist after a quick check, don't block - just exit gracefully
+    97→  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    98→    if (attempt > 0) {
+    99→      // Single short retry - 200ms is enough for filesystem sync
+   100→      await delay(200);
+   101→    }
+   102→
+   103→    if (!existsSync(actualTranscriptPath)) {
+   104→      console.error(`❌ Transcript file doesn't exist: ${actualTranscriptPath} (attempt ${attempt + 1}/${maxAttempts})`);
+   105→
+   106→      // Try to find agent transcript in the same directory
+   107→      const dir = require('path').dirname(transcriptPath);
+   108→      if (existsSync(dir)) {
+   109→        const { readdirSync, statSync } = require('fs');
+   110→        const files = readdirSync(dir)
+   111→          .filter((f: string) => f.startsWith('agent-') && f.endsWith('.jsonl'))
+   112→          .map((f: string) => ({ name: f, mtime: statSync(join(dir, f)).mtime }))
+   113→          .sort((a: any, b: any) => b.mtime - a.mtime);
+   114→
+   115→        if (files.length > 0) {
+   116→          actualTranscriptPath = join(dir, files[0].name);
+   117→          console.error(`🔄 Found recent agent transcript: ${actualTranscriptPath}`);
+   118→        }
+   119→      }
+   120→
+   121→      if (!existsSync(actualTranscriptPath)) {
+   122→        continue;
+   123→      }
+   124→    }
+   125→
+   126→    try {
+   127→      const transcript = readFileSync(actualTranscriptPath, 'utf-8');
+   128→      const lines = transcript.trim().split('\n');
+   129→
+   130→      // Search from the end of the transcript backwards
+   131→      for (let i = lines.length - 1; i >= 0; i--) {
+   132→        try {
+   133→          const entry = JSON.parse(lines[i]);
+   134→
+   135→          // Look for assistant messages that contain Task tool_use
+   136→          if (entry.type === 'assistant' && entry.message?.content) {
+   137→            for (const content of entry.message.content) {
+   138→              if (content.type === 'tool_use' && content.name === 'Task') {
+   139→                const toolInput = content.input;
+   140→                const description = toolInput?.description || null;
+   141→                console.error(`✅ Found Task invocation with subagent: ${toolInput?.subagent_type}, description: ${description}`);
+   142→                // Found a Task invocation, now look for its result
+   143→                // The result should be in a subsequent user message
+   144→                for (let j = i + 1; j < lines.length; j++) {
+   145→                  const resultEntry = JSON.parse(lines[j]);
+   146→                  if (resultEntry.type === 'user' && resultEntry.message?.content) {
+   147→                    for (const resultContent of resultEntry.message.content) {
+   148→                      if (resultContent.type === 'tool_result' && resultContent.tool_use_id === content.id) {
+   149→                        // Found the matching Task result
+   150→                        // Content can be either a string or an array of objects with text
+   151→                        let taskOutput: string;
+   152→                        if (typeof resultContent.content === 'string') {
+   153→                          taskOutput = resultContent.content;
+   154→                        } else if (Array.isArray(resultContent.content)) {
+   155→                          // Extract text from array of content objects
+   156→                          taskOutput = resultContent.content
+   157→                            .filter((item: any) => item.type === 'text')
+   158→                            .map((item: any) => item.text)
+   159→                            .join('\n');
+   160→                        } else {
+   161→                          console.error('❌ Unexpected tool_result content type');
+   162→                          continue;
+   163→                        }
+   164→
+   165→                        // Extract agent type from the output
+   166→                        let agentType = 'default';
+   167→                        const agentMatch = taskOutput.match(/Sub-agent\s+(\w+)\s+completed/i);
+   168→                        if (agentMatch) {
+   169→                          agentType = agentMatch[1].toLowerCase();
+   170→                        }
+   171→
+   172→                        return { result: taskOutput, agentType, description, toolInput };
+   173→                      }
+   174→                    }
+   175→                  }
+   176→                }
+   177→              }
+   178→            }
+   179→          }
+   180→        } catch (e) {
+   181→          // Invalid JSON line, skip
+   182→        }
+   183→      }
+   184→    } catch (e) {
+   185→      // Error reading file, will retry
+   186→    }
+   187→  }
+   188→
+   189→  return { result: null, agentType: null, description: null, toolInput: null };
+   190→}
+   191→
+   192→function extractCompletionMessage(taskOutput: string): { message: string | null, agentType: string | null } {
+   193→  console.error('🔍 DEBUG - Extracting from task output, length:', taskOutput.length);
+   194→  console.error('🔍 DEBUG - First 200 chars:', taskOutput.substring(0, 200));
+   195→  console.error('🔍 DEBUG - Last 200 chars:', taskOutput.substring(taskOutput.length - 200));
+   196→
+   197→  // Look for the COMPLETED section in the agent's output
+   198→  // Priority: 1) New 🗣️ format, 2) Legacy [AGENT:type] format
+   199→  const agentPatterns = [
+   200→    // NEW FORMAT: 🗣️ AgentName: [text] (primary)
+   201→    // Captures agent name dynamically from the line
+   202→    /🗣️\s*\*{0,2}([\w-]+):?\*{0,2}\s*(.+?)(?:\n|$)/is,
+   203→
+   204→    // LEGACY FORMAT: 🎯 COMPLETED: [AGENT:type] [text] (backward compatibility)
+   205→    // Handle markdown formatting with asterisks - same line
+   206→    /\*+🎯\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+   207→    /\*+🎯\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+   208→    // Non-markdown patterns - same line
+   209→    /🎯\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+   210→    /COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+   211→
+   212→    // Multi-line patterns (emoji/COMPLETED on one line, AGENT tag on next)
+   213→    /🎯\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+   214→    /##\s*🎯\s*COMPLETED[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+   215→    /\*+🎯\s*COMPLETED\*+[\s\n]+\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+   216→
+   217→    // Generic pattern for current format
+   218→    /🎯.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*(.+?)(?:\n|$)/is,
+   219→
+   220→    // OLD: Handle legacy "I completed" format (for backward compatibility)
+   221→    /\*+🎯\s*COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+   222→    /\*+🎯\s+COMPLETED:\*+\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+   223→    /🎯\s*COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+   224→    /COMPLETED:\s*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is,
+   225→    /\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\.|!|\n|$)/is,
+   226→    /🎯.*COMPLETED.*\[AGENT:(\w+[-\w]*)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is
+   227→  ];
+   228→
+   229→  // First try to match agent-specific patterns
+   230→  for (const pattern of agentPatterns) {
+   231→    const match = taskOutput.match(pattern);
+   232→    if (match && match[1] && match[2]) {
+   233→      const agentType = match[1].toLowerCase();
+   234→      let message = match[2].trim();
+   235→
+   236→      // Prepend agent name for spoken message
+   237→      const agentName = agentType.charAt(0).toUpperCase() + agentType.slice(1);
+   238→
+   239→      // Intelligent "completed" detection
+   240→      // Don't say "completed" for greetings, questions, or status updates
+   241→      const isGreeting = /^(hey|hello|hi|greetings|good morning|good afternoon|good evening)/i.test(message);
+   242→      const isQuestion = message.includes('?');
+   243→      const isStatusUpdate = /(ready to help|online|here|available|standing by|doing (great|well|fine))/i.test(message);
+   244→
+   245→      const fullMessage = (isGreeting || isQuestion || isStatusUpdate)
+   246→        ? message  // Just the message for greetings/questions/status
+   247→        : `${agentName} completed ${message}`;  // Prepend "completed" for tasks
+   248→
+   249→      console.error(`✅ FOUND AGENT MATCH: [${agentType}] ${fullMessage}`);
+   250→
+   251→      // Return agent type and message
+   252→      return { message: fullMessage, agentType };
+   253→    }
+   254→  }
+   255→
+   256→  // Fall back to generic patterns but try to extract agent type
+   257→  const genericPatterns = [
+   258→    // NEW FORMAT: 🗣️ [text] (without specific name - fallback)
+   259→    /🗣️\s*(.+?)(?:\n|$)/i,
+   260→    // LEGACY FORMAT (backward compatibility)
+   261→    // Handle markdown formatting
+   262→    /\*+🎯\s*COMPLETED:\*+\s*(.+?)(?:\n|$)/i,
+   263→    /\*+COMPLETED:\*+\s*(.+?)(?:\n|$)/i,
+   264→    // Non-markdown patterns
+   265→    /🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/i,
+   266→    /COMPLETED:\s*(.+?)(?:\n|$)/i,
+   267→    /Sub-agent\s+\w+\s+completed\s+(.+?)(?:\.|!|\n|$)/i,
+   268→    /Agent\s+completed\s+(.+?)(?:\.|!|\n|$)/i
+   269→  ];
+   270→
+   271→  for (const pattern of genericPatterns) {
+   272→    const match = taskOutput.match(pattern);
+   273→    if (match && match[1]) {
+   274→      let message = match[1].trim();
+   275→
+   276→      // Basic cleanup
+   277→      message = message.replace(/^(the\s+)?requested\s+task$/i, '');
+   278→
+   279→      // Only return if it's not a generic message
+   280→      if (message &&
+   281→          !message.match(/^(the\s+)?requested\s+task$/i) &&
+   282→          !message.match(/^task$/i) &&
+   283→          message.length > 5) {
+   284→
+   285→        // Try to detect agent type from context
+   286→        let agentType = null;
+   287→        const agentMatch = taskOutput.match(/Sub-agent\s+(\w+)\s+completed/i);
+   288→        if (agentMatch) {
+   289→          agentType = agentMatch[1].toLowerCase();
+   290→        }
+   291→
+   292→        return { message, agentType };
+   293→      }
+   294→    }
+   295→  }
+   296→
+   297→  return { message: null, agentType: null };
+   298→}
+   299→
+   300→async function main() {
+   301→  const { appendFileSync } = require('fs');
+   302→  const { join } = require('path');
+   303→  const { homedir } = require('os');
+   304→  const debugLog = paiPath('hooks', 'subagent-stop-debug.log');
+   305→
+   306→  function debug(msg: string) {
+   307→    const timestamp = new Date().toISOString();
+   308→    appendFileSync(debugLog, `[${timestamp}] ${msg}\n`);
+   309→    console.error(msg);
+   310→  }
+   311→
+   312→  debug('🔍 SubagentStop hook started');
+   313→  // Read input from stdin with timeout
+   314→  let input = '';
+   315→  try {
+   316→    const decoder = new TextDecoder();
+   317→    const reader = Bun.stdin.stream().getReader();
+   318→
+   319→    const timeoutPromise = new Promise<void>((resolve) => {
+   320→      setTimeout(() => resolve(), 500);
+   321→    });
+   322→
+   323→    const readPromise = (async () => {
+   324→      while (true) {
+   325→        const { done, value } = await reader.read();
+   326→        if (done) break;
+   327→        input += decoder.decode(value, { stream: true });
+   328→      }
+   329→    })();
+   330→
+   331→    await Promise.race([readPromise, timeoutPromise]);
+   332→  } catch (e) {
+   333→    debug(`Failed to read input: ${e}`);
+   334→    process.exit(0);
+   335→  }
+   336→  
+   337→  if (!input) {
+   338→    debug('No input received');
+   339→    process.exit(0);
+   340→  }
+   341→
+   342→  debug(`Input received: ${input.substring(0, 100)}...`);
+   343→
+   344→  let transcriptPath: string;
+   345→  try {
+   346→    const parsed = JSON.parse(input);
+   347→    transcriptPath = parsed.transcript_path;
+   348→    debug(`Transcript path: ${transcriptPath}`);
+   349→  } catch (e) {
+   350→    debug(`Invalid input JSON: ${e}`);
+   351→    process.exit(0);
+   352→  }
+   353→
+   354→  if (!transcriptPath) {
+   355→    debug('No transcript path provided');
+   356→    process.exit(0);
+   357→  }
+   358→
+   359→  // Wait for and find the Task result
+   360→  debug('Starting findTaskResult...');
+   361→  const { result: taskOutput, agentType, description, toolInput } = await findTaskResult(transcriptPath);
+   362→
+   363→  if (!taskOutput) {
+   364→    debug('No Task result found in transcript after waiting');
+   365→    process.exit(0);
+   366→  }
+   367→
+   368→  debug(`Task output found, length: ${taskOutput.length}`);
+   369→  debug(`Task output preview: ${taskOutput.substring(Math.max(0, taskOutput.length - 300))}`);
+   370→
+   371→  // Extract agent instance metadata from Task tool input
+   372→  const instanceMetadata = extractAgentInstanceId(toolInput, description);
+   373→  debug(`Instance metadata: ${JSON.stringify(instanceMetadata)}`);
+   374→
+   375→  // Extract the completion message and agent type
+   376→  const { message: completionMessage, agentType: extractedAgentType } = extractCompletionMessage(taskOutput);
+   377→
+   378→  if (!completionMessage) {
+   379→    debug('No specific completion message found in Task output');
+   380→    debug(`Full task output for debugging: ${taskOutput}`);
+   381→    process.exit(0);
+   382→  }
+   383→
+   384→  debug(`Completion message: ${completionMessage}`);
+   385→
+   386→  // Use extracted agent type if available, otherwise use the one from task analysis
+   387→  const finalAgentType = extractedAgentType || agentType || instanceMetadata.agent_type || 'default';
+   388→  debug(`Final agent type: ${finalAgentType}`);
+   389→
+   390→  // NOTE: Voice notifications are now handled by agents themselves
+   391→  // The hook only logs completion messages and captures to history
+   392→  const agentName = finalAgentType.charAt(0).toUpperCase() + finalAgentType.slice(1);
+   393→  debug(`📝 Agent completed: [${agentName}] ${completionMessage}`);
+   394→
+   395→  // Capture agent output to RESEARCH directory
+   396→  try {
+   397→    await captureAgentOutput(finalAgentType, completionMessage, taskOutput, transcriptPath);
+   398→  } catch (e) {
+   399→    console.error('Failed to capture agent output:', e);
+   400→  }
+   401→
+   402→  // Send push notification for background agents
+   403→  // Check if this was a background agent (run_in_background: true)
+   404→  const isBackground = toolInput?.run_in_background === true;
+   405→  if (isBackground) {
+   406→    debug(`📱 Sending push notification for background agent: ${finalAgentType}`);
+   407→    notifyBackgroundAgent(finalAgentType, completionMessage).catch(() => {
+   408→      // Fire and forget
+   409→    });
+   410→  }
+   411→
+   412→  // Send event to observability dashboard with instance metadata
+   413→  try {
+   414→    const parsed = JSON.parse(input);
+   415→    const event: any = {
+   416→      source_app: getSourceApp(),
+   417→      session_id: parsed.session_id,
+   418→      hook_event_type: 'SubagentStop',
+   419→      timestamp: getCurrentTimestamp(),
+   420→      transcript_path: transcriptPath,
+   421→      agent_type: finalAgentType,
+   422→      summary: completionMessage,
+   423→    };
+   424→
+   425→    // Add instance metadata if available
+   426→    if (instanceMetadata.agent_instance_id) {
+   427→      event.agent_instance_id = instanceMetadata.agent_instance_id;
+   428→    }
+   429→    if (instanceMetadata.instance_number !== undefined) {
+   430→      event.instance_number = instanceMetadata.instance_number;
+   431→    }
+   432→    if (instanceMetadata.parent_session_id) {
+   433→      event.parent_session_id = instanceMetadata.parent_session_id;
+   434→    }
+   435→    if (instanceMetadata.parent_task_id) {
+   436→      event.parent_task_id = instanceMetadata.parent_task_id;
+   437→    }
+   438→
+   439→    await sendEventToObservability(event);
+   440→  } catch (e) {
+   441→    // Silently fail - dashboard may not be running
+   442→  }
+   443→}
+   444→
+   445→// UOCS: Capture agent output to history directory
+   446→async function captureAgentOutput(
+   447→  agentType: string,
+   448→  completionMessage: string,
+   449→  taskOutput: string,
+   450→  transcriptPath: string
+   451→) {
+   452→  const { writeFileSync, mkdirSync, existsSync } = require('fs');
+   453→  const { join } = require('path');
+   454→  const { homedir } = require('os');
+   455→
+   456→  const MEMORY_DIR = paiPath('MEMORY');
+   457→
+   458→  // Generate timestamp for filename (PST)
+   459→  const pstTimestamp = getPSTTimestamp();
+   460→  const timestamp = pstTimestamp
+   461→    .replace(/ PST$/, '')
+   462→    .replace(/:/g, '')
+   463→    .replace(/ /, '-'); // YYYY-MM-DD-HHMMSS
+   464→
+   465→  const yearMonth = timestamp.substring(0, 7); // YYYY-MM
+   466→
+   467→  // Infer capture type from agent type
+   468→  // All agent outputs go to RESEARCH for simplicity (consolidated structure)
+   469→  let captureType = 'RESEARCH';
+   470→  const category = 'RESEARCH';
+   471→
+   472→  if (agentType === 'researcher' || agentType.includes('researcher')) {
+   473→    captureType = 'RESEARCH';
+   474→  } else if (agentType === 'architect') {
+   475→    captureType = 'DECISION';
+   476→  } else if (agentType === 'engineer') {
+   477→    captureType = 'IMPLEMENTATION';
+   478→  } else if (agentType === 'designer') {
+   479→    captureType = 'DESIGN';
+   480→  } else if (agentType === 'pentester') {
+   481→    captureType = 'SECURITY';
+   482→  } else if (agentType === 'intern') {
+   483→    captureType = 'RESEARCH';
+   484→  }
+   485→
+   486→  // Generate description from completion message (kebab-case, max 60 chars)
+   487→  const description = completionMessage
+   488→    .toLowerCase()
+   489→    .replace(/^(architect|engineer|designer|researcher|pentester|intern)\s+completed\s+/i, '')
+   490→    .replace(/[^a-z0-9]+/g, '-')
+   491→    .replace(/^-|-$/g, '')
+   492→    .substring(0, 60);
+   493→
+   494→  // Generate filename
+   495→  const filename = `${timestamp}_AGENT-${agentType}_${captureType}_${description}.md`;
+   496→
+   497→  // Ensure directory exists
+   498→  const outputDir = join(MEMORY_DIR, category, yearMonth);
+   499→  if (!existsSync(outputDir)) {
+   500→    mkdirSync(outputDir, { recursive: true });
+   501→  }
+   502→
+   503→  // Format document
+   504→  const fullTimestamp = getPSTTimestamp();
+   505→  const document = `---
+   506→capture_type: ${captureType}
+   507→timestamp: ${fullTimestamp}
+   508→executor: ${agentType}
+   509→agent_completion: ${completionMessage}
+   510→---
+   511→
+   512→# ${captureType}: ${completionMessage}
+   513→
+   514→**Agent:** ${agentType}
+   515→**Completed:** ${timestamp.replace(/-/g, ':').substring(0, 19)}
+   516→
+   517→---
+   518→
+   519→## Agent Output
+   520→
+   521→${taskOutput}
+   522→
+   523→---
+   524→
+   525→## Metadata
+   526→
+   527→**Transcript:** \`${transcriptPath}\`
+   528→**Captured:** ${fullTimestamp}
+   529→
+   530→---
+   531→
+   532→*This output was automatically captured by UOCS SubagentStop hook.*
+   533→`;
+   534→
+   535→  // Write file
+   536→  const filePath = join(outputDir, filename);
+   537→  writeFileSync(filePath, document);
+   538→
+   539→  console.log(`📝 UOCS: Captured agent output to ${category}/${yearMonth}/${filename}`);
+   540→}
+   541→
+   542→main().catch(console.error);
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

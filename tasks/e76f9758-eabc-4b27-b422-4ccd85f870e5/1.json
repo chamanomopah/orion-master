@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Claude Code hooks researched and validated",
+  "description": "Confirm via online research if Claude Code hooks allow external control of CLI sessions. Document capabilities, limitations, and required WebSocket/IPC mechanisms.",
+  "activeForm": "Researching Claude Code hooks capabilities",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

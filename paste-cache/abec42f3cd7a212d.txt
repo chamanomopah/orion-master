@@ -1,0 +1,42 @@
+Microsoft Windows [versão 10.0.22631.6199]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\JOSE>set N8N_ALLOW_EXECUTE_COMMAND=true
+
+C:\Users\JOSE>set NODES_EXCLUDE=""
+
+C:\Users\JOSE>set WEBHOOK_URL=https://maceio-n8n-alfa42.serveousercontent.com
+
+C:\Users\JOSE>n8n start
+Initializing n8n process
+ENOENT: no such file or directory, open 'C:\Users\JOSE\.n8n\nodes\node_modules\n8n-nodes-modelpilot\package.json'
+ENOENT: no such file or directory, open 'C:\Users\JOSE\.n8n\nodes\node_modules\n8n-nodes-modelpilot\package.json'
+ENOENT: no such file or directory, open 'C:\Users\JOSE\.n8n\nodes\node_modules\n8n-nodes-neo4j\package.json'
+ENOENT: no such file or directory, open 'C:\Users\JOSE\.n8n\nodes\node_modules\n8n-nodes-neo4j\package.json'
+ENOENT: no such file or directory, open 'C:\Users\JOSE\.n8n\nodes\node_modules\n8n-nodes-tubelab\package.json'
+ENOENT: no such file or directory, open 'C:\Users\JOSE\.n8n\nodes\node_modules\n8n-nodes-tubelab\package.json'
+ENOENT: no such file or directory, open 'C:\Users\JOSE\.n8n\nodes\node_modules\@kenkaiii\n8n-nodes-super-agent\package.json'
+ENOENT: no such file or directory, open 'C:\Users\JOSE\.n8n\nodes\node_modules\@kenkaiii\n8n-nodes-super-agent\package.json'
+n8n ready on ::, port 5678
+n8n Task Broker ready on 127.0.0.1, port 5679
+Failed to start Python task runner in internal mode. because Python 3 is missing from this system. Launching a Python runner in internal mode is intended only for debugging and is not recommended for production. Users are encouraged to deploy in external mode. See: https://docs.n8n.io/hosting/configuration/task-runners/#setting-up-external-mode
+[license SDK] Skipping renewal on init: license cert is not due for renewal
+Registered runner "JS Task Runner" (zPRwrSR3j38n5ZOfFjssM)
+Version: 2.2.6
+Start Active Workflows:
+Activated workflow "Trechos de videos do youtube" (ID: fQ4WJSTuVHdQLwcK)
+Activated workflow "descrição + arco + personagens" (ID: OaVShx8YNdNwv1pznqkls)
+Activated workflow "prompt_personagem" (ID: p4tTCAp_vaK8AI6jmwA2c)
+Activated workflow "prompt_video" (ID: k7Q-HhNnbBnyj5NShK2Bb)
+Activated workflow "Nano Banana Pro - Image to Image (Corrigido)" (ID: Xw7zQmQ0TlMLbMoC1I3QP)
+Activated workflow "audio_gen" (ID: CNNuHMWMSHT_vT8S7gM1D)
+Activated workflow "image_gen_personagens" (ID: 6VmGySDxke6kD9Oq)
+Activated workflow "Download + Upload FFmpeg API - VERSÃO 2 (Merge Fix)" (ID: a5lDipbPs3cc7yW0THwg2)
+Activated workflow "execute_subworkflow" (ID: XqXE7IBsg2ev9iyE)
+Activated workflow "Generate Text Images - Simple Template" (ID: XbRXSWBgccPl8fiO)
+Activated workflow "setting Staff" (ID: rIg8xdLCRQwixj6xHRafR)
+
+Editor is now accessible via:
+https://maceio-n8n-alfa42.serveousercontent.com
+
+Press "o" to open in Browser.

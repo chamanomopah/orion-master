@@ -1,0 +1,631 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * SecurityValidator.hook.ts - Security Validation for Tool Calls (PreToolUse)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Validates Bash commands and file operations against security patterns before
+     7→ * execution. Prevents accidental or malicious operations that could damage the
+     8→ * system, expose secrets, or compromise security.
+     9→ *
+    10→ * TRIGGER: PreToolUse (matcher: Bash, Edit, Write, Read)
+    11→ *
+    12→ * INPUT:
+    13→ * - tool_name: "Bash" | "Edit" | "Write" | "Read"
+    14→ * - tool_input: { command?: string, file_path?: string, ... }
+    15→ * - session_id: Current session identifier
+    16→ *
+    17→ * OUTPUT:
+    18→ * - stdout: JSON decision object
+    19→ *   - {"continue": true} → Allow operation
+    20→ *   - {"decision": "ask", "message": "..."} → Prompt user for confirmation
+    21→ * - exit(0): Normal completion (with decision)
+    22→ * - exit(2): Hard block (catastrophic operation prevented)
+    23→ *
+    24→ * SIDE EFFECTS:
+    25→ * - Writes to: MEMORY/SECURITY/YYYY/MM/security-{summary}-{timestamp}.jsonl
+    26→ * - User prompt: May trigger confirmation dialog for confirm-level operations
+    27→ *
+    28→ * INTER-HOOK RELATIONSHIPS:
+    29→ * - DEPENDS ON: patterns.yaml (security pattern definitions)
+    30→ * - COORDINATES WITH: None (standalone validation)
+    31→ * - MUST RUN BEFORE: Tool execution (blocking)
+    32→ * - MUST RUN AFTER: None
+    33→ *
+    34→ * ERROR HANDLING:
+    35→ * - Missing patterns.yaml: Uses default safe patterns
+    36→ * - Parse errors: Logs warning, allows operation (fail-open for usability)
+    37→ * - Logging failures: Silent (should not block operations)
+    38→ *
+    39→ * PERFORMANCE:
+    40→ * - Blocking: Yes (must complete before tool executes)
+    41→ * - Typical execution: <10ms
+    42→ * - Design: Fast path for safe operations, pattern matching only when needed
+    43→ *
+    44→ * PATTERN CATEGORIES:
+    45→ * Bash commands:
+    46→ * - blocked: Always prevented (rm -rf /, format, etc.)
+    47→ * - confirm: Requires user confirmation (git push --force, etc.)
+    48→ * - alert: Logged but allowed (sudo, etc.)
+    49→ *
+    50→ * File paths:
+    51→ * - zeroAccess: Never readable or writable (~/.ssh, credentials, etc.)
+    52→ * - readOnly: Readable but not writable (system configs)
+    53→ * - confirmWrite: Requires confirmation to write
+    54→ * - noDelete: Cannot be deleted
+    55→ *
+    56→ * SECURITY MODEL:
+    57→ * - Defense in depth: Multiple pattern layers
+    58→ * - Fail-safe for catastrophic operations (exit 2)
+    59→ * - Fail-open for minor concerns (log and allow)
+    60→ * - All decisions logged for audit trail
+    61→ */
+    62→
+    63→import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'fs';
+    64→import { join } from 'path';
+    65→import { homedir } from 'os';
+    66→import { parse as parseYaml } from 'yaml';
+    67→import { paiPath } from './lib/paths';
+    68→
+    69→// ========================================
+    70→// Security Event Logging
+    71→// ========================================
+    72→
+    73→// Logs to individual files: MEMORY/SECURITY/YYYY/MM/security-{summary}-{timestamp}.jsonl
+    74→// Each event gets a descriptive filename for easy scanning
+    75→
+    76→interface SecurityEvent {
+    77→  timestamp: string;
+    78→  session_id: string;
+    79→  event_type: 'block' | 'confirm' | 'alert' | 'allow';
+    80→  tool: string;
+    81→  category: 'bash_command' | 'path_access';
+    82→  target: string;  // command or path
+    83→  pattern_matched?: string;
+    84→  reason?: string;
+    85→  action_taken: string;
+    86→}
+    87→
+    88→function generateEventSummary(event: SecurityEvent): string {
+    89→  // Create a 6-word-max slug from event type and target/reason
+    90→  const eventWord = event.event_type; // block, confirm, alert, allow
+    91→
+    92→  // Extract key words from target or reason
+    93→  const source = event.reason || event.target || 'unknown';
+    94→  const words = source
+    95→    .toLowerCase()
+    96→    .replace(/[^a-z0-9\s]/g, ' ')  // Remove special chars
+    97→    .split(/\s+/)
+    98→    .filter(w => w.length > 1)     // Skip tiny words
+    99→    .slice(0, 5);                   // Max 5 words (+ event type = 6)
+   100→
+   101→  return [eventWord, ...words].join('-');
+   102→}
+   103→
+   104→function getSecurityLogPath(event: SecurityEvent): string {
+   105→  const now = new Date();
+   106→  const year = now.getFullYear().toString();
+   107→  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+   108→  const day = now.getDate().toString().padStart(2, '0');
+   109→  const hour = now.getHours().toString().padStart(2, '0');
+   110→  const min = now.getMinutes().toString().padStart(2, '0');
+   111→  const sec = now.getSeconds().toString().padStart(2, '0');
+   112→
+   113→  const summary = generateEventSummary(event);
+   114→  const timestamp = `${year}${month}${day}-${hour}${min}${sec}`;
+   115→
+   116→  return paiPath('MEMORY', 'SECURITY', year, month, `security-${summary}-${timestamp}.jsonl`);
+   117→}
+   118→
+   119→function logSecurityEvent(event: SecurityEvent): void {
+   120→  try {
+   121→    const logPath = getSecurityLogPath(event);
+   122→    const dir = logPath.substring(0, logPath.lastIndexOf('/'));
+   123→
+   124→    // Ensure directory exists
+   125→    if (!existsSync(dir)) {
+   126→      mkdirSync(dir, { recursive: true });
+   127→    }
+   128→
+   129→    const content = JSON.stringify(event, null, 2);
+   130→    writeFileSync(logPath, content);
+   131→  } catch {
+   132→    // Logging failure should not block operations
+   133→    console.error('Warning: Failed to log security event');
+   134→  }
+   135→}
+   136→
+   137→// ========================================
+   138→// Types
+   139→// ========================================
+   140→
+   141→interface HookInput {
+   142→  session_id: string;
+   143→  tool_name: string;
+   144→  tool_input: Record<string, unknown> | string;
+   145→}
+   146→
+   147→interface Pattern {
+   148→  pattern: string;
+   149→  reason: string;
+   150→}
+   151→
+   152→interface PatternsConfig {
+   153→  version: string;
+   154→  philosophy: {
+   155→    mode: string;
+   156→    principle: string;
+   157→  };
+   158→  bash: {
+   159→    blocked: Pattern[];
+   160→    confirm: Pattern[];
+   161→    alert: Pattern[];
+   162→  };
+   163→  paths: {
+   164→    zeroAccess: string[];
+   165→    readOnly: string[];
+   166→    confirmWrite: string[];
+   167→    noDelete: string[];
+   168→  };
+   169→  projects: Record<string, {
+   170→    path: string;
+   171→    rules: Array<{ action: string; reason: string }>;
+   172→  }>;
+   173→}
+   174→
+   175→// ========================================
+   176→// Config Loading - Cascading Path Lookup
+   177→// ========================================
+   178→
+   179→// Pattern paths in priority order:
+   180→// 1. USER/PAISECURITYSYSTEM/patterns.yaml (user's custom rules)
+   181→// 2. skills/PAI/SYSTEM/PAISECURITYSYSTEM/patterns.example.yaml (default template)
+   182→const USER_PATTERNS_PATH = paiPath('USER', 'PAISECURITYSYSTEM', 'patterns.yaml');
+   183→const SYSTEM_PATTERNS_PATH = paiPath('skills', 'PAI', 'SYSTEM', 'PAISECURITYSYSTEM', 'patterns.example.yaml');
+   184→
+   185→let patternsCache: PatternsConfig | null = null;
+   186→let patternsSource: 'user' | 'system' | 'none' = 'none';
+   187→
+   188→function getPatternsPath(): string | null {
+   189→  // Try USER patterns first (user's custom rules)
+   190→  if (existsSync(USER_PATTERNS_PATH)) {
+   191→    patternsSource = 'user';
+   192→    return USER_PATTERNS_PATH;
+   193→  }
+   194→
+   195→  // Fall back to SYSTEM patterns (default template)
+   196→  if (existsSync(SYSTEM_PATTERNS_PATH)) {
+   197→    patternsSource = 'system';
+   198→    return SYSTEM_PATTERNS_PATH;
+   199→  }
+   200→
+   201→  // No patterns found
+   202→  patternsSource = 'none';
+   203→  return null;
+   204→}
+   205→
+   206→function loadPatterns(): PatternsConfig {
+   207→  if (patternsCache) return patternsCache;
+   208→
+   209→  const patternsPath = getPatternsPath();
+   210→
+   211→  if (!patternsPath) {
+   212→    // No patterns file - fail open (allow all)
+   213→    return {
+   214→      version: '0.0',
+   215→      philosophy: { mode: 'permissive', principle: 'No patterns loaded - fail open' },
+   216→      bash: { blocked: [], confirm: [], alert: [] },
+   217→      paths: { zeroAccess: [], readOnly: [], confirmWrite: [], noDelete: [] },
+   218→      projects: {}
+   219→    };
+   220→  }
+   221→
+   222→  try {
+   223→    const content = readFileSync(patternsPath, 'utf-8');
+   224→    patternsCache = parseYaml(content) as PatternsConfig;
+   225→    return patternsCache;
+   226→  } catch (error) {
+   227→    // Parse error - fail open
+   228→    console.error(`Failed to parse ${patternsSource} patterns.yaml:`, error);
+   229→    return {
+   230→      version: '0.0',
+   231→      philosophy: { mode: 'permissive', principle: 'Parse error - fail open' },
+   232→      bash: { blocked: [], confirm: [], alert: [] },
+   233→      paths: { zeroAccess: [], readOnly: [], confirmWrite: [], noDelete: [] },
+   234→      projects: {}
+   235→    };
+   236→  }
+   237→}
+   238→
+   239→// ========================================
+   240→// Pattern Matching
+   241→// ========================================
+   242→
+   243→function matchesPattern(command: string, pattern: string): boolean {
+   244→  // Convert pattern to regex
+   245→  // Patterns can use .* for wildcards
+   246→  try {
+   247→    const regex = new RegExp(pattern, 'i');
+   248→    return regex.test(command);
+   249→  } catch {
+   250→    // Invalid regex - try literal match
+   251→    return command.toLowerCase().includes(pattern.toLowerCase());
+   252→  }
+   253→}
+   254→
+   255→function expandPath(path: string): string {
+   256→  // Expand ~ to home directory
+   257→  if (path.startsWith('~')) {
+   258→    return path.replace('~', homedir());
+   259→  }
+   260→  return path;
+   261→}
+   262→
+   263→function matchesPathPattern(filePath: string, pattern: string): boolean {
+   264→  const expandedPattern = expandPath(pattern);
+   265→  const expandedPath = expandPath(filePath);
+   266→
+   267→  // Handle glob patterns
+   268→  if (pattern.includes('*')) {
+   269→    // First replace ** with a placeholder, then escape, then convert back
+   270→    let regexPattern = expandedPattern
+   271→      .replace(/\*\*/g, '<<<DOUBLESTAR>>>')  // Protect **
+   272→      .replace(/\*/g, '<<<SINGLESTAR>>>')    // Protect *
+   273→      .replace(/[.+^${}()|[\]\\]/g, '\\$&')  // Escape special chars
+   274→      .replace(/<<<DOUBLESTAR>>>/g, '.*')    // ** = anything including /
+   275→      .replace(/<<<SINGLESTAR>>>/g, '[^/]*'); // * = anything except /
+   276→
+   277→    try {
+   278→      const regex = new RegExp(`^${regexPattern}$`);
+   279→      return regex.test(expandedPath);
+   280→    } catch {
+   281→      return false;
+   282→    }
+   283→  }
+   284→
+   285→  // Exact match or prefix match for directories
+   286→  return expandedPath === expandedPattern ||
+   287→         expandedPath.startsWith(expandedPattern.endsWith('/') ? expandedPattern : expandedPattern + '/');
+   288→}
+   289→
+   290→// ========================================
+   291→// Bash Command Validation
+   292→// ========================================
+   293→
+   294→function validateBashCommand(command: string): { action: 'allow' | 'block' | 'confirm' | 'alert'; reason?: string } {
+   295→  const patterns = loadPatterns();
+   296→
+   297→  // Check blocked patterns (hard block)
+   298→  for (const p of patterns.bash.blocked) {
+   299→    if (matchesPattern(command, p.pattern)) {
+   300→      return { action: 'block', reason: p.reason };
+   301→    }
+   302→  }
+   303→
+   304→  // Check confirm patterns (prompt user)
+   305→  for (const p of patterns.bash.confirm) {
+   306→    if (matchesPattern(command, p.pattern)) {
+   307→      return { action: 'confirm', reason: p.reason };
+   308→    }
+   309→  }
+   310→
+   311→  // Check alert patterns (log but allow)
+   312→  for (const p of patterns.bash.alert) {
+   313→    if (matchesPattern(command, p.pattern)) {
+   314→      return { action: 'alert', reason: p.reason };
+   315→    }
+   316→  }
+   317→
+   318→  return { action: 'allow' };
+   319→}
+   320→
+   321→// ========================================
+   322→// Path Validation
+   323→// ========================================
+   324→
+   325→type PathAction = 'read' | 'write' | 'delete';
+   326→
+   327→function validatePath(filePath: string, action: PathAction): { action: 'allow' | 'block' | 'confirm'; reason?: string } {
+   328→  const patterns = loadPatterns();
+   329→
+   330→  // Check zeroAccess (complete denial)
+   331→  for (const p of patterns.paths.zeroAccess) {
+   332→    if (matchesPathPattern(filePath, p)) {
+   333→      return { action: 'block', reason: `Zero access path: ${p}` };
+   334→    }
+   335→  }
+   336→
+   337→  // Check readOnly (can read, cannot write/delete)
+   338→  if (action === 'write' || action === 'delete') {
+   339→    for (const p of patterns.paths.readOnly) {
+   340→      if (matchesPathPattern(filePath, p)) {
+   341→        return { action: 'block', reason: `Read-only path: ${p}` };
+   342→      }
+   343→    }
+   344→  }
+   345→
+   346→  // Check confirmWrite (can read, writing requires confirmation)
+   347→  if (action === 'write') {
+   348→    for (const p of patterns.paths.confirmWrite) {
+   349→      if (matchesPathPattern(filePath, p)) {
+   350→        return { action: 'confirm', reason: `Writing to protected file requires confirmation: ${p}` };
+   351→      }
+   352→    }
+   353→  }
+   354→
+   355→  // Check noDelete (can read/write, cannot delete)
+   356→  if (action === 'delete') {
+   357→    for (const p of patterns.paths.noDelete) {
+   358→      if (matchesPathPattern(filePath, p)) {
+   359→        return { action: 'block', reason: `Cannot delete protected path: ${p}` };
+   360→      }
+   361→    }
+   362→  }
+   363→
+   364→  return { action: 'allow' };
+   365→}
+   366→
+   367→// ========================================
+   368→// Tool-Specific Handlers
+   369→// ========================================
+   370→
+   371→function handleBash(input: HookInput): void {
+   372→  const command = typeof input.tool_input === 'string'
+   373→    ? input.tool_input
+   374→    : (input.tool_input?.command as string) || '';
+   375→
+   376→  if (!command) {
+   377→    console.log(JSON.stringify({ continue: true }));
+   378→    return;
+   379→  }
+   380→
+   381→  const result = validateBashCommand(command);
+   382→
+   383→  switch (result.action) {
+   384→    case 'block':
+   385→      logSecurityEvent({
+   386→        timestamp: new Date().toISOString(),
+   387→        session_id: input.session_id,
+   388→        event_type: 'block',
+   389→        tool: 'Bash',
+   390→        category: 'bash_command',
+   391→        target: command.slice(0, 500),
+   392→        reason: result.reason,
+   393→        action_taken: 'Hard block - exit 2'
+   394→      });
+   395→      console.error(`[PAI SECURITY] 🚨 BLOCKED: ${result.reason}`);
+   396→      console.error(`Command: ${command.slice(0, 100)}`);
+   397→      process.exit(2);
+   398→      break;
+   399→
+   400→    case 'confirm':
+   401→      logSecurityEvent({
+   402→        timestamp: new Date().toISOString(),
+   403→        session_id: input.session_id,
+   404→        event_type: 'confirm',
+   405→        tool: 'Bash',
+   406→        category: 'bash_command',
+   407→        target: command.slice(0, 500),
+   408→        reason: result.reason,
+   409→        action_taken: 'Prompted user for confirmation'
+   410→      });
+   411→      console.log(JSON.stringify({
+   412→        decision: 'ask',
+   413→        message: `[PAI SECURITY] ⚠️ ${result.reason}\n\nCommand: ${command.slice(0, 200)}\n\nProceed?`
+   414→      }));
+   415→      break;
+   416→
+   417→    case 'alert':
+   418→      logSecurityEvent({
+   419→        timestamp: new Date().toISOString(),
+   420→        session_id: input.session_id,
+   421→        event_type: 'alert',
+   422→        tool: 'Bash',
+   423→        category: 'bash_command',
+   424→        target: command.slice(0, 500),
+   425→        reason: result.reason,
+   426→        action_taken: 'Logged alert, allowed execution'
+   427→      });
+   428→      console.error(`[PAI SECURITY] ⚠️ ALERT: ${result.reason}`);
+   429→      console.error(`Command: ${command.slice(0, 100)}`);
+   430→      console.log(JSON.stringify({ continue: true }));
+   431→      break;
+   432→
+   433→    default:
+   434→      console.log(JSON.stringify({ continue: true }));
+   435→  }
+   436→}
+   437→
+   438→function handleEdit(input: HookInput): void {
+   439→  const filePath = typeof input.tool_input === 'string'
+   440→    ? input.tool_input
+   441→    : (input.tool_input?.file_path as string) || '';
+   442→
+   443→  if (!filePath) {
+   444→    console.log(JSON.stringify({ continue: true }));
+   445→    return;
+   446→  }
+   447→
+   448→  const result = validatePath(filePath, 'write');
+   449→
+   450→  switch (result.action) {
+   451→    case 'block':
+   452→      logSecurityEvent({
+   453→        timestamp: new Date().toISOString(),
+   454→        session_id: input.session_id,
+   455→        event_type: 'block',
+   456→        tool: 'Edit',
+   457→        category: 'path_access',
+   458→        target: filePath,
+   459→        reason: result.reason,
+   460→        action_taken: 'Hard block - exit 2'
+   461→      });
+   462→      console.error(`[PAI SECURITY] 🚨 BLOCKED: ${result.reason}`);
+   463→      console.error(`Path: ${filePath}`);
+   464→      process.exit(2);
+   465→      break;
+   466→
+   467→    case 'confirm':
+   468→      logSecurityEvent({
+   469→        timestamp: new Date().toISOString(),
+   470→        session_id: input.session_id,
+   471→        event_type: 'confirm',
+   472→        tool: 'Edit',
+   473→        category: 'path_access',
+   474→        target: filePath,
+   475→        reason: result.reason,
+   476→        action_taken: 'Prompted user for confirmation'
+   477→      });
+   478→      console.log(JSON.stringify({
+   479→        decision: 'ask',
+   480→        message: `[PAI SECURITY] ⚠️ ${result.reason}\n\nPath: ${filePath}\n\nProceed?`
+   481→      }));
+   482→      break;
+   483→
+   484→    default:
+   485→      console.log(JSON.stringify({ continue: true }));
+   486→  }
+   487→}
+   488→
+   489→function handleWrite(input: HookInput): void {
+   490→  const filePath = typeof input.tool_input === 'string'
+   491→    ? input.tool_input
+   492→    : (input.tool_input?.file_path as string) || '';
+   493→
+   494→  if (!filePath) {
+   495→    console.log(JSON.stringify({ continue: true }));
+   496→    return;
+   497→  }
+   498→
+   499→  const result = validatePath(filePath, 'write');
+   500→
+   501→  switch (result.action) {
+   502→    case 'block':
+   503→      logSecurityEvent({
+   504→        timestamp: new Date().toISOString(),
+   505→        session_id: input.session_id,
+   506→        event_type: 'block',
+   507→        tool: 'Write',
+   508→        category: 'path_access',
+   509→        target: filePath,
+   510→        reason: result.reason,
+   511→        action_taken: 'Hard block - exit 2'
+   512→      });
+   513→      console.error(`[PAI SECURITY] 🚨 BLOCKED: ${result.reason}`);
+   514→      console.error(`Path: ${filePath}`);
+   515→      process.exit(2);
+   516→      break;
+   517→
+   518→    case 'confirm':
+   519→      logSecurityEvent({
+   520→        timestamp: new Date().toISOString(),
+   521→        session_id: input.session_id,
+   522→        event_type: 'confirm',
+   523→        tool: 'Write',
+   524→        category: 'path_access',
+   525→        target: filePath,
+   526→        reason: result.reason,
+   527→        action_taken: 'Prompted user for confirmation'
+   528→      });
+   529→      console.log(JSON.stringify({
+   530→        decision: 'ask',
+   531→        message: `[PAI SECURITY] ⚠️ ${result.reason}\n\nPath: ${filePath}\n\nProceed?`
+   532→      }));
+   533→      break;
+   534→
+   535→    default:
+   536→      console.log(JSON.stringify({ continue: true }));
+   537→  }
+   538→}
+   539→
+   540→function handleRead(input: HookInput): void {
+   541→  const filePath = typeof input.tool_input === 'string'
+   542→    ? input.tool_input
+   543→    : (input.tool_input?.file_path as string) || '';
+   544→
+   545→  if (!filePath) {
+   546→    console.log(JSON.stringify({ continue: true }));
+   547→    return;
+   548→  }
+   549→
+   550→  const result = validatePath(filePath, 'read');
+   551→
+   552→  switch (result.action) {
+   553→    case 'block':
+   554→      logSecurityEvent({
+   555→        timestamp: new Date().toISOString(),
+   556→        session_id: input.session_id,
+   557→        event_type: 'block',
+   558→        tool: 'Read',
+   559→        category: 'path_access',
+   560→        target: filePath,
+   561→        reason: result.reason,
+   562→        action_taken: 'Hard block - exit 2'
+   563→      });
+   564→      console.error(`[PAI SECURITY] 🚨 BLOCKED: ${result.reason}`);
+   565→      console.error(`Path: ${filePath}`);
+   566→      process.exit(2);
+   567→      break;
+   568→
+   569→    default:
+   570→      console.log(JSON.stringify({ continue: true }));
+   571→  }
+   572→}
+   573→
+   574→// ========================================
+   575→// Main
+   576→// ========================================
+   577→
+   578→async function main(): Promise<void> {
+   579→  let input: HookInput;
+   580→
+   581→  try {
+   582→    // Fast stdin read with timeout
+   583→    const text = await Promise.race([
+   584→      Bun.stdin.text(),
+   585→      new Promise<string>((_, reject) =>
+   586→        setTimeout(() => reject(new Error('timeout')), 100)
+   587→      )
+   588→    ]);
+   589→
+   590→    if (!text.trim()) {
+   591→      console.log(JSON.stringify({ continue: true }));
+   592→      return;
+   593→    }
+   594→
+   595→    input = JSON.parse(text);
+   596→  } catch {
+   597→    // Parse error or timeout - fail open
+   598→    console.log(JSON.stringify({ continue: true }));
+   599→    return;
+   600→  }
+   601→
+   602→  // Route to appropriate handler
+   603→  switch (input.tool_name) {
+   604→    case 'Bash':
+   605→      handleBash(input);
+   606→      break;
+   607→    case 'Edit':
+   608→    case 'MultiEdit':
+   609→      handleEdit(input);
+   610→      break;
+   611→    case 'Write':
+   612→      handleWrite(input);
+   613→      break;
+   614→    case 'Read':
+   615→      handleRead(input);
+   616→      break;
+   617→    default:
+   618→      // Allow all other tools
+   619→      console.log(JSON.stringify({ continue: true }));
+   620→  }
+   621→}
+   622→
+   623→// Run main, fail open on any error
+   624→main().catch(() => {
+   625→  console.log(JSON.stringify({ continue: true }));
+   626→});
+   627→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

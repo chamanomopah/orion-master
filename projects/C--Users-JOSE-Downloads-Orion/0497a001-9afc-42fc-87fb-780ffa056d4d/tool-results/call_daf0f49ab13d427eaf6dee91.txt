@@ -1,0 +1,500 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * ImplicitSentimentCapture.hook.ts - Implicit Sentiment Detection (UserPromptSubmit)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Detects emotional signals in user messages to infer satisfaction/dissatisfaction
+     7→ * when no explicit rating is given. Uses AI inference to understand nuanced sentiment
+     8→ * like frustration, excitement, or disappointment from natural language.
+     9→ *
+    10→ * TRIGGER: UserPromptSubmit
+    11→ *
+    12→ * INPUT:
+    13→ * - prompt: User's message text
+    14→ * - session_id: Current session identifier
+    15→ * - transcript_path: Path to conversation transcript (for context)
+    16→ *
+    17→ * OUTPUT:
+    18→ * - stdout: None (no context injection)
+    19→ * - exit(0): Normal completion
+    20→ *
+    21→ * SIDE EFFECTS:
+    22→ * - Writes to: MEMORY/LEARNING/SIGNALS/ratings.jsonl (source: "implicit")
+    23→ * - Writes to: MEMORY/LEARNING/<category>/<YYYY-MM>/*.md (for low ratings)
+    24→ * - Triggers: TrendingAnalysis.ts update (fire-and-forget)
+    25→ * - API call: Haiku inference for sentiment analysis (fast/cheap)
+    26→ *
+    27→ * INTER-HOOK RELATIONSHIPS:
+    28→ * - DEPENDS ON: ExplicitRatingCapture (must defer if explicit rating detected)
+    29→ * - COORDINATES WITH: ExplicitRatingCapture (shares ratings.jsonl)
+    30→ * - MUST RUN BEFORE: None
+    31→ * - MUST RUN AFTER: ExplicitRatingCapture (implicit is secondary)
+    32→ *
+    33→ * COORDINATION PROTOCOL:
+    34→ * Checks isExplicitRating(prompt) FIRST - if true, exits immediately.
+    35→ * This ensures explicit ratings like "8 - great work" are handled by
+    36→ * ExplicitRatingCapture, not double-captured as implicit sentiment.
+    37→ *
+    38→ * ERROR HANDLING:
+    39→ * - Explicit rating detected: Exits immediately (defers to ExplicitRatingCapture)
+    40→ * - Inference timeout: Exits gracefully after 25s
+    41→ * - Low confidence (<0.5): Not logged
+    42→ * - Neutral sentiment: Logged as rating 5 (baseline for feature requests)
+    43→ *
+    44→ * PERFORMANCE:
+    45→ * - Non-blocking: Yes (runs async)
+    46→ * - Typical execution: 0.5-1.5s (Haiku inference)
+    47→ * - Timeout: 25s max
+    48→ *
+    49→ * SENTIMENT EXAMPLES:
+    50→ * - "What the fuck, why did you break it?" → rating 1-2 (frustration)
+    51→ * - "Oh my god, this is amazing!" → rating 9-10 (excitement)
+    52→ * - "Hmm, that's not quite right" → rating 4 (mild dissatisfaction)
+    53→ * - "Check the logs" → 5 (neutral, logged as baseline)
+    54→ *
+    55→ * RATING SCALE:
+    56→ * - 1-2: Strong frustration, anger, disappointment
+    57→ * - 3-4: Mild frustration, dissatisfaction
+    58→ * - 5: Neutral (logged as baseline for feature requests)
+    59→ * - 6-7: Satisfaction, approval
+    60→ * - 8-9: Strong approval, impressed
+    61→ * - 10: Extraordinary enthusiasm
+    62→ */
+    63→
+    64→import { appendFileSync, mkdirSync, existsSync, readFileSync, writeFileSync } from 'fs';
+    65→import { join } from 'path';
+    66→import { inference } from '../skills/PAI/Tools/Inference';
+    67→import { getIdentity, getPrincipal } from './lib/identity';
+    68→import { getLearningCategory } from './lib/learning-utils';
+    69→import { getISOTimestamp, getPSTComponents } from './lib/time';
+    70→import { captureFailure } from '../skills/PAI/Tools/FailureCapture';
+    71→
+    72→const PRINCIPAL_NAME = getPrincipal().name;
+    73→const ASSISTANT_NAME = getIdentity().name;
+    74→
+    75→interface HookInput {
+    76→  session_id: string;
+    77→  prompt?: string;        // Actual field name from Claude Code
+    78→  user_prompt?: string;   // Legacy field name
+    79→  transcript_path: string;
+    80→  hook_event_name: string;
+    81→}
+    82→
+    83→interface SentimentResult {
+    84→  rating: number | null;
+    85→  sentiment: 'positive' | 'negative' | 'neutral';
+    86→  confidence: number;
+    87→  summary: string;
+    88→  detailed_context: string;
+    89→}
+    90→
+    91→interface ImplicitRatingEntry {
+    92→  timestamp: string;
+    93→  rating: number;
+    94→  session_id: string;
+    95→  source: 'implicit';
+    96→  sentiment_summary: string;
+    97→  confidence?: number;
+    98→}
+    99→
+   100→const SENTIMENT_SYSTEM_PROMPT = `Analyze ${PRINCIPAL_NAME}'s message for emotional sentiment toward ${ASSISTANT_NAME} (the AI assistant).
+   101→
+   102→CONTEXT: This is a personal AI system. ${PRINCIPAL_NAME} is the ONLY user. Never say "users" - always "${PRINCIPAL_NAME}."
+   103→
+   104→OUTPUT FORMAT (JSON only):
+   105→{
+   106→  "rating": <1-10 or null>,
+   107→  "sentiment": "positive" | "negative" | "neutral",
+   108→  "confidence": <0.0-1.0>,
+   109→  "summary": "<brief explanation, 10 words max>",
+   110→  "detailed_context": "<comprehensive analysis for learning, 100-256 words>"
+   111→}
+   112→
+   113→DETAILED_CONTEXT REQUIREMENTS (critical for learning system):
+   114→Write 100-256 words covering:
+   115→1. What ${PRINCIPAL_NAME} was trying to accomplish
+   116→2. What ${ASSISTANT_NAME} did (or failed to do)
+   117→3. Why ${PRINCIPAL_NAME} is frustrated/satisfied (the root cause)
+   118→4. What specific behavior triggered this reaction
+   119→5. What ${ASSISTANT_NAME} should have done differently (for negative) or what worked well (for positive)
+   120→6. Any patterns this reveals about ${PRINCIPAL_NAME}'s expectations
+   121→
+   122→This context will be used retroactively to improve ${ASSISTANT_NAME}, so include enough detail that someone reading it months later can understand exactly what went wrong or right.
+   123→
+   124→RATING SCALE:
+   125→- 1-2: Strong frustration, anger, disappointment with ${ASSISTANT_NAME}
+   126→- 3-4: Mild frustration, dissatisfaction
+   127→- 5: Neutral (no strong sentiment)
+   128→- 6-7: Satisfaction, approval
+   129→- 8-9: Strong approval, impressed
+   130→- 10: Extraordinary enthusiasm, blown away
+   131→
+   132→CRITICAL DISTINCTIONS:
+   133→- Profanity can indicate EITHER frustration OR excitement
+   134→  - "What the fuck?!" + complaint about work = LOW (1-3)
+   135→  - "Holy shit, this is amazing!" = HIGH (9-10)
+   136→- Context is KEY: Is the emotion directed AT ${ASSISTANT_NAME}'s work?
+   137→- Sarcasm: "Oh great, another error" = negative despite "great"
+   138→
+   139→WHEN TO RETURN null FOR RATING:
+   140→- Neutral technical questions ("Can you check the logs?")
+   141→- Simple commands ("Do it", "Yes", "Continue")
+   142→- No emotional indicators present
+   143→- Emotion unrelated to ${ASSISTANT_NAME}'s work
+   144→
+   145→EXAMPLES:
+   146→${PRINCIPAL_NAME}: "What the fuck, why did you delete my file?"
+   147→→ {"rating": 1, "sentiment": "negative", "confidence": 0.95, "summary": "Angry about deleted file", "detailed_context": "..."}
+   148→
+   149→${PRINCIPAL_NAME}: "Oh my god, this is fucking incredible, you nailed it!"
+   150→→ {"rating": 10, "sentiment": "positive", "confidence": 0.95, "summary": "Extremely impressed with result", "detailed_context": "..."}
+   151→
+   152→${PRINCIPAL_NAME}: "Fix the auth bug"
+   153→→ {"rating": null, "sentiment": "neutral", "confidence": 0.9, "summary": "Neutral command, no sentiment", "detailed_context": ""}
+   154→
+   155→${PRINCIPAL_NAME}: "Hmm, that's not quite right"
+   156→→ {"rating": 4, "sentiment": "negative", "confidence": 0.6, "summary": "Mild dissatisfaction", "detailed_context": "..."}
+   157→
+   158→${PRINCIPAL_NAME}: "Perfect, exactly what I needed"
+   159→→ {"rating": 8, "sentiment": "positive", "confidence": 0.85, "summary": "Satisfied with result", "detailed_context": "..."}`;
+   160→
+   161→const MIN_PROMPT_LENGTH = 3;
+   162→const MIN_CONFIDENCE = 0.5;
+   163→const ANALYSIS_TIMEOUT = 25000;
+   164→
+   165→/**
+   166→ * Check if prompt is an explicit rating (defer to ExplicitRatingCapture)
+   167→ */
+   168→function isExplicitRating(prompt: string): boolean {
+   169→  const trimmed = prompt.trim();
+   170→  const ratingPattern = /^(10|[1-9])(?:\s*[-:]\s*|\s+)?(.*)$/;
+   171→  const match = trimmed.match(ratingPattern);
+   172→
+   173→  if (!match) return false;
+   174→
+   175→  const comment = match[2]?.trim();
+   176→  if (comment) {
+   177→    const sentenceStarters = /^(items?|things?|steps?|files?|lines?|bugs?|issues?|errors?|times?|minutes?|hours?|days?|seconds?|percent|%|th\b|st\b|nd\b|rd\b|of\b|in\b|at\b|to\b|the\b|a\b|an\b)/i;
+   178→    if (sentenceStarters.test(comment)) {
+   179→      return false;
+   180→    }
+   181→  }
+   182→
+   183→  return true;
+   184→}
+   185→
+   186→/**
+   187→ * Read stdin with timeout
+   188→ */
+   189→async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
+   190→  return new Promise((resolve, reject) => {
+   191→    let data = '';
+   192→    const timer = setTimeout(() => reject(new Error('Timeout')), timeout);
+   193→    process.stdin.on('data', (chunk) => { data += chunk.toString(); });
+   194→    process.stdin.on('end', () => { clearTimeout(timer); resolve(data); });
+   195→    process.stdin.on('error', (err) => { clearTimeout(timer); reject(err); });
+   196→  });
+   197→}
+   198→
+   199→/**
+   200→ * Get recent conversation context from transcript
+   201→ */
+   202→function getRecentContext(transcriptPath: string, maxTurns: number = 3): string {
+   203→  try {
+   204→    if (!transcriptPath || !existsSync(transcriptPath)) return '';
+   205→
+   206→    const content = readFileSync(transcriptPath, 'utf-8');
+   207→    const lines = content.trim().split('\n');
+   208→
+   209→    const turns: { role: string; text: string }[] = [];
+   210→
+   211→    for (const line of lines) {
+   212→      if (!line.trim()) continue;
+   213→      try {
+   214→        const entry = JSON.parse(line);
+   215→
+   216→        if (entry.type === 'user' && entry.message?.content) {
+   217→          let text = '';
+   218→          if (typeof entry.message.content === 'string') {
+   219→            text = entry.message.content;
+   220→          } else if (Array.isArray(entry.message.content)) {
+   221→            text = entry.message.content
+   222→              .filter((c: any) => c.type === 'text')
+   223→              .map((c: any) => c.text)
+   224→              .join(' ');
+   225→          }
+   226→          if (text.trim()) {
+   227→            turns.push({ role: 'User', text: text.slice(0, 200) });
+   228→          }
+   229→        }
+   230→
+   231→        if (entry.type === 'assistant' && entry.message?.content) {
+   232→          const text = typeof entry.message.content === 'string'
+   233→            ? entry.message.content
+   234→            : Array.isArray(entry.message.content)
+   235→              ? entry.message.content.filter((c: any) => c.type === 'text').map((c: any) => c.text).join(' ')
+   236→              : '';
+   237→          if (text) {
+   238→            const summaryMatch = text.match(/SUMMARY:\s*([^\n]+)/i);
+   239→            const shortText = summaryMatch ? summaryMatch[1] : text.slice(0, 150);
+   240→            turns.push({ role: 'Assistant', text: shortText });
+   241→          }
+   242→        }
+   243→      } catch {}
+   244→    }
+   245→
+   246→    const recentTurns = turns.slice(-maxTurns);
+   247→    if (recentTurns.length === 0) return '';
+   248→
+   249→    return recentTurns.map(t => `${t.role}: ${t.text}`).join('\n');
+   250→  } catch {
+   251→    return '';
+   252→  }
+   253→}
+   254→
+   255→/**
+   256→ * Analyze sentiment using Sonnet
+   257→ */
+   258→async function analyzeSentiment(prompt: string, context: string): Promise<SentimentResult | null> {
+   259→  const userPrompt = context
+   260→    ? `CONTEXT:\n${context}\n\nCURRENT MESSAGE:\n${prompt}`
+   261→    : prompt;
+   262→
+   263→  const result = await inference({
+   264→    systemPrompt: SENTIMENT_SYSTEM_PROMPT,
+   265→    userPrompt,
+   266→    expectJson: true,
+   267→    timeout: 20000,
+   268→    level: 'fast',  // fast = haiku (quick/cheap)
+   269→  });
+   270→
+   271→  if (!result.success || !result.parsed) {
+   272→    console.error(`[ImplicitSentimentCapture] Inference failed: ${result.error}`);
+   273→    return null;
+   274→  }
+   275→
+   276→  return result.parsed as SentimentResult;
+   277→}
+   278→
+   279→/**
+   280→ * Write implicit rating to ratings.jsonl
+   281→ * NOTE: Ratings are now stored in LEARNING/SIGNALS/ (consolidated from separate SIGNALS/)
+   282→ */
+   283→function writeImplicitRating(entry: ImplicitRatingEntry): void {
+   284→  const baseDir = process.env.PAI_DIR || join(process.env.HOME!, '.claude');
+   285→  const signalsDir = join(baseDir, 'MEMORY', 'LEARNING', 'SIGNALS');
+   286→  const ratingsFile = join(signalsDir, 'ratings.jsonl');
+   287→
+   288→  if (!existsSync(signalsDir)) {
+   289→    mkdirSync(signalsDir, { recursive: true });
+   290→  }
+   291→
+   292→  appendFileSync(ratingsFile, JSON.stringify(entry) + '\n', 'utf-8');
+   293→  console.error(`[ImplicitSentimentCapture] Wrote implicit rating ${entry.rating} to ${ratingsFile}`);
+   294→}
+   295→
+   296→/**
+   297→ * Capture low rating as learning opportunity
+   298→ */
+   299→function captureLowRatingLearning(
+   300→  rating: number,
+   301→  sentimentSummary: string,
+   302→  detailedContext: string,
+   303→  transcriptPath: string
+   304→): void {
+   305→  if (rating >= 6) return;
+   306→
+   307→  const baseDir = process.env.PAI_DIR || join(process.env.HOME!, '.claude');
+   308→  const { year, month, day, hours, minutes, seconds } = getPSTComponents();
+   309→
+   310→  const yearMonth = `${year}-${month}`;
+   311→  const category = getLearningCategory(detailedContext, sentimentSummary);
+   312→  const learningsDir = join(baseDir, 'MEMORY', 'LEARNING', category, yearMonth);
+   313→
+   314→  if (!existsSync(learningsDir)) {
+   315→    mkdirSync(learningsDir, { recursive: true });
+   316→  }
+   317→
+   318→  // Get response context
+   319→  let responseContext = '';
+   320→  try {
+   321→    if (transcriptPath && existsSync(transcriptPath)) {
+   322→      const content = readFileSync(transcriptPath, 'utf-8');
+   323→      const lines = content.trim().split('\n');
+   324→      for (const line of lines) {
+   325→        try {
+   326→          const entry = JSON.parse(line);
+   327→          if (entry.type === 'assistant' && entry.message?.content) {
+   328→            const text = typeof entry.message.content === 'string'
+   329→              ? entry.message.content
+   330→              : Array.isArray(entry.message.content)
+   331→                ? entry.message.content.filter((c: any) => c.type === 'text').map((c: any) => c.text).join(' ')
+   332→                : '';
+   333→            if (text) responseContext = text;
+   334→          }
+   335→        } catch {}
+   336→      }
+   337→      responseContext = responseContext.slice(0, 500);
+   338→    }
+   339→  } catch {}
+   340→
+   341→  const filename = `${year}-${month}-${day}-${hours}${minutes}${seconds}_LEARNING_sentiment-rating-${rating}.md`;
+   342→  const filepath = join(learningsDir, filename);
+   343→
+   344→  const content = `---
+   345→capture_type: LEARNING
+   346→timestamp: ${year}-${month}-${day} ${hours}:${minutes}:${seconds} PST
+   347→rating: ${rating}
+   348→source: implicit-sentiment
+   349→auto_captured: true
+   350→tags: [sentiment-detected, implicit-rating, improvement-opportunity]
+   351→---
+   352→
+   353→# Implicit Low Rating Detected: ${rating}/10
+   354→
+   355→**Date:** ${year}-${month}-${day}
+   356→**Rating:** ${rating}/10
+   357→**Detection Method:** Sentiment Analysis
+   358→**Sentiment Summary:** ${sentimentSummary}
+   359→
+   360→---
+   361→
+   362→## Detailed Analysis (for Learning System)
+   363→
+   364→${detailedContext || 'No detailed analysis available'}
+   365→
+   366→---
+   367→
+   368→## Assistant Response Context
+   369→
+   370→${responseContext || 'No response context available'}
+   371→
+   372→---
+   373→
+   374→## Improvement Notes
+   375→
+   376→This response triggered a ${rating}/10 implicit rating based on detected user sentiment.
+   377→
+   378→**Quick Summary:** ${sentimentSummary}
+   379→
+   380→**Root Cause Analysis:** Review the detailed analysis above to understand what went wrong and how to prevent similar issues.
+   381→
+   382→**Action Items:**
+   383→- Review the assistant response context to identify specific failure points
+   384→- Consider whether this represents a pattern that needs systemic correction
+   385→- Update relevant skills, workflows, or constitutional principles if needed
+   386→
+   387→---
+   388→`;
+   389→
+   390→  writeFileSync(filepath, content, 'utf-8');
+   391→  console.error(`[ImplicitSentimentCapture] Captured low rating learning to ${filepath}`);
+   392→}
+   393→
+   394→async function main() {
+   395→  try {
+   396→    console.error('[ImplicitSentimentCapture] Hook started');
+   397→    const input = await readStdinWithTimeout();
+   398→    const data: HookInput = JSON.parse(input);
+   399→    // The payload uses 'prompt' (Claude Code) - user_prompt is legacy
+   400→    const prompt = data.prompt || data.user_prompt || '';
+   401→
+   402→    // Skip if explicit rating (let ExplicitRatingCapture handle)
+   403→    if (isExplicitRating(prompt)) {
+   404→      console.error('[ImplicitSentimentCapture] Explicit rating detected, deferring to ExplicitRatingCapture');
+   405→      process.exit(0);
+   406→    }
+   407→
+   408→    if (prompt.length < MIN_PROMPT_LENGTH) {
+   409→      console.error('[ImplicitSentimentCapture] Prompt too short, exiting');
+   410→      process.exit(0);
+   411→    }
+   412→
+   413→    const context = getRecentContext(data.transcript_path);
+   414→
+   415→    const analysisPromise = analyzeSentiment(prompt, context);
+   416→    const timeoutPromise = new Promise<null>((resolve) =>
+   417→      setTimeout(() => resolve(null), ANALYSIS_TIMEOUT)
+   418→    );
+   419→
+   420→    const sentiment = await Promise.race([analysisPromise, timeoutPromise]);
+   421→
+   422→    if (!sentiment) {
+   423→      console.error('[ImplicitSentimentCapture] Analysis failed or timed out');
+   424→      process.exit(0);
+   425→    }
+   426→
+   427→    // Neutral sentiment gets rating 5 (baseline for feature requests)
+   428→    if (sentiment.rating === null) {
+   429→      sentiment.rating = 5;
+   430→      console.error('[ImplicitSentimentCapture] Neutral sentiment, assigning baseline rating 5');
+   431→    }
+   432→
+   433→    if (sentiment.confidence < MIN_CONFIDENCE) {
+   434→      console.error(`[ImplicitSentimentCapture] Low confidence (${sentiment.confidence}), not logging`);
+   435→      process.exit(0);
+   436→    }
+   437→
+   438→    console.error(`[ImplicitSentimentCapture] Detected: ${sentiment.rating}/10 - ${sentiment.summary}`);
+   439→
+   440→    const entry: ImplicitRatingEntry = {
+   441→      timestamp: getISOTimestamp(),
+   442→      rating: sentiment.rating,
+   443→      session_id: data.session_id,
+   444→      source: 'implicit',
+   445→      sentiment_summary: sentiment.summary,
+   446→      confidence: sentiment.confidence,
+   447→    };
+   448→
+   449→    writeImplicitRating(entry);
+   450→
+   451→    // Update trending analysis cache (fire-and-forget, don't block)
+   452→    const baseDir = process.env.PAI_DIR || join(process.env.HOME!, '.claude');
+   453→    const trendingScript = join(baseDir, 'tools', 'TrendingAnalysis.ts');
+   454→    if (existsSync(trendingScript)) {
+   455→      Bun.spawn(['bun', trendingScript, '--force'], {
+   456→        stdout: 'ignore',
+   457→        stderr: 'ignore'
+   458→      });
+   459→      console.error('[ImplicitSentimentCapture] Triggered TrendingAnalysis update');
+   460→    }
+   461→
+   462→    if (sentiment.rating < 6) {
+   463→      captureLowRatingLearning(
+   464→        sentiment.rating,
+   465→        sentiment.summary,
+   466→        sentiment.detailed_context || '',
+   467→        data.transcript_path
+   468→      );
+   469→
+   470→      // For ratings 1-3, also create full failure capture
+   471→      if (sentiment.rating <= 3) {
+   472→        try {
+   473→          await captureFailure({
+   474→            transcriptPath: data.transcript_path,
+   475→            rating: sentiment.rating,
+   476→            sentimentSummary: sentiment.summary,
+   477→            detailedContext: sentiment.detailed_context || '',
+   478→            sessionId: data.session_id,
+   479→          });
+   480→          console.error(`[ImplicitSentimentCapture] Created full failure capture for rating ${sentiment.rating}`);
+   481→        } catch (err) {
+   482→          console.error(`[ImplicitSentimentCapture] Error creating failure capture: ${err}`);
+   483→        }
+   484→      }
+   485→    }
+   486→
+   487→    console.error('[ImplicitSentimentCapture] Done');
+   488→    process.exit(0);
+   489→  } catch (err) {
+   490→    console.error(`[ImplicitSentimentCapture] Error: ${err}`);
+   491→    process.exit(0);
+   492→  }
+   493→}
+   494→
+   495→main();
+   496→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

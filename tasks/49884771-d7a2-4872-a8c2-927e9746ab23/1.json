@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "GitHub repository created and connected",
+  "description": "GitHub repository created successfully with name matching folder (tentativa-52 or similar) and remote configured in local git",
+  "activeForm": "Creating GitHub repository and connecting",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

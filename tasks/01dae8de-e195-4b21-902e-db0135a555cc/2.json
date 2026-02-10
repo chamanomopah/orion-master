@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Documentação LiveKit Plugins validada",
+  "description": "Documentação oficial de todos os plugins LiveKit necessários: Anthropic (LLM), Deepgram (STT), OpenAI/Cartesia (TTS), WebSocket. Cada plugin deve ter instalação, configuração, e código de exemplo validados.",
+  "activeForm": "Validando documentação LiveKit Plugins",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

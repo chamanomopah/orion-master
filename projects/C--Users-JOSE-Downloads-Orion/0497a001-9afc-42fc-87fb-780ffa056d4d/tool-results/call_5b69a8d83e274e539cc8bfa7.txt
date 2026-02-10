@@ -1,0 +1,311 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * RelationshipMemory.hook.ts - Extract relationship notes from sessions
+     4→ *
+     5→ * PURPOSE:
+     6→ * Analyzes session transcripts to extract relationship-relevant learnings
+     7→ * and appends them to the daily relationship log. This builds the memory
+     8→ * that makes our relationship feel like it's growing.
+     9→ *
+    10→ * TRIGGER: Stop (session end)
+    11→ *
+    12→ * INPUT:
+    13→ * - session_id: Current session identifier
+    14→ * - transcript_path: Path to conversation transcript
+    15→ *
+    16→ * OUTPUT:
+    17→ * - Writes to: MEMORY/RELATIONSHIP/YYYY-MM/YYYY-MM-DD.md
+    18→ * - May update: skills/PAI/USER/ABOUT_DANIEL.md (significant learnings)
+    19→ *
+    20→ * RELATIONSHIP NOTE TYPES:
+    21→ * - W (World): Objective facts about Daniel's situation
+    22→ * - B (Biographical): What happened this session (first-person DA)
+    23→ * - O (Opinion): Preference/belief with confidence
+    24→ *
+    25→ * EXAMPLES:
+    26→ * - W @Principal: Currently focused on PAI infrastructure improvements
+    27→ * - B @DA: Successfully debugged voice notifications after 5 attempts
+    28→ * - O(c=0.85) @Principal: Appreciates when I admit mistakes early
+    29→ */
+    30→
+    31→import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync } from 'fs';
+    32→import { join } from 'path';
+    33→import { getPaiDir } from './lib/paths';
+    34→import { getISOTimestamp, getPSTComponents } from './lib/time';
+    35→import { getDAName, getPrincipalName } from './lib/identity';
+    36→
+    37→interface HookInput {
+    38→  session_id: string;
+    39→  transcript_path?: string;
+    40→}
+    41→
+    42→interface RelationshipNote {
+    43→  type: 'W' | 'B' | 'O';
+    44→  entities: string[];
+    45→  content: string;
+    46→  confidence?: number;
+    47→}
+    48→
+    49→interface TranscriptEntry {
+    50→  type: 'user' | 'assistant';
+    51→  message?: {
+    52→    content: string | Array<{ type: string; text?: string }>;
+    53→  };
+    54→}
+    55→
+    56→/**
+    57→ * Read stdin with timeout
+    58→ */
+    59→async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
+    60→  return new Promise((resolve, reject) => {
+    61→    let data = '';
+    62→    const timer = setTimeout(() => reject(new Error('Timeout')), timeout);
+    63→    process.stdin.on('data', (chunk) => { data += chunk.toString(); });
+    64→    process.stdin.on('end', () => { clearTimeout(timer); resolve(data); });
+    65→    process.stdin.on('error', (err) => { clearTimeout(timer); reject(err); });
+    66→  });
+    67→}
+    68→
+    69→/**
+    70→ * Extract text content from transcript entry
+    71→ */
+    72→function extractText(entry: TranscriptEntry): string {
+    73→  if (!entry.message?.content) return '';
+    74→
+    75→  if (typeof entry.message.content === 'string') {
+    76→    return entry.message.content;
+    77→  }
+    78→
+    79→  if (Array.isArray(entry.message.content)) {
+    80→    return entry.message.content
+    81→      .filter((c) => c.type === 'text' && c.text)
+    82→      .map((c) => c.text)
+    83→      .join(' ');
+    84→  }
+    85→
+    86→  return '';
+    87→}
+    88→
+    89→/**
+    90→ * Read and parse transcript
+    91→ */
+    92→function readTranscript(path: string): TranscriptEntry[] {
+    93→  if (!path || !existsSync(path)) return [];
+    94→
+    95→  try {
+    96→    const content = readFileSync(path, 'utf-8');
+    97→    const entries: TranscriptEntry[] = [];
+    98→
+    99→    for (const line of content.trim().split('\n')) {
+   100→      try {
+   101→        const entry = JSON.parse(line);
+   102→        if (entry.type === 'user' || entry.type === 'assistant') {
+   103→          entries.push(entry);
+   104→        }
+   105→      } catch {
+   106→        // Skip invalid lines
+   107→      }
+   108→    }
+   109→
+   110→    return entries;
+   111→  } catch {
+   112→    return [];
+   113→  }
+   114→}
+   115→
+   116→/**
+   117→ * Analyze transcript for relationship-relevant content
+   118→ */
+   119→function analyzeForRelationship(entries: TranscriptEntry[]): RelationshipNote[] {
+   120→  const notes: RelationshipNote[] = [];
+   121→
+   122→  // Patterns that indicate relationship-relevant content
+   123→  const patterns = {
+   124→    preference: /(?:prefer|like|want|appreciate|enjoy|love|hate|dislike)\s+(?:when|that|to)/i,
+   125→    frustration: /(?:frustrat|annoy|bother|irritat)/i,
+   126→    positive: /(?:great|awesome|perfect|excellent|good job|well done|nice)/i,
+   127→    learning: /(?:learn|discover|realize|understand|figure out)/i,
+   128→    milestone: /(?:first time|finally|breakthrough|success|accomplish)/i,
+   129→  };
+   130→
+   131→  // Track what happened this session
+   132→  let sessionSummary: string[] = [];
+   133→  let danielPreferences: string[] = [];
+   134→  let frustrations: string[] = [];
+   135→  let positives: string[] = [];
+   136→
+   137→  for (const entry of entries) {
+   138→    const text = extractText(entry);
+   139→    if (!text || text.length < 10) continue;
+   140→
+   141→    // User messages might reveal preferences
+   142→    if (entry.type === 'user') {
+   143→      if (patterns.preference.test(text)) {
+   144→        // Extract preference (simplified - would benefit from LLM analysis)
+   145→        const snippet = text.slice(0, 200);
+   146→        danielPreferences.push(snippet);
+   147→      }
+   148→
+   149→      if (patterns.frustration.test(text)) {
+   150→        frustrations.push(text.slice(0, 150));
+   151→      }
+   152→
+   153→      if (patterns.positive.test(text)) {
+   154→        positives.push(text.slice(0, 150));
+   155→      }
+   156→    }
+   157→
+   158→    // Assistant messages with SUMMARY tags indicate completed work
+   159→    if (entry.type === 'assistant') {
+   160→      const summaryMatch = text.match(/SUMMARY:\s*([^\n]+)/i);
+   161→      if (summaryMatch) {
+   162→        sessionSummary.push(summaryMatch[1].trim());
+   163→      }
+   164→
+   165→      // Check for milestones
+   166→      if (patterns.milestone.test(text)) {
+   167→        const snippet = text.match(/[^.]*(?:first time|finally|breakthrough|success)[^.]*/i)?.[0];
+   168→        if (snippet) {
+   169→          sessionSummary.push(snippet.trim());
+   170→        }
+   171→      }
+   172→    }
+   173→  }
+   174→
+   175→  // Generate relationship notes from analysis
+   176→
+   177→  // B (Biographical) - What the DA did this session
+   178→  if (sessionSummary.length > 0) {
+   179→    const uniqueSummaries = [...new Set(sessionSummary)].slice(0, 3);
+   180→    for (const summary of uniqueSummaries) {
+   181→      notes.push({
+   182→        type: 'B',
+   183→        entities: [`@${getDAName()}`],
+   184→        content: summary
+   185→      });
+   186→    }
+   187→  }
+   188→
+   189→  // O (Opinion) - Inferred preferences
+   190→  if (positives.length >= 2) {
+   191→    notes.push({
+   192→      type: 'O',
+   193→      entities: [`@${getPrincipalName()}`],
+   194→      content: 'Responded positively to this session\'s approach',
+   195→      confidence: 0.70
+   196→    });
+   197→  }
+   198→
+   199→  if (frustrations.length >= 2) {
+   200→    notes.push({
+   201→      type: 'O',
+   202→      entities: [`@${getPrincipalName()}`],
+   203→      content: 'Experienced frustration during this session (likely tooling-related)',
+   204→      confidence: 0.75
+   205→    });
+   206→  }
+   207→
+   208→  return notes;
+   209→}
+   210→
+   211→/**
+   212→ * Format notes for markdown
+   213→ */
+   214→function formatNotes(notes: RelationshipNote[]): string {
+   215→  if (notes.length === 0) return '';
+   216→
+   217→  const lines: string[] = [];
+   218→  const { hours, minutes } = getPSTComponents();
+   219→
+   220→  lines.push(`\n## ${hours}:${minutes} PST\n`);
+   221→
+   222→  for (const note of notes) {
+   223→    const entities = note.entities.join(' ');
+   224→    const confidence = note.confidence ? `(c=${note.confidence.toFixed(2)})` : '';
+   225→    lines.push(`- ${note.type}${confidence} ${entities}: ${note.content}`);
+   226→  }
+   227→
+   228→  return lines.join('\n') + '\n';
+   229→}
+   230→
+   231→/**
+   232→ * Ensure relationship memory directory exists
+   233→ */
+   234→function ensureRelationshipDir(paiDir: string): string {
+   235→  const { year, month, day } = getPSTComponents();
+   236→  const monthDir = join(paiDir, 'MEMORY', 'RELATIONSHIP', `${year}-${month}`);
+   237→
+   238→  if (!existsSync(monthDir)) {
+   239→    mkdirSync(monthDir, { recursive: true });
+   240→  }
+   241→
+   242→  return join(monthDir, `${year}-${month}-${day}.md`);
+   243→}
+   244→
+   245→/**
+   246→ * Initialize daily relationship file if needed
+   247→ */
+   248→function initDailyFile(filepath: string): void {
+   249→  if (existsSync(filepath)) return;
+   250→
+   251→  const { year, month, day } = getPSTComponents();
+   252→  const header = `# Relationship Notes: ${year}-${month}-${day}
+   253→
+   254→*Auto-captured from sessions. Manual additions welcome.*
+   255→
+   256→---
+   257→`;
+   258→
+   259→  writeFileSync(filepath, header, 'utf-8');
+   260→}
+   261→
+   262→async function main() {
+   263→  try {
+   264→    console.error('[RelationshipMemory] Hook started');
+   265→
+   266→    const input = await readStdinWithTimeout();
+   267→    const data: HookInput = JSON.parse(input);
+   268→
+   269→    if (!data.transcript_path) {
+   270→      console.error('[RelationshipMemory] No transcript path, exiting');
+   271→      process.exit(0);
+   272→    }
+   273→
+   274→    // Read and analyze transcript
+   275→    const entries = readTranscript(data.transcript_path);
+   276→    if (entries.length === 0) {
+   277→      console.error('[RelationshipMemory] No transcript entries, exiting');
+   278→      process.exit(0);
+   279→    }
+   280→
+   281→    console.error(`[RelationshipMemory] Analyzing ${entries.length} transcript entries`);
+   282→
+   283→    const notes = analyzeForRelationship(entries);
+   284→    if (notes.length === 0) {
+   285→      console.error('[RelationshipMemory] No relationship notes to capture');
+   286→      process.exit(0);
+   287→    }
+   288→
+   289→    // Write to daily relationship file
+   290→    const paiDir = getPaiDir();
+   291→    const filepath = ensureRelationshipDir(paiDir);
+   292→    initDailyFile(filepath);
+   293→
+   294→    const formatted = formatNotes(notes);
+   295→    appendFileSync(filepath, formatted, 'utf-8');
+   296→
+   297→    console.error(`[RelationshipMemory] Captured ${notes.length} notes to ${filepath}`);
+   298→    process.exit(0);
+   299→
+   300→  } catch (err) {
+   301→    console.error(`[RelationshipMemory] Error: ${err}`);
+   302→    process.exit(0); // Don't fail the session end
+   303→  }
+   304→}
+   305→
+   306→main();
+   307→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

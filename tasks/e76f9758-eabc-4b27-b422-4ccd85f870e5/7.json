@@ -1,0 +1,9 @@
+{
+  "id": "7",
+  "subject": "E2E tests passing all scenarios",
+  "description": "Automated tests covering: single session, multi-sessions, command execution, error handling, session termination, and dashboard updates.",
+  "activeForm": "Running E2E test suite",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

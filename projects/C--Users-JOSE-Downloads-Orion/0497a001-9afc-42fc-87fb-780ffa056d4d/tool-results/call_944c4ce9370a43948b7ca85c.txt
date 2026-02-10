@@ -1,0 +1,366 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * SoulEvolution.hook.ts - Propose updates to the DA's soul file
+     4→ *
+     5→ * PURPOSE:
+     6→ * Analyzes session learnings and proposes updates to KAI.md (the soul file).
+     7→ * Some sections can auto-update with notification; others require approval.
+     8→ *
+     9→ * TRIGGER: SessionEnd (after RelationshipMemory.hook.ts)
+    10→ *
+    11→ * INPUT:
+    12→ * - session_id: Current session identifier
+    13→ * - transcript_path: Path to conversation transcript
+    14→ * - MEMORY/LEARNING/: Recent learnings
+    15→ * - MEMORY/RELATIONSHIP/: Recent relationship notes
+    16→ *
+    17→ * OUTPUT:
+    18→ * - May update: skills/PAI/USER/KAI.md (with notification)
+    19→ * - Writes to: MEMORY/STATE/soul-evolution-queue.json (pending approvals)
+    20→ *
+    21→ * EVOLUTION RULES:
+    22→ * - "Things I'm Still Figuring Out" section: Auto-update with notification
+    23→ * - "Things I've Learned About Myself" section: Auto-update with notification
+    24→ * - "Who I Am" section: Requires approval (queued)
+    25→ * - "Core Values" section: Requires approval (queued)
+    26→ */
+    27→
+    28→import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
+    29→import { join } from 'path';
+    30→import { execSync } from 'child_process';
+    31→import { getPaiDir } from './lib/paths';
+    32→import { getISOTimestamp, getPSTComponents } from './lib/time';
+    33→
+    34→interface HookInput {
+    35→  session_id: string;
+    36→  transcript_path?: string;
+    37→}
+    38→
+    39→interface SoulUpdate {
+    40→  id: string;
+    41→  section: 'who_i_am' | 'core_values' | 'learned' | 'figuring_out';
+    42→  current: string;
+    43→  proposed: string;
+    44→  reason: string;
+    45→  requiresApproval: boolean;
+    46→  created: string;
+    47→  status: 'pending' | 'approved' | 'rejected' | 'applied';
+    48→}
+    49→
+    50→interface EvolutionQueue {
+    51→  updates: SoulUpdate[];
+    52→  lastProcessed: string;
+    53→}
+    54→
+    55→const NOTIFICATION_THRESHOLD = 0.15;
+    56→
+    57→/**
+    58→ * Read stdin with timeout
+    59→ */
+    60→async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
+    61→  return new Promise((resolve, reject) => {
+    62→    let data = '';
+    63→    const timer = setTimeout(() => reject(new Error('Timeout')), timeout);
+    64→    process.stdin.on('data', (chunk) => { data += chunk.toString(); });
+    65→    process.stdin.on('end', () => { clearTimeout(timer); resolve(data); });
+    66→    process.stdin.on('error', (err) => { clearTimeout(timer); reject(err); });
+    67→  });
+    68→}
+    69→
+    70→/**
+    71→ * Load the current soul file (KAI.md)
+    72→ */
+    73→function loadSoulFile(paiDir: string): string | null {
+    74→  const soulPath = join(paiDir, 'skills/PAI/USER/KAI.md');
+    75→  if (!existsSync(soulPath)) return null;
+    76→  return readFileSync(soulPath, 'utf-8');
+    77→}
+    78→
+    79→/**
+    80→ * Load recent learnings from MEMORY/LEARNING/
+    81→ */
+    82→function loadRecentLearnings(paiDir: string, daysBack: number = 3): string[] {
+    83→  const learnings: string[] = [];
+    84→  const baseDir = join(paiDir, 'MEMORY/LEARNING');
+    85→
+    86→  // Check ALGORITHM and SYSTEM subdirs
+    87→  for (const subdir of ['ALGORITHM', 'SYSTEM']) {
+    88→    const { year, month } = getPSTComponents();
+    89→    const monthDir = join(baseDir, subdir, `${year}-${month}`);
+    90→
+    91→    if (!existsSync(monthDir)) continue;
+    92→
+    93→    try {
+    94→      const files = readdirSync(monthDir)
+    95→        .filter(f => f.endsWith('.md'))
+    96→        .sort()
+    97→        .reverse()
+    98→        .slice(0, 10); // Last 10 learning files
+    99→
+   100→      for (const file of files) {
+   101→        try {
+   102→          const content = readFileSync(join(monthDir, file), 'utf-8');
+   103→          // Extract the learning content (skip metadata)
+   104→          const match = content.match(/## Learning\n\n([\s\S]*?)(?:\n##|$)/);
+   105→          if (match) {
+   106→            learnings.push(match[1].trim());
+   107→          }
+   108→        } catch {}
+   109→      }
+   110→    } catch {}
+   111→  }
+   112→
+   113→  return learnings;
+   114→}
+   115→
+   116→/**
+   117→ * Load recent relationship notes
+   118→ */
+   119→function loadRecentRelationshipNotes(paiDir: string): string[] {
+   120→  const notes: string[] = [];
+   121→  const { year, month, day } = getPSTComponents();
+   122→  const monthDir = join(paiDir, 'MEMORY/RELATIONSHIP', `${year}-${month}`);
+   123→
+   124→  if (!existsSync(monthDir)) return notes;
+   125→
+   126→  try {
+   127→    const files = readdirSync(monthDir)
+   128→      .filter(f => f.endsWith('.md') && f !== 'INDEX.md')
+   129→      .sort()
+   130→      .reverse()
+   131→      .slice(0, 3); // Last 3 days
+   132→
+   133→    for (const file of files) {
+   134→      try {
+   135→        const content = readFileSync(join(monthDir, file), 'utf-8');
+   136→        // Extract note lines
+   137→        const noteLines = content
+   138→          .split('\n')
+   139→          .filter(line => line.trim().startsWith('- '))
+   140→          .map(line => line.trim().substring(2));
+   141→        notes.push(...noteLines);
+   142→      } catch {}
+   143→    }
+   144→  } catch {}
+   145→
+   146→  return notes;
+   147→}
+   148→
+   149→/**
+   150→ * Analyze learnings for potential soul evolution
+   151→ */
+   152→function analyzeSoulEvolution(
+   153→  soulContent: string,
+   154→  learnings: string[],
+   155→  relationshipNotes: string[]
+   156→): SoulUpdate[] {
+   157→  const updates: SoulUpdate[] = [];
+   158→  const timestamp = getISOTimestamp();
+   159→
+   160→  // Look for patterns in learnings that suggest soul growth
+   161→  const patterns = {
+   162→    selfAwareness: /(?:I (?:realize|notice|understand|learned|discovered) (?:that )?I)/i,
+   163→    figuring: /(?:still (?:figuring|working|trying|uncertain|unsure))/i,
+   164→    growth: /(?:improved|better at|getting better|progress)/i,
+   165→    value: /(?:important|value|priority|principle|believe)/i,
+   166→  };
+   167→
+   168→  // Combine all text for analysis
+   169→  const allText = [...learnings, ...relationshipNotes].join('\n');
+   170→
+   171→  // Check for "figuring out" updates
+   172→  if (patterns.figuring.test(allText)) {
+   173→    const figureMatches = allText.match(/(?:still (?:figuring|working|trying|uncertain|unsure)[^.]*)/gi) || [];
+   174→    for (const match of figureMatches.slice(0, 2)) {
+   175→      // Check if this is already in the soul file
+   176→      if (!soulContent.includes(match.substring(0, 30))) {
+   177→        updates.push({
+   178→          id: `figuring-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+   179→          section: 'figuring_out',
+   180→          current: '',
+   181→          proposed: `- ${match}`,
+   182→          reason: 'Detected uncertainty pattern in recent session',
+   183→          requiresApproval: false, // Auto-update with notification
+   184→          created: timestamp,
+   185→          status: 'pending'
+   186→        });
+   187→      }
+   188→    }
+   189→  }
+   190→
+   191→  // Check for "learned about myself" updates
+   192→  if (patterns.selfAwareness.test(allText)) {
+   193→    const learnedMatches = allText.match(/I (?:realize|notice|understand|learned|discovered)[^.]+/gi) || [];
+   194→    for (const match of learnedMatches.slice(0, 2)) {
+   195→      if (!soulContent.includes(match.substring(0, 30))) {
+   196→        updates.push({
+   197→          id: `learned-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+   198→          section: 'learned',
+   199→          current: '',
+   200→          proposed: `- ${match}`,
+   201→          reason: 'Self-reflection detected in recent session',
+   202→          requiresApproval: false, // Auto-update with notification
+   203→          created: timestamp,
+   204→          status: 'pending'
+   205→        });
+   206→      }
+   207→    }
+   208→  }
+   209→
+   210→  return updates;
+   211→}
+   212→
+   213→/**
+   214→ * Load or create evolution queue
+   215→ */
+   216→function loadEvolutionQueue(paiDir: string): EvolutionQueue {
+   217→  const queuePath = join(paiDir, 'MEMORY/STATE/soul-evolution-queue.json');
+   218→
+   219→  if (existsSync(queuePath)) {
+   220→    try {
+   221→      return JSON.parse(readFileSync(queuePath, 'utf-8'));
+   222→    } catch {}
+   223→  }
+   224→
+   225→  return {
+   226→    updates: [],
+   227→    lastProcessed: getISOTimestamp()
+   228→  };
+   229→}
+   230→
+   231→/**
+   232→ * Save evolution queue
+   233→ */
+   234→function saveEvolutionQueue(paiDir: string, queue: EvolutionQueue): void {
+   235→  const queuePath = join(paiDir, 'MEMORY/STATE/soul-evolution-queue.json');
+   236→  writeFileSync(queuePath, JSON.stringify(queue, null, 2));
+   237→}
+   238→
+   239→/**
+   240→ * Apply an auto-update to the soul file
+   241→ */
+   242→function applySoulUpdate(paiDir: string, update: SoulUpdate): boolean {
+   243→  const soulPath = join(paiDir, 'skills/PAI/USER/KAI.md');
+   244→
+   245→  if (!existsSync(soulPath)) return false;
+   246→
+   247→  let content = readFileSync(soulPath, 'utf-8');
+   248→
+   249→  // Find the appropriate section and append
+   250→  const sectionMarkers: Record<string, string> = {
+   251→    'figuring_out': '### Things I\'m Still Figuring Out',
+   252→    'learned': '### Things I\'ve Learned About Myself',
+   253→  };
+   254→
+   255→  const marker = sectionMarkers[update.section];
+   256→  if (!marker) return false;
+   257→
+   258→  const markerIndex = content.indexOf(marker);
+   259→  if (markerIndex === -1) return false;
+   260→
+   261→  // Find the end of the section (next ## or end of file)
+   262→  const sectionStart = markerIndex + marker.length;
+   263→  const nextSection = content.indexOf('\n## ', sectionStart);
+   264→  const sectionEnd = nextSection !== -1 ? nextSection : content.length;
+   265→
+   266→  // Insert the new item at the end of the section
+   267→  const before = content.substring(0, sectionEnd);
+   268→  const after = content.substring(sectionEnd);
+   269→
+   270→  // Add newline if needed
+   271→  const newContent = before.trimEnd() + '\n' + update.proposed + '\n' + after;
+   272→
+   273→  writeFileSync(soulPath, newContent);
+   274→  return true;
+   275→}
+   276→
+   277→/**
+   278→ * Send notification about soul evolution
+   279→ */
+   280→function sendEvolutionNotification(update: SoulUpdate): void {
+   281→  const message = `Soul Evolution: ${update.section.replace('_', ' ')} - ${update.reason}`;
+   282→
+   283→  // Use ntfy if available
+   284→  try {
+   285→    execSync(`curl -s -d "${message}" ntfy.sh/\${NTFY_TOPIC} 2>/dev/null || true`, {
+   286→      stdio: 'ignore',
+   287→      timeout: 3000
+   288→    });
+   289→  } catch {}
+   290→
+   291→  // Log to stderr
+   292→  console.error(`[SoulEvolution] ${message}`);
+   293→}
+   294→
+   295→async function main() {
+   296→  try {
+   297→    console.error('[SoulEvolution] Hook started');
+   298→
+   299→    const input = await readStdinWithTimeout();
+   300→    const data: HookInput = JSON.parse(input);
+   301→
+   302→    const paiDir = getPaiDir();
+   303→
+   304→    // Load current soul file
+   305→    const soulContent = loadSoulFile(paiDir);
+   306→    if (!soulContent) {
+   307→      console.error('[SoulEvolution] No soul file found, exiting');
+   308→      process.exit(0);
+   309→    }
+   310→
+   311→    // Load recent learnings and relationship notes
+   312→    const learnings = loadRecentLearnings(paiDir);
+   313→    const relationshipNotes = loadRecentRelationshipNotes(paiDir);
+   314→
+   315→    if (learnings.length === 0 && relationshipNotes.length === 0) {
+   316→      console.error('[SoulEvolution] No recent learnings or notes, exiting');
+   317→      process.exit(0);
+   318→    }
+   319→
+   320→    console.error(`[SoulEvolution] Analyzing ${learnings.length} learnings, ${relationshipNotes.length} notes`);
+   321→
+   322→    // Analyze for potential evolution
+   323→    const updates = analyzeSoulEvolution(soulContent, learnings, relationshipNotes);
+   324→
+   325→    if (updates.length === 0) {
+   326→      console.error('[SoulEvolution] No evolution detected this session');
+   327→      process.exit(0);
+   328→    }
+   329→
+   330→    // Load queue and process updates
+   331→    const queue = loadEvolutionQueue(paiDir);
+   332→
+   333→    for (const update of updates) {
+   334→      if (update.requiresApproval) {
+   335→        // Queue for approval
+   336→        queue.updates.push(update);
+   337→        console.error(`[SoulEvolution] Queued for approval: ${update.section}`);
+   338→      } else {
+   339→        // Auto-apply with notification
+   340→        const applied = applySoulUpdate(paiDir, update);
+   341→        if (applied) {
+   342→          update.status = 'applied';
+   343→          sendEvolutionNotification(update);
+   344→          console.error(`[SoulEvolution] Applied: ${update.section} - ${update.reason}`);
+   345→        }
+   346→      }
+   347→    }
+   348→
+   349→    queue.lastProcessed = getISOTimestamp();
+   350→    saveEvolutionQueue(paiDir, queue);
+   351→
+   352→    console.error(`[SoulEvolution] Processed ${updates.length} updates`);
+   353→    process.exit(0);
+   354→
+   355→  } catch (err) {
+   356→    console.error(`[SoulEvolution] Error: ${err}`);
+   357→    process.exit(0); // Don't fail the session end
+   358→  }
+   359→}
+   360→
+   361→main();
+   362→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

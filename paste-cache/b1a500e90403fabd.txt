@@ -1,0 +1,36 @@
+PS C:\Users\JOSE\Downloads\Orion\Personal_AI_Infrastructure-main\Releases\v2.5> cd .claude
+PS C:\Users\JOSE\Downloads\Orion\Personal_AI_Infrastructure-main\Releases\v2.5\.claude> bun run INSTALL.ts
+394 |         await new Promise<void>((resolve, reject) => {
+                    ^
+error: "await" can only be used inside an "async" function
+    at C:\Users\JOSE\Downloads\Orion\Personal_AI_Infrastructure-main\Releases\v2.5\.claude\INSTALL.ts:394:15
+
+353 | function installBun(): void {
+      ^
+note: Consider adding the "async" keyword here
+   at C:\Users\JOSE\Downloads\Orion\Personal_AI_Infrastructure-main\Releases\v2.5\.claude\INSTALL.ts:353:1
+
+Bun v1.3.9 (Windows x64)
+PS C:\Users\JOSE\Downloads\Orion\Personal_AI_Infrastructure-main\Releases\v2.5\.claude> node INSTALL.ts
+C:\Users\JOSE\Downloads\Orion\Personal_AI_Infrastructure-main\Releases\v2.5\.claude\INSTALL.ts:394
+
+        await new Promise<void>((resolve, reject) => {
+        ^^^^^
+          installScript.on('close', (code) => {
+
+SyntaxError [ERR_INVALID_TYPESCRIPT_SYNTAX]: await isn't allowed in non-async function
+    at parseTypeScript (node:internal/modules/typescript:72:36)
+    at processTypeScriptCode (node:internal/modules/typescript:146:42)
+    at stripTypeScriptModuleTypes (node:internal/modules/typescript:209:22)
+    at Module._compile (node:internal/modules/cjs/loader:1713:15)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1481:32)
+    at Module._load (node:internal/modules/cjs/loader:1300:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5) {
+  code: 'ERR_INVALID_TYPESCRIPT_SYNTAX'
+}
+
+Node.js v24.12.0
+PS C:\Users\JOSE\Downloads\Orion\Personal_AI_Infrastructure-main\Releases\v2.5\.claude>

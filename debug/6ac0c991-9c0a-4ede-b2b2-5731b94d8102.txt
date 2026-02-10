@@ -1,0 +1,75 @@
+2026-02-10T13:48:01.436Z [DEBUG] [init] configureGlobalMTLS starting
+2026-02-10T13:48:01.437Z [DEBUG] [init] configureGlobalMTLS complete
+2026-02-10T13:48:01.437Z [DEBUG] [init] configureGlobalAgents starting
+2026-02-10T13:48:01.437Z [DEBUG] [init] configureGlobalAgents complete
+2026-02-10T13:48:01.472Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2026-02-10T13:48:01.497Z [DEBUG] Applying permission update: Adding 17 allow rule(s) to destination 'userSettings': ["Bash","Read","Write","Edit","MultiEdit","Glob","Grep","LS","WebFetch","WebSearch","NotebookRead","NotebookEdit","TodoWrite","ExitPlanMode","Task","Skill","mcp__*"]
+2026-02-10T13:48:01.497Z [DEBUG] Applying permission update: Adding 29 ask rule(s) to destination 'userSettings': ["Bash(rm -rf /)","Bash(rm -rf /:*)","Bash(sudo rm -rf /)","Bash(sudo rm -rf /:*)","Bash(rm -rf ~)","Bash(rm -rf ~:*)","Bash(rm -rf ~/.claude)","Bash(rm -rf ~/.claude:*)","Bash(diskutil eraseDisk:*)","Bash(diskutil zeroDisk:*)","Bash(diskutil partitionDisk:*)","Bash(diskutil apfs deleteContainer:*)","Bash(diskutil apfs eraseVolume:*)","Bash(dd if=/dev/zero:*)","Bash(mkfs:*)","Bash(gh repo delete:*)","Bash(gh repo edit --visibility public:*)","Bash(git push --force:*)","Bash(git push -f:*)","Bash(git push origin --force:*)","Bash(git push origin -f:*)","Read(~/.ssh/id_*)","Read(~/.ssh/*.pem)","Read(~/.aws/credentials)","Read(~/.gnupg/private*)","Write(~/.claude/settings.json)","Edit(~/.claude/settings.json)","Write(~/.ssh/*)","Edit(~/.ssh/*)"]
+2026-02-10T13:48:01.497Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-02-10T13:48:01.507Z [DEBUG] [ToolSearch:optimistic] mode=standard, ENABLE_TOOL_SEARCH=undefined, result=false
+2026-02-10T13:48:01.508Z [DEBUG] [STARTUP] Running setup()...
+2026-02-10T13:48:01.508Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2026-02-10T13:48:01.511Z [DEBUG] [claudeai-mcp] Checking gate (cached)...
+2026-02-10T13:48:01.511Z [DEBUG] [claudeai-mcp] Gate returned: true
+2026-02-10T13:48:01.511Z [DEBUG] [claudeai-mcp] No access token
+2026-02-10T13:48:01.511Z [DEBUG] [TeammateModeSnapshot] Captured from config: auto
+2026-02-10T13:48:01.522Z [DEBUG] Loading skills from: managed=C:\ProgramData\ClaudeCode\.claude\skills, user=C:\Users\JOSE\.claude\skills, project=[]
+2026-02-10T13:48:01.563Z [WARN] Failed to parse YAML frontmatter in C:\Users\JOSE\.claude\skills\Research\SKILL.md: YAML Parse error: Unexpected token
+2026-02-10T13:48:01.569Z [DEBUG] Error log sink initialized
+2026-02-10T13:48:01.575Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2026-02-10T13:48:01.575Z [DEBUG] Total plugin skills loaded: 0
+2026-02-10T13:48:01.575Z [DEBUG] Total plugin commands loaded: 0
+2026-02-10T13:48:01.582Z [DEBUG] [STARTUP] setup() completed in 74ms
+2026-02-10T13:48:01.582Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-02-10T13:48:01.585Z [DEBUG] Registered 0 hooks from 0 plugins
+2026-02-10T13:48:01.601Z [DEBUG] Loaded 28 unique skills (managed: 0, user: 28, project: 0, additional: 0, legacy commands: 0)
+2026-02-10T13:48:01.604Z [DEBUG] getSkills returning: 28 skill dir commands, 0 plugin skills, 2 bundled skills
+2026-02-10T13:48:01.647Z [DEBUG] Total plugin agents loaded: 0
+2026-02-10T13:48:01.647Z [DEBUG] [STARTUP] Commands and agents loaded in 65ms
+2026-02-10T13:48:01.648Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-02-10T13:48:01.648Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-02-10T13:48:01.648Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-02-10T13:48:01.656Z [DEBUG] Total LSP servers loaded: 0
+2026-02-10T13:48:01.656Z [DEBUG] [STARTUP] MCP configs loaded in 159ms
+2026-02-10T13:48:01.665Z [DEBUG] MCP server "chrome-devtools": Starting connection with timeout of 30000ms
+2026-02-10T13:48:01.691Z [DEBUG] MCP server "neo4j-mcp": Starting connection with timeout of 30000ms
+2026-02-10T13:48:01.789Z [DEBUG] MCP server "n8n": Starting connection with timeout of 30000ms
+2026-02-10T13:48:01.809Z [DEBUG] MCP server "supabase": Initializing HTTP transport to https://mcp.supabase.com/mcp?project_ref=aivuhtocoumvbtcepphf
+2026-02-10T13:48:01.809Z [DEBUG] MCP server "supabase": Node version: v24.3.0, Platform: win32
+2026-02-10T13:48:01.809Z [DEBUG] MCP server "supabase": Environment: {"NODE_OPTIONS":"not set","UV_THREADPOOL_SIZE":"default","HTTP_PROXY":"not set","HTTPS_PROXY":"not set","NO_PROXY":"not set"}
+2026-02-10T13:48:01.809Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-02-10T13:48:01.809Z [DEBUG] LSP manager initialized with 0 servers
+2026-02-10T13:48:01.809Z [DEBUG] LSP server manager initialized successfully
+2026-02-10T13:48:01.809Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-02-10T13:48:01.809Z [DEBUG] MCP server "supabase": Proxy options: default
+2026-02-10T13:48:01.809Z [DEBUG] MCP server "supabase": HTTP transport options: {"url":"https://mcp.supabase.com/mcp?project_ref=aivuhtocoumvbtcepphf","headers":{"User-Agent":"claude-code/2.1.37","Authorization":"[REDACTED]"},"hasAuthProvider":true,"timeoutMs":60000}
+2026-02-10T13:48:01.809Z [DEBUG] MCP server "supabase": HTTP transport created successfully
+2026-02-10T13:48:01.810Z [DEBUG] MCP server "supabase": Client created, setting up request handler
+2026-02-10T13:48:01.810Z [DEBUG] MCP server "supabase": Starting connection with timeout of 30000ms
+2026-02-10T13:48:01.810Z [DEBUG] MCP server "supabase": Testing basic HTTP connectivity to https://mcp.supabase.com/mcp?project_ref=aivuhtocoumvbtcepphf
+2026-02-10T13:48:01.810Z [DEBUG] MCP server "supabase": Parsed URL: host=mcp.supabase.com, port=default, protocol=https:
+2026-02-10T13:48:01.814Z [DEBUG] MCP server "supabase": No token data found
+2026-02-10T13:48:01.828Z [ERROR] MCP server "neo4j-mcp" Server stderr: time=2026-02-10T10:48:01.797-03:00 level=INFO msg="Telemetry is enabled to help us improve the product by collecting anonymous usage data such as: tools being used, the operating system, and CPU architecture."
+time=2026-02-10T10:48:01.807-03:00 level=INFO msg="To disable telemetry, set the NEO4J_TELEMETRY environment variable to \"false\"."
+time=2026-02-10T10:48:01.808-03:00 level=ERROR msg="Failed to verify database connectivity" error="ConnectivityError: Unable to retrieve routing table from 127.0.0.1:7687: dial tcp 127.0.0.1:7687: connectex: No connection could be made because the target machine actively refused it."
+time=2026-02-10T10:48:01.808-03:00 level=ERROR msg="Server error" error="impossible to verify connectivity with the Neo4j instance: ConnectivityError: Unable to retrieve routing table from 127.0.0.1:7687: dial tcp 127.0.0.1:7687: connectex: No connection could be made because the target machine actively refused it."
+2026-02-10T13:48:01.829Z [DEBUG] MCP server "neo4j-mcp": Connection failed after 138ms: MCP error -32000: Connection closed
+2026-02-10T13:48:01.829Z [ERROR] MCP server "neo4j-mcp" Connection failed: MCP error -32000: Connection closed
+2026-02-10T13:48:01.918Z [DEBUG] Failed to fetch org penguin mode status, defaulting to disabled
+2026-02-10T13:48:02.951Z [DEBUG] MCP server "supabase": No token data found
+2026-02-10T13:48:02.984Z [DEBUG] MCP server "n8n": Successfully connected to stdio server in 1196ms
+2026-02-10T13:48:02.984Z [DEBUG] MCP server "n8n": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"n8n-documentation-mcp","version":"2.11.0"}}
+2026-02-10T13:48:03.142Z [DEBUG] MCP server "supabase": No token data found
+2026-02-10T13:48:03.142Z [DEBUG] MCP server "supabase": Successfully connected to http server in 1333ms
+2026-02-10T13:48:03.142Z [DEBUG] MCP server "supabase": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"supabase","title":"Supabase","version":"0.6.3"}}
+2026-02-10T13:48:03.142Z [DEBUG] MCP server "supabase": No token data found
+2026-02-10T13:48:07.189Z [ERROR] MCP server "chrome-devtools" Server stderr: chrome-devtools-mcp exposes content of the browser instance to the MCP clients allowing them to inspect,
+debug, and modify any data in the browser or DevTools.
+Avoid sharing sensitive or personal information that you do not want to share with MCP clients.
+Performance tools may send trace URLs to the Google CrUX API to fetch real-user experience data. To disable, run with --no-performance-crux.
+
+Google collects usage statistics to improve Chrome DevTools MCP. To opt-out, run with --no-usage-statistics.
+For more details, visit: https://github.com/ChromeDevTools/chrome-devtools-mcp#usage-statistics
+2026-02-10T13:48:07.189Z [DEBUG] MCP server "chrome-devtools": Successfully connected to undefined server in 5528ms
+2026-02-10T13:48:07.190Z [DEBUG] MCP server "chrome-devtools": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"chrome_devtools","title":"Chrome DevTools MCP server","version":"0.17.0"}}
+2026-02-10T13:48:07.199Z [DEBUG] MCP server "playwright": Starting connection with timeout of 30000ms

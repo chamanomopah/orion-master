@@ -1,0 +1,74 @@
+     1→#!/usr/bin/env bun
+     2→/**
+     3→ * SetQuestionTab.hook.ts - Tab Color for User Input (PreToolUse)
+     4→ *
+     5→ * PURPOSE:
+     6→ * Changes the terminal tab color to dark teal when Claude invokes the
+     7→ * AskUserQuestion tool. This visual indicator shows that the system is
+     8→ * waiting for user input, distinct from the working (orange) or inference
+     9→ * (purple) states set by UpdateTabTitle.
+    10→ *
+    11→ * TRIGGER: PreToolUse (matcher: AskUserQuestion)
+    12→ *
+    13→ * INPUT:
+    14→ * - None (triggered by tool match, no stdin processing)
+    15→ *
+    16→ * OUTPUT:
+    17→ * - stdout: None
+    18→ * - stderr: Status message
+    19→ * - exit(0): Always (non-blocking)
+    20→ *
+    21→ * SIDE EFFECTS:
+    22→ * - Kitty remote control: Sets tab color to teal (#085050)
+    23→ *
+    24→ * INTER-HOOK RELATIONSHIPS:
+    25→ * - DEPENDS ON: None
+    26→ * - COORDINATES WITH: UpdateTabTitle (shares tab color management)
+    27→ * - MUST RUN BEFORE: None
+    28→ * - MUST RUN AFTER: UpdateTabTitle (overrides working color when asking)
+    29→ *
+    30→ * TAB COLOR SCHEME (inactive tab only - active tab stays dark blue):
+    31→ * - Dark teal (#085050): Waiting for user input (this hook)
+    32→ * - Dark orange (#804000): Actively working (UpdateTabTitle)
+    33→ * - Dark purple (#1E0A3C): AI inference/thinking (UpdateTabTitle)
+    34→ * - Dark blue (#002B80): Active tab always uses this
+    35→ *
+    36→ * ERROR HANDLING:
+    37→ * - Kitty unavailable: Silent failure (other terminals not supported)
+    38→ *
+    39→ * PERFORMANCE:
+    40→ * - Non-blocking: Yes
+    41→ * - Typical execution: <50ms
+    42→ */
+    43→
+    44→const TAB_AWAITING_BG = '#085050';  // Dark teal - waiting for user input
+    45→const ACTIVE_TAB_BG = '#002B80';    // Dark blue - active tab always
+    46→const TAB_TEXT = '#FFFFFF';
+    47→const INACTIVE_TEXT = '#A0A0A0';
+    48→
+    49→// Simple question indicator - teal background does the work
+    50→const QUESTION_TITLE = '❓ Question';
+    51→
+    52→async function main() {
+    53→  try {
+    54→    // Set tab color: active stays dark blue, inactive shows teal
+    55→    await Bun.$`kitten @ set-tab-color --self active_bg=${ACTIVE_TAB_BG} active_fg=${TAB_TEXT} inactive_bg=${TAB_AWAITING_BG} inactive_fg=${INACTIVE_TEXT}`;
+    56→
+    57→    // Set simple question title - teal background provides visual distinction
+    58→    await Bun.$`kitty @ set-tab-title ${QUESTION_TITLE}`;
+    59→
+    60→    console.error('[SetQuestionTab] Tab set to teal with question indicator');
+    61→  } catch (error) {
+    62→    // Silently fail if kitty remote control is not available
+    63→    console.error('[SetQuestionTab] Kitty remote control unavailable');
+    64→  }
+    65→
+    66→  process.exit(0);
+    67→}
+    68→
+    69→main();
+    70→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

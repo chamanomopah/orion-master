@@ -1,0 +1,11 @@
+{
+  "id": "3",
+  "subject": "HookExecutionDebugger",
+  "description": "You are the Hook Execution Debugger. Your mission:\n\nDebug the actual execution failures of SessionSt",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": [],
+  "metadata": {
+    "_internal": true
+  }
+}
