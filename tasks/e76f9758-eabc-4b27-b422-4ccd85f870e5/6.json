@@ -1,9 +1,0 @@
-{
-  "id": "6",
-  "subject": "Voice-to-command pipeline working",
-  "description": "End-to-end flow: voice input → LiveKit STT → command parsing → Claude Code execution → response → TTS output.",
-  "activeForm": "Implementing voice-to-command pipeline",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}

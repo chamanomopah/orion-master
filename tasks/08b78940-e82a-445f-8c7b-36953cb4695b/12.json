@@ -1,0 +1,9 @@
+{
+  "id": "12",
+  "subject": "Discrepâncias identificadas",
+  "description": "Comparar descobertas com documento atual e identificar discrepâncias",
+  "activeForm": "Comparando descobertas com documento",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

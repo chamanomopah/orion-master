@@ -1,9 +1,0 @@
-{
-  "id": "5",
-  "subject": "Real-time dashboard built",
-  "description": "Web dashboard displaying active sessions, command history, and real-time output from Claude Code executions. Use WebSocket for live updates.",
-  "activeForm": "Building real-time dashboard",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}

@@ -1,9 +1,0 @@
-{
-  "id": "4",
-  "subject": "Multi-session backend implemented",
-  "description": "Backend system handling multiple concurrent Claude Code sessions with proper isolation, state management, and session routing.",
-  "activeForm": "Implementing multi-session backend",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}

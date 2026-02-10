@@ -1,0 +1,10 @@
+{
+  "taskId": "001_tasknotification-taskidbd4e0c6taskid-ou",
+  "status": "PENDING",
+  "effortLevel": "STANDARD",
+  "criteria": [],
+  "antiCriteria": [],
+  "satisfaction": null,
+  "createdAt": "2026-02-10T13:51:04-03:00",
+  "updatedAt": "2026-02-10T13:53:39-03:00"
+}

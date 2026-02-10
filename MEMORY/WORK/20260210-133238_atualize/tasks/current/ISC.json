@@ -1,0 +1,10 @@
+{
+  "taskId": "001_atualize",
+  "status": "PENDING",
+  "effortLevel": "STANDARD",
+  "criteria": [],
+  "antiCriteria": [],
+  "satisfaction": null,
+  "createdAt": "2026-02-10T13:32:38-03:00",
+  "updatedAt": "2026-02-10T13:39:42-03:00"
+}

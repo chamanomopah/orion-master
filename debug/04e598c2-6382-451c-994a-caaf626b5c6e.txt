@@ -966,3 +966,15 @@ For more details, visit: https://github.com/ChromeDevTools/chrome-devtools-mcp#u
     at Kg1 (file:///C:/Users/JOSE/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:3647:3139)
     at Object.current (file:///C:/Users/JOSE/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:6281:16280)
     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-02-10T16:12:49.192Z [DEBUG] AutoUpdater: Detected installation type: npm-global
+2026-02-10T16:12:49.192Z [DEBUG] AutoUpdater: Using global update method
+2026-02-10T16:12:49.193Z [ERROR] IZ6: IZ6: Another process is currently installing an update
+    at Kg1 (file:///C:/Users/JOSE/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:3647:3139)
+    at Object.current (file:///C:/Users/JOSE/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:6281:16280)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+2026-02-10T16:42:49.275Z [DEBUG] AutoUpdater: Detected installation type: npm-global
+2026-02-10T16:42:49.275Z [DEBUG] AutoUpdater: Using global update method
+2026-02-10T16:42:49.275Z [ERROR] IZ6: IZ6: Another process is currently installing an update
+    at Kg1 (file:///C:/Users/JOSE/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:3647:3139)
+    at Object.current (file:///C:/Users/JOSE/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js:6281:16280)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)

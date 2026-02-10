@@ -1,9 +1,0 @@
-{
-  "id": "8",
-  "subject": "MVP deployed locally and tested manually",
-  "description": "Full manual testing session: start system, create 3 sessions, execute diverse commands, verify dashboard updates, test voice commands, stop sessions cleanly.",
-  "activeForm": "Performing manual testing session",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}

@@ -1,0 +1,9 @@
+{
+  "id": "11",
+  "subject": "Resultados agregados",
+  "description": "Aggregar resultados dos agentes de investigação",
+  "activeForm": "Agregando resultados investigação",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

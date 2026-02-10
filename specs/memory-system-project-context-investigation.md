@@ -1,6 +1,8 @@
 # Memory System Project Context Investigation
 
-**Status:** 🔄 In Progress
+**Status:** ✅ Investigation Complete - Verification Report Added
+**Last Updated:** 2026-02-10 09:00 PST
+**Verification Status:** Reviewed by 6-agent team - Corrections applied
 **Created:** 2026-02-10
 **Priority:** High
 **Related Issue:** Memory hooks creating files in centralized location instead of project-specific
@@ -556,3 +558,305 @@ bun ProjectMemories.ts --list
 **Last Updated:** 2026-02-10 08:10 PST
 **Investigation Status:** ✅ COMPLETE - Ready for user decision
 **Updated By:** Orion (PAI v2.5)
+
+---
+
+## 🔍 Agent Verification Report (2026-02-10)
+
+**Overview:** This document was reviewed by a 6-agent verification team to identify gaps, inaccuracies, and missing information before implementation.
+
+**Verdict:** **⚠️ SPEC NEEDS SUBSTANTIAL REVISIONS** - Multiple critical gaps identified
+
+### Summary of Findings
+
+| Agent | Section | Status | Issues Found | Severity |
+|-------|---------|--------|--------------|----------|
+| af65eaa | Hooks Analysis | ⚠️ Partial | 7+ hooks missing, 3 directories omitted | Medium |
+| a2716ba | Architectural Perspectives | ⚠️ Incomplete | 6 options missing, Symlink analysis flawed | High |
+| a6d6356 | Project Detection | ✅ Accurate | All findings confirmed | None |
+| aedf816 | Implementation | 🚨 Critical | 11+ hooks missing, code bugs, no error handling | Critical |
+| a02a7a9 | Tradeoff Matrix | ⚠️ Biased | 7 dimensions missing, inflated ratings | High |
+| a9f8cc6 | Migration Paths | ⚠️ Unrealistic | Path 1 timeline impossible, gaps in all paths | High |
+
+---
+
+### 1. Hooks Analysis (Agent: af65eaa)
+
+**Status:** PARTIALLY ACCURATE but INCOMPLETE
+
+**✅ What's Correct:**
+- Line numbers for AutoWorkCreation.hook.ts (55) ✓
+- Line numbers for ResponseCapture.ts (26, 300) ✓
+- Path patterns accurately described ✓
+
+**❌ What's Missing (7+ additional hooks):**
+
+| Hook/File | Lines | Hardcoded Path |
+|-----------|-------|----------------|
+| WorkCompletionLearning.hook.ts | 59-64 | `MEMORY/LEARNING/{category}/{yearMonth}` |
+| AgentOutputCapture.hook.ts | 454, 496 | `MEMORY/RESEARCH/{yearMonth}` |
+| ExplicitRatingCapture.hook.ts | 137-138, 194 | `MEMORY/LEARNING/SIGNALS`, `MEMORY/LEARNING/{category}` |
+| ImplicitSentimentCapture.hook.ts | 285-286, 313 | `MEMORY/LEARNING/SIGNALS`, `MEMORY/LEARNING/{category}` |
+| SessionSummary.hook.ts | 57-60 | `MEMORY/STATE`, `MEMORY/WORK` |
+| ISCValidator.ts | 51-53 | `MEMORY/WORK`, `MEMORY/STATE` |
+| FailureCapture.ts | 292 | `MEMORY/LEARNING/FAILURES/{yearMonth}` |
+
+**❌ Missing Directories:**
+- `MEMORY/STATE/` - Not mentioned in spec
+- `MEMORY/LEARNING/SIGNALS/` - Not mentioned
+- `MEMORY/LEARNING/FAILURES/` - Not mentioned
+
+**Correction Needed:** Expand hooks table to include all 9+ hooks that create memory files.
+
+---
+
+### 2. Architectural Perspectives (Agent: a2716ba)
+
+**Status:** INCOMPLETE - 6 major architectural options not considered
+
+**✅ Sound Perspectives (4/5):**
+- Purist Centralist - Well-reasoned
+- Project-Native - Accurate user expectations
+- Hybrid Context-Aware - Logically sound
+- Virtual View - Valid abstraction pattern
+
+**❌ Flawed Perspective:**
+- **Symlink Federation** has incomplete tradeoff analysis:
+  - Windows requires ADMIN PRIVILEGES (not just "Poor")
+  - Backup nightmares with symlinks
+  - Broken symlinks when central storage deleted
+  - Internal inconsistency in matrix ratings
+
+**🚨 6 Missing Architectural Options:**
+
+1. **Environment-Based Routing (DEV/PROD)** - Should memories differ between environments?
+2. **Temporary/Cache Memory** - Ephemeral vs persistent storage
+3. **Remote/Cloud Storage** - S3/GCS for collaborator access
+4. **Database-Backed** - SQLite/PostgreSQL with complex queries
+5. **Time-Based Expiration** - Hot/cold storage tiering
+6. **Multi-Tenant/Collaborative** - `.pai-team/` shared via git
+
+**Overall Assessment:**
+- Logical Soundness: 80%
+- Tradeoff Completeness: 65%
+- Architectural Coverage: 60%
+
+---
+
+### 3. Project Detection Findings (Agent: a6d6356)
+
+**Status:** ✅ ALL CONFIRMED - No corrections needed
+
+**Verification Results:**
+- CONFIRMED: 5 major findings
+- REFUTED: 0
+- INCOMPLETE: 3 minor clarifications (subagent detection, findActiveWorkDir scope)
+
+**Assessment:** Findings are ACCURATE and THOROUGH. Proceed with confidence.
+
+---
+
+### 4. Implementation Recommendations (Agent: aedf816)
+
+**Status:** 🚨 CRITICAL GAPS - Code examples have bugs
+
+**❌ 11+ Additional Hooks to Modify:**
+
+The spec only mentions 3 hooks, but these ALSO need modification:
+- RelationshipMemory.hook.ts (line 236)
+- WorkCompletionLearning.hook.ts (lines 60-64)
+- LoadContext.hook.ts (lines 54, 287)
+- SoulEvolution.hook.ts (lines 84, 122, 217, 235)
+- ImplicitSentimentCapture.hook.ts (lines 286, 313)
+- ExplicitRatingCapture.hook.ts (lines 138, 194)
+- SessionSummary.hook.ts (lines 57-60)
+- ISCValidator.ts (lines 52-53)
+- change-detection.ts (line 56)
+- UpdateCounts.ts (line 135)
+
+**❌ Code Example Bugs:**
+
+1. **Missing imports** in detectProject() example:
+   ```typescript
+   // Missing:
+   import { homedir } from 'os';
+   import { join, basename, dirname } from 'path';
+   import { existsSync } from 'fs';
+   ```
+
+2. **Infinite loop risk** in marker detection:
+   ```typescript
+   while (current !== homedir()) {  // Could infinite loop if homedir() not reachable
+     if (existsSync(join(current, '.pai-root'))) {
+       return {...};
+     }
+     current = dirname(current);
+   }
+   ```
+
+3. **No maximum iterations** guard in directory traversal
+
+**❌ Missing Components:**
+
+1. **Error handling strategy** - What if detection fails? What if write fails?
+2. **Utility abstraction** - Will lead to code duplication across 14+ files
+3. **Migration implementation** - Only discussed, not specified
+4. **Type safety** - No TypeScript types for project index, configuration
+
+**Correction Needed:** Create `hooks/lib/project-context.ts` utility module with all helper functions, error handling, and proper types.
+
+---
+
+### 5. Tradeoff Matrix (Agent: a02a7a9)
+
+**Status:** ⚠️ POSITIVITY BIAS - Ratings inflated, dimensions missing
+
+**❌ Overstated Ratings (should be lower):**
+
+| Current | Should Be | Why |
+|---------|-----------|-----|
+| Hybrid Cross-Project: Good | Medium/Poor | Semantic fragmentation |
+| Hybrid Mental Model: Good | Poor | Complex cognitive load |
+| Virtual Mental Model: Excellent | Medium | Indirection confusion |
+| Virtual Collaborator: Good | Poor | Collaborators see nothing |
+| Symlink Backup: Good | Medium | Backup tool issues |
+| Symlink Cross-Project: Excellent | Good | No inherent improvement |
+
+**🚨 7 Missing Critical Dimensions:**
+
+1. **Data Portability** - Moving between systems
+2. **Performance** - I/O overhead, index lookups
+3. **Privacy/Isolation** - Project separation
+4. **Cleanup Safety** - Orphaned memories on delete
+5. **Multi-Machine Sync** - Cross-device workflows
+6. **Memory Fragmentation** - Related memories scattered
+7. **Tooling Integration** - IDE/grep compatibility
+
+**Bias Detected:** 8 "Excellent" ratings (many unjustified). Recommended solution (Hybrid/Virtual) given favorable treatment.
+
+**Impact:** Missing dimensions would significantly alter the comparison if included.
+
+---
+
+### 6. Migration Paths (Agent: a9f8cc6)
+
+**Status:** ⚠️ Unrealistic estimates - Path 1 dangerous, gaps in all paths
+
+**❌ Path 1 (Big Bang) - HIGHLY UNREALISTIC:**
+
+| Task | Estimated | Realistic | Why |
+|------|-----------|-----------|-----|
+| Total | 2-3 days | **10-15 days minimum** | Catastrophically underestimated |
+
+**Why it's impossible:**
+- "Parse META.yaml for project context" - META.yaml has NO project path field
+- 124+ memory references across 23 files
+- 79 existing memory files with no project context
+- Manual classification required
+
+**Risk:** PERMANENT DATA LOSS if rollback fails
+
+**⚠️ Path 2 (Phased Rollout) - VIABLE with Gaps:**
+
+**Missing details:**
+- How to handle LEARNING files during dual-write (duplication?)
+- Rollback plan for each phase
+- Cross-project session continuity (what if user switches projects mid-session?)
+- LEARNING classification rules (who decides SYSTEM vs project-specific?)
+- Git integration (should .pai-memory/ be committed or gitignored?)
+
+**⚠️ Path 3 (Virtual First) - SOUND but Incomplete:**
+
+**Missing details:**
+- How to populate index retroactively (79 existing files)
+- Index maintenance (what happens when work deleted/renamed?)
+- Migration of existing memory files
+
+**🚨 4 Missing Migration Approaches:**
+
+1. **Copy-on-Write** - Leave existing, gradual background migration
+2. **Symbolic Link Transition** - Symlinks first, convert to real dirs later
+3. **User-Assisted Classification** - Present 14 work dirs to user for manual sorting
+4. **Feature Flag Per Memory Type** - Separate flags for WORK/LEARNING/RESEARCH
+
+**Critical Pre-work Not Mentioned:**
+- Audit existing memory for project associations (MANUAL)
+- Define "what is a project" criteria
+- Create classification rules for each memory type
+- Build and test rollback procedures
+
+---
+
+## 📋 Required Corrections Before Implementation
+
+### Priority 1: CRITICAL (Must Fix)
+
+1. **Complete Hook Inventory**
+   - Add 11+ missing hooks to "Hooks to Modify" section
+   - Include all memory directories (STATE, SIGNALS, FAILURES)
+   - Update scope from 3 hooks to 14+ hooks
+
+2. **Fix Implementation Section**
+   - Add missing imports to code examples
+   - Add infinite loop guards
+   - Create error handling strategy
+   - Design utility module (`hooks/lib/project-context.ts`)
+
+3. **Revise Migration Path 1**
+   - Remove or label as "NOT RECOMMENDED"
+   - Add realistic timeline (10-15 days minimum)
+   - Add warning about data loss risk
+
+### Priority 2: HIGH (Should Fix)
+
+1. **Add Missing Architectural Options**
+   - Document 6 missing approaches (Cloud, Database, Multi-tenant, etc.)
+   - Re-evaluate Symlink Federation with complete tradeoffs
+
+2. **Expand Tradeoff Matrix**
+   - Add 7 missing dimensions
+   - Correct inflated ratings
+   - Remove positivity bias
+
+3. **Complete Migration Path 2**
+   - Add rollback plans for each phase
+   - Address session continuity
+   - Define LEARNING classification rules
+   - Specify Git integration strategy
+
+### Priority 3: MEDIUM (Nice to Have)
+
+1. **Add Alternative Migration Approaches**
+   - Copy-on-Write migration
+   - User-assisted classification
+   - Feature flags per memory type
+
+2. **Clarify Minor Points**
+   - Subagent detection purpose
+   - findActiveWorkDir() scope
+   - .git reference purpose
+
+---
+
+## 🎯 Revised Recommendation
+
+**DO NOT IMPLEMENT** based on current spec. Critical gaps would cause:
+
+1. **Incomplete implementation** - 11+ hooks would be missed
+2. **Code bugs** - Infinite loops, missing imports
+3. **Migration failure** - Path 1 estimates impossible
+4. **Architectural regret** - Missing options might be better fit
+
+**Next Steps:**
+1. Apply Priority 1 corrections
+2. Re-review with stakeholders
+3. Consider Cloud/Database options for Alfredo's multi-machine workflow
+4. Create proof-of-concept for Path 3 (Virtual) before committing
+
+---
+
+**Verification Team:** 6 Intern agents (parallel execution)
+**Total Agent Time:** ~14 minutes
+**Total Tokens:** ~195,000
+**Verification Date:** 2026-02-10 08:00-09:00 PST
+

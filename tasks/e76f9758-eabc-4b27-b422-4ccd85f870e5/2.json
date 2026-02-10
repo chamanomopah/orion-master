@@ -1,9 +1,0 @@
-{
-  "id": "2",
-  "subject": "LiveKit agent integration architected",
-  "description": "Design architecture for LiveKit voice agent to control Claude Code CLI. Include LangChain integration if applicable, session management, and command flow.",
-  "activeForm": "Architecting LiveKit-Claude Code integration",
-  "status": "completed",
-  "blocks": [],
-  "blockedBy": []
-}
