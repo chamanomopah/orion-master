@@ -1,9 +1,0 @@
-{
-  "id": "5",
-  "subject": "ClaudeCodeController implementado com subprocess",
-  "description": "Classe ClaudeCodeController implementada com métodos start_session, send_prompt, get_status, stop_session usando subprocess Popen para controlar Claude Code CLI. Testes unitários passam.",
-  "activeForm": "Implementando ClaudeCodeController",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}

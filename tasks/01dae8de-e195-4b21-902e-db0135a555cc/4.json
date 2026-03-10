@@ -1,9 +1,0 @@
-{
-  "id": "4",
-  "subject": "Projeto LiveKit Agent criado e configurado",
-  "description": "Estrutura de projeto Python criada com `uv init`, dependências instaladas (livekit, livekit-agents, plugins), arquivo .env.local configurado com credenciais existentes, e código base funcional.",
-  "activeForm": "Criando e configurando projeto LiveKit Agent",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}

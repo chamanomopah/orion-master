@@ -1,9 +1,0 @@
-{
-  "id": "3",
-  "subject": "Documentação Vibe Companion coletada",
-  "description": "Documentação oficial do Vibe Companion (the-vibe-companion), incluindo instalação via Bun, configuração WebSocket, dashboard monitoring, e integração com Claude Code CLI.",
-  "activeForm": "Coletando documentação Vibe Companion",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}

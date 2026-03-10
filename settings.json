@@ -1,49 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "paiVersion": "2.5",
   "env": {
     "PAI_DIR": "C:\\Users\\JOSE\\.claude",
     "PROJECTS_DIR": "C:\\Users\\JOSE\\Projects",
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "80000",
-    "BASH_DEFAULT_TIMEOUT_MS": "600000"
-  },
-  "contextFiles": [
-    "skills/PAI/SKILL.md",
-    "skills/PAI/SYSTEM/AISTEERINGRULES.md",
-    "skills/PAI/USER/AISTEERINGRULES.md",
-    "skills/PAI/USER/DAIDENTITY.md"
-  ],
-  "daidentity": {
-    "name": "Orion",
-    "fullName": "Orion - Personal AI",
-    "displayName": "Orion",
-    "color": "#3B82F6",
-    "voiceId": "pNInz6obpgDQGcFmaJgB",
-    "voice": {
-      "stability": 0.35,
-      "similarity_boost": 0.8,
-      "style": 0.9,
-      "speed": 1.1,
-      "use_speaker_boost": true,
-      "volume": 0.8
-    },
-    "startupCatchphrase": "Orion here, ready to go."
-  },
-  "principal": {
-    "name": "Alfredo",
-    "timezone": "America/Sao_Paulo"
-  },
-  "pai": {
-    "repoUrl": "github.com/danielmiessler/PAI",
-    "version": "2.5"
-  },
-  "techStack": {
-    "browser": "arc",
-    "terminal": "windows-terminal",
-    "packageManager": "bun",
-    "pythonPackageManager": "pip",
-    "language": "TypeScript",
-    "devServerPort": 5173
+    "BASH_DEFAULT_TIMEOUT_MS": "600000",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
     "allow": [
@@ -99,9 +61,57 @@
     ],
     "defaultMode": "default"
   },
+  "model": "sonnet[1m]",
   "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [],
-  "hooks": {
+  "statusLine": {
+    "type": "command",
+    "command": "C:\\Users\\JOSE\\.claude\\statusline-command.ps1"
+  },
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "preferences": {
+    "tmuxSplitPanes": true
+  },
+  "paiVersion": "2.5",
+  "contextFiles": [
+    "skills/PAI/SKILL.md",
+    "skills/PAI/SYSTEM/AISTEERINGRULES.md",
+    "skills/PAI/USER/AISTEERINGRULES.md",
+    "skills/PAI/USER/DAIDENTITY.md"
+  ],
+  "daidentity": {
+    "name": "Orion",
+    "fullName": "Orion - Personal AI",
+    "displayName": "Orion",
+    "color": "#3B82F6",
+    "voiceId": "pNInz6obpgDQGcFmaJgB",
+    "voice": {
+      "stability": 0.35,
+      "similarity_boost": 0.8,
+      "style": 0.9,
+      "speed": 1.1,
+      "use_speaker_boost": true,
+      "volume": 0.8
+    },
+    "startupCatchphrase": "Orion here, ready to go."
+  },
+  "principal": {
+    "name": "Alfredo",
+    "timezone": "America/Sao_Paulo"
+  },
+  "pai": {
+    "repoUrl": "github.com/danielmiessler/PAI",
+    "version": "2.5"
+  },
+  "techStack": {
+    "browser": "arc",
+    "terminal": "windows-terminal",
+    "packageManager": "bun",
+    "pythonPackageManager": "pip",
+    "language": "TypeScript",
+    "devServerPort": 5173
+  },
+  "hooks_STOP": {
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -239,11 +249,6 @@
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "C:\\Users\\JOSE\\.claude\\statusline-command.ps1"
-  },
-  "alwaysThinkingEnabled": true,
   "platform": "win32",
   "installDate": "2026-02-10T12:21:50.885Z",
   "_docs": {
@@ -264,6 +269,8 @@
     "hooks": 18,
     "signals": 10,
     "files": 44,
-    "updatedAt": "2026-02-10T17:24:47.665Z"
-  }
+    "updatedAt": "2026-02-11T13:32:45.099Z"
+  },
+  "ANTHROPIC_DEFAULT_OPUS_MODEL": "GLM-5",
+  "effortLevel": "high"
 }

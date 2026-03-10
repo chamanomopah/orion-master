@@ -1,9 +1,0 @@
-{
-  "id": "10",
-  "subject": "Estrutura PAI investigada localmente",
-  "description": "Spawnaar 5 agentes locais para investigar estrutura PAI atual (Task tool)",
-  "activeForm": "Investigando estrutura PAI local",
-  "status": "in_progress",
-  "blocks": [],
-  "blockedBy": []
-}

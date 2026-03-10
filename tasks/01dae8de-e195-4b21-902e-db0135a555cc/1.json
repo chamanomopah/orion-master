@@ -1,9 +1,0 @@
-{
-  "id": "1",
-  "subject": "Documentação LiveKit Agents Python pesquisada",
-  "description": "3 agentes Gemini devem localizar documentação oficial atualizada do LiveKit Agents Python SDK, incluindo installation, setup, function_tools, e exemplos de agentes. URLs oficiais e snippets de código válidos devem ser coletados.",
-  "activeForm": "Pesquisando documentação LiveKit Agents Python",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}

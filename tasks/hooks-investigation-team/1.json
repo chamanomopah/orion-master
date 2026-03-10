@@ -1,9 +1,0 @@
-{
-  "id": "1",
-  "subject": "Investigate SessionStart hooks errors",
-  "description": "Root cause analysis of SessionStart hook errors showing \"/model to try Opus 4.6\" and repeated startup failures. Investigate hook chain execution, bun runtime, environment variables, and Windows path handling.",
-  "activeForm": "Investigating SessionStart hooks errors",
-  "status": "completed",
-  "blocks": [],
-  "blockedBy": []
-}

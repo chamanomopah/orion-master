@@ -1,9 +1,0 @@
-{
-  "id": "3",
-  "subject": "Remote origin configured correctly",
-  "description": "Git remote 'origin' points to the newly created GitHub repository",
-  "activeForm": "Configuring git remote",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}

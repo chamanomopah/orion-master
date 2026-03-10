@@ -1,9 +1,0 @@
-{
-  "id": "6",
-  "subject": "LiveKit Agent com tools funcionais criado",
-  "description": "Agent LiveKit configurado com 4 function_tools (start_claude_session, send_claude_prompt, check_claude_status, stop_claude_session). Usa Gemini LLM (não OpenAI), Deepgram STT, e Cartesia TTS conforme .env.local.",
-  "activeForm": "Criando LiveKit Agent com tools",
-  "status": "pending",
-  "blocks": [],
-  "blockedBy": []
-}
