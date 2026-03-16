@@ -1,0 +1,54 @@
+%% Ciclo da Água - Fluxograma
+%% Diagrama mostra os principais processos do ciclo hidrológico
+%% Inclui: evaporação, condensação, precipitação, infiltração e escoamento
+
+flowchart TD
+    %% Direction: Top-Down para melhor visualização do ciclo
+
+    %% Corpos d'água principais
+    OCEAN[🌊 Oceanos e Mares]
+    RIOS[🏞️ Rios e Lagos]
+
+    %% Processos de evaporação
+    OCEAN -->|Evaporação| EVAP[💨 Evaporação]
+    RIOS -->|Evaporação| EVAP
+    VEGET[🌿 Vegetação] -->|Transpiração| EVAP
+
+    %% Atmosfera e condensação
+    EVAP --> ATM[🌤️ Atmosfera - Vapor D'água]
+    ATM -->|Resfriamento| COND[☁️ Condensação]
+
+    %% Formação de nuvens
+    COND --> NUVENS[⛈️ Nuvens]
+
+    %% Precipitação
+    NUVENS -->|Precipitação| PREC[🌧️ Chuva/Neve/Granizo]
+
+    %% Destinos da precipitação
+    PREC -->|Cai em| SOLO[🌍 Solo e Superfície]
+
+    %% Processos no solo
+    SOLO -->|Infiltração| INFIL[💧 Infiltração]
+    INFIL --> LENCOL[🔶 Lençol Freático]
+    LENCOL -->|Resurgência| RIOS
+
+    %% Escoamento superficial
+    SOLO -->|Escoamento Superficial| ESCO[🌊 Escoamento]
+    ESCO --> RIOS
+
+    %% Retorno ao oceano
+    RIOS -->|Fluxo| OCEAN
+
+    %% Estilos para melhor visualização
+    classDef oceanos fill:#0077be,stroke:#004488,stroke-width:3px,color:#fff
+    classDef atmosfera fill:#87ceeb,stroke:#5a9fd4,stroke-width:2px,color:#000
+    classDef processos fill:#ffd700,stroke:#daa520,stroke-width:2px,color:#000
+    classDef terra fill:#8b4513,stroke:#654321,stroke-width:2px,color:#fff
+    classDef agua fill:#4682b4,stroke:#306080,stroke-width:2px,color:#fff
+
+    %% Aplicar estilos
+    class OCEAN oceanos
+    class ATM,COND,NUVENS atmosfera
+    class EVAP,PREC,INFIL,ESCO processos
+    class SOLO,LENCOL,VEGET terra
+    class RIOS agua

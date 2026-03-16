@@ -1,0 +1,125 @@
+%% Ciclo da Água - Diagrama de Fluxo Detalhado
+%% Mostra os principais processos hidrológicos e suas interconexões
+%% Autor: Claude Code
+%% Data: 2026-03-14
+
+flowchart TD
+    %% Definições de estilos
+    classDef oceanio fill:#0066cc,stroke:#004080,stroke-width:3px,color:#fff
+    classDef atmosfera fill:#87ceeb,stroke:#4682b4,stroke-width:2px,color:#000
+    classDef terra fill="#8B4513",stroke="#5D2906",stroke-width:2px,color="#fff"
+    classDef vegetacao fill="#228B22",stroke="#006400",stroke-width:2px,color="#fff"
+    classDef processo fill="#FFD700",stroke="#DAA520",stroke-width:2px,color="#000"
+    classDef acumulacao fill="#4169E1",stroke="#0000CD",stroke-width:3px,color="#fff"
+
+    %% Oceanos e corpos d'água
+    Oceano[("🌊 Oceanos e Mares")]:::oceanio
+    Lagos[("🏞️ Lagos e Rios")]:::oceanio
+    AguasSubterraneas[("💧 Águas Subterrâneas")]:::acumulacao
+
+    %% Processos de Evaporação
+    subgraph Evaporacao["☀️ Evaporação"]
+        direction TB
+        EvapOceano[Evaporação dos Oceanos]:::processo
+        EvapLagos[Evaporação de Lagos/Rios]:::processo
+        EvapSolo[Evaporação do Solo]:::processo
+    end
+
+    %% Transpiração Vegetal
+    subgraph Transpiracao["🌿 Transpiração"]
+        direction TB
+        Vegetacao[Florestas e Plantas]:::vegetacao
+        TranspiracaoVegetal[Transpiração Vegetal]:::processo
+    end
+
+    %% Atmosfera - Condensação
+    subgraph Atmosfera["☁️ Atmosfera"]
+        direction TB
+        VaporAgua[Vapor de Água]:::atmosfera
+        Condensacao[Condensação]:::processo
+        Nuvens[Nuvens Formadas]:::atmosfera
+    end
+
+    %% Precipitação
+    subgraph Precipitacao["🌧️ Precipitação"]
+        direction TB
+        Chuva[Chuva]:::processo
+        Neve[Neve]:::processo
+        Granizo[Granizo]:::processo
+    end
+
+    %% Processos na Terra
+    subgraph Solo["🌍 Processos no Solo"]
+        direction TB
+        Infiltracao[Infiltração]:::processo
+        EscoamentoSuperficial[Escoamento Superficial]:::processo
+        Percolacao[Percolação]:::processo
+    end
+
+    %% Fluxos principais - do oceano para atmosfera
+    Oceano -->|Evaporação| EvapOceano
+    Lagos -->|Evaporação| EvapLacos
+
+    %% Fluxos de transpiração
+    Vegetacao -->|Transpiração| TranspiracaoVegetal
+
+    %% Todo vapor vai para atmosfera
+    EvapOceano -->|Vapor d'água| VaporAgua
+    EvapLacos -->|Vapor d'água| VaporAgua
+    EvapSolo -->|Vapor d'água| VaporAgua
+    TranspiracaoVegetal -->|Vapor d'água| VaporAgua
+
+    %% Condensação
+    VaporAgua -->|Resfriamento| Condensacao
+    Condensacao -->|Formação| Nuvens
+
+    %% Precipitação
+    Nuvens -->|Precipitação| Chuva
+    Nuvens -->|Precipitação| Neve
+    Nuvens -->|Precipitação| Granizo
+
+    %% Da precipitação para o solo e águas
+    Chuva -->|Cai sobre| Infiltracao
+    Neve -->|Derretimento| Infiltracao
+    Chuva -->|Cai diretamente| Lagos
+    Chuva -->|Cai diretamente| Oceano
+
+    %% Processos no solo
+    Infiltracao -->|Água penetra| EscoamentoSuperficial
+    Infiltracao -->|Água desce| Percolacao
+
+    %% Escoamento para corpos d'água
+    EscoamentoSuperficial -->|Fluxo superficial| Lagos
+    EscoamentoSuperficial -->|Fluxo superficial| Oceano
+
+    %% Percolação para águas subterrâneas
+    Percolacao -->|Recarga| AguasSubterraneas
+    AguasSubterraneas -->|Fluxo base| Lagos
+    AguasSubterraneas -->|Fluxo base| Oceano
+
+    %% Feedback loops
+    Lagos -.->|Evaporação contínua| EvapLacos
+    Oceano -.->|Evaporação contínua| EvapOceano
+
+    %% Evaporação do solo (depois da infiltração)
+    Infiltracao -.->|Umidade do solo| EvapSolo
+
+    %% Legenda
+    subgraph Legenda["📋 Legenda"]
+        L1[🌊 Oceanos/Águas Surface]:::oceanio
+        L2[☁️ Atmosfera]:::atmosfera
+        L3[🌍 Solo/Terra]:::terra
+        L4[🌿 Vegetação]:::vegetacao
+        L5[⚙️ Processos]:::processo
+        L6[💧 Acumulação]:::acumulacao
+    end
+
+    %% Estilo dos fluxos
+    linkStyle default stroke:#333,stroke-width:2px
+    linkStyle 0,1,2,3,4,5 stroke:#ff6b6b,stroke-width:3px
+    linkStyle 6,7,8 stroke:#4ecdc4,stroke-width:2px
+
+    %% Comentários explicativos
+    %% O ciclo da água é um sistema contínuo e interconectado
+    %% A energia solar impulsa a evaporação
+    %% A gravidade impulsa a precipitação e escoamento
