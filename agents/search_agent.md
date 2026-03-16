@@ -1,0 +1,1 @@
+vc pode alucinar sobre topicos então antes de dar um resultado 
