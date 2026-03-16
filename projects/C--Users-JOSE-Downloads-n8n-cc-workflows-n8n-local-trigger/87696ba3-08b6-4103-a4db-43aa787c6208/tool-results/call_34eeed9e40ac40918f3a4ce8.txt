@@ -1,0 +1,1312 @@
+     1→app.py:247:17: E722 Do not use bare `except`
+     2→    |
+     3→245 |                     if i == default_device:
+     4→246 |                         device_info['default'] = True
+     5→247 |                 except:
+     6→    |                 ^^^^^^ E722
+     7→248 |                     pass
+     8→    |
+     9→
+    10→list_audio_devices.py:48:23: F541 [*] f-string without any placeholders
+    11→   |
+    12→46 |             default_device = sd.default.device[0]
+    13→47 |             if device_id == default_device:
+    14→48 |                 print(f"    ⭐ DISPOSITIVO PADRÃO DO SISTEMA")
+    15→   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+    16→49 |         except:
+    17→50 |             pass
+    18→   |
+    19→   = help: Remove extraneous `f` prefix
+    20→
+    21→list_audio_devices.py:49:9: E722 Do not use bare `except`
+    22→   |
+    23→47 |             if device_id == default_device:
+    24→48 |                 print(f"    ⭐ DISPOSITIVO PADRÃO DO SISTEMA")
+    25→49 |         except:
+    26→   |         ^^^^^^ E722
+    27→50 |             pass
+    28→   |
+    29→
+    30→tests\test_audio_device.py:58:15: F541 [*] f-string without any placeholders
+    31→   |
+    32→57 |         print("✅ Gravação concluída!")
+    33→58 |         print(f"📊 Resultados:")
+    34→   |               ^^^^^^^^^^^^^^^^^ F541
+    35→59 |         print(f"   - Amplitude máxima: {max_amplitude:.4f}")
+    36→60 |         print(f"   - RMS (volume médio): {rms:.4f}")
+    37→   |
+    38→   = help: Remove extraneous `f` prefix
+    39→
+    40→tests\test_audio_gain.py:24:1: E402 Module level import not at top of file
+    41→   |
+    42→22 | sys.path.insert(0, SCRIPT_DIR)
+    43→23 |
+    44→24 | from audio_recorder import AudioRecorder
+    45→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+    46→25 |
+    47→26 | def load_deepgram_config():
+    48→   |
+    49→
+    50→tests\test_audio_gain.py:51:11: F541 [*] f-string without any placeholders
+    51→   |
+    52→50 |     print(f"[CONFIG] Ganho atual: {current_gain:.1f}x")
+    53→51 |     print(f"[INFO] Este teste gravará 3 segundos de áudio com diferentes ganhos")
+    54→   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+    55→52 |     print()
+    56→   |
+    57→   = help: Remove extraneous `f` prefix
+    58→
+    59→tests\test_audio_gain.py:70:15: F541 [*] f-string without any placeholders
+    60→   |
+    61→68 |         )
+    62→69 |
+    63→70 |         print(f"\n[INSTRUÇÃO] Fale claramente por 3 segundos...")
+    64→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+    65→71 |         print("[INFO] Gravação iniciará em 3...")
+    66→72 |         time.sleep(1)
+    67→   |
+    68→   = help: Remove extraneous `f` prefix
+    69→
+    70→tests\test_audio_gain.py:90:15: F541 [*] f-string without any placeholders
+    71→   |
+    72→88 |         # For this test, we'll trust the debug output that was shown
+    73→89 |         print(f"\n[RESULTADO] Duração: {duration:.2f}s")
+    74→90 |         print(f"[INFO] Verifique a amplitude mostrada acima")
+    75→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+    76→91 |
+    77→92 |         # Ask user to verify
+    78→   |
+    79→   = help: Remove extraneous `f` prefix
+    80→
+    81→tests\test_audio_recording.py:35:11: F541 [*] f-string without any placeholders
+    82→   |
+    83→33 |     channels = audio_settings.get('channels', 1)
+    84→34 |
+    85→35 |     print(f"[INFO] Audio settings:")
+    86→   |           ^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+    87→36 |     print(f"  - Sample rate: {sample_rate} Hz")
+    88→37 |     print(f"  - Channels: {channels}")
+    89→   |
+    90→   = help: Remove extraneous `f` prefix
+    91→
+    92→tests\test_audio_recording.py:57:15: F541 [*] f-string without any placeholders
+    93→   |
+    94→55 |         audio_filepath, duration = recorder.stop_recording()
+    95→56 |
+    96→57 |         print(f"[OK] Recording stopped")
+    97→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+    98→58 |         print(f"[DEBUG] Duration: {duration:.2f}s")
+    99→59 |         print(f"[DEBUG] File: {audio_filepath}")
+   100→   |
+   101→   = help: Remove extraneous `f` prefix
+   102→
+   103→tests\test_audio_recording.py:67:15: F541 [*] f-string without any placeholders
+   104→   |
+   105→65 |         result = transcriber.transcribe_file_sync(audio_filepath)
+   106→66 |
+   107→67 |         print(f"[OK] Transcription completed")
+   108→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   109→68 |         print(f"[DEBUG] Text: '{result.get('text', '')}'")
+   110→69 |         print(f"[DEBUG] Confidence: {result.get('confidence', 0.0):.2%}")
+   111→   |
+   112→   = help: Remove extraneous `f` prefix
+   113→
+   114→tests\test_audio_recording.py:83:19: F541 [*] f-string without any placeholders
+   115→   |
+   116→81 |         if transcript_text:
+   117→82 |             print(f"[SUCCESS] Transcription: \"{transcript_text}\"")
+   118→83 |             print(f"[INFO] This would be sent to the webhook!")
+   119→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   120→84 |         else:
+   121→85 |             print("[WARN] No speech detected")
+   122→   |
+   123→   = help: Remove extraneous `f` prefix
+   124→
+   125→tests\test_deepgram_api.py:22:1: E402 Module level import not at top of file
+   126→   |
+   127→20 | sys.path.insert(0, SCRIPT_DIR)
+   128→21 |
+   129→22 | import requests
+   130→   | ^^^^^^^^^^^^^^^ E402
+   131→23 |
+   132→24 | def load_config():
+   133→   |
+   134→
+   135→tests\test_deepgram_api.py:191:9: E722 Do not use bare `except`
+   136→    |
+   137→189 |         try:
+   138→190 |             os.unlink(temp_filepath)
+   139→191 |         except:
+   140→    |         ^^^^^^ E722
+   141→192 |             pass
+   142→193 |         return False
+   143→    |
+   144→
+   145→tests\test_deepgram_direct.py:67:15: F541 [*] f-string without any placeholders
+   146→   |
+   147→65 |             wav_file.writeframes(silence)
+   148→66 |
+   149→67 |         print(f"\n[TEST 3] Transcribing test audio...")
+   150→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   151→68 |         print(f"[DEBUG] Audio file: {temp_filepath}")
+   152→   |
+   153→   = help: Remove extraneous `f` prefix
+   154→
+   155→tests\test_deepgram_direct.py:83:19: F541 [*] f-string without any placeholders
+   156→   |
+   157→81 |             )
+   158→82 |
+   159→83 |             print(f"[OK] Transcription completed")
+   160→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   161→84 |             print(f"[DEBUG] Response type: {type(response)}")
+   162→   |
+   163→   = help: Remove extraneous `f` prefix
+   164→
+   165→tests\test_deepgram_direct.py:88:23: F541 [*] f-string without any placeholders
+   166→   |
+   167→86 |             # Try to access results
+   168→87 |             if hasattr(response, 'results'):
+   169→88 |                 print(f"[DEBUG] Has 'results' attribute")
+   170→   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   171→89 |                 if response.results:
+   172→90 |                     print(f"[DEBUG] Results not empty")
+   173→   |
+   174→   = help: Remove extraneous `f` prefix
+   175→
+   176→tests\test_deepgram_direct.py:90:27: F541 [*] f-string without any placeholders
+   177→   |
+   178→88 |                 print(f"[DEBUG] Has 'results' attribute")
+   179→89 |                 if response.results:
+   180→90 |                     print(f"[DEBUG] Results not empty")
+   181→   |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   182→91 |
+   183→92 |                     if hasattr(response.results, 'channels'):
+   184→   |
+   185→   = help: Remove extraneous `f` prefix
+   186→
+   187→tests\test_deepgram_direct.py:93:31: F541 [*] f-string without any placeholders
+   188→   |
+   189→92 |                     if hasattr(response.results, 'channels'):
+   190→93 |                         print(f"[DEBUG] Has 'channels'")
+   191→   |                               ^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   192→94 |                         channels = response.results.channels
+   193→95 |                         print(f"[DEBUG] Number of channels: {len(channels)}")
+   194→   |
+   195→   = help: Remove extraneous `f` prefix
+   196→
+   197→tests\test_deepgram_direct.py:100:39: F541 [*] f-string without any placeholders
+   198→    |
+   199→ 98 | …                     channel = channels[0]
+   200→ 99 | …                     if hasattr(channel, 'alternatives'):
+   201→100 | …                         print(f"[DEBUG] Has 'alternatives'")
+   202→    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   203→101 | …                         alts = channel.alternatives
+   204→102 | …                         if len(alts) > 0:
+   205→    |
+   206→    = help: Remove extraneous `f` prefix
+   207→
+   208→tests\test_deepgram_direct.py:109:23: F541 [*] f-string without any placeholders
+   209→    |
+   210→107 |                                         print(f"[DEBUG] Confidence: {alt.confidence}")
+   211→108 |             else:
+   212→109 |                 print(f"[WARN] Response has no 'results' attribute")
+   213→    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   214→110 |                 print(f"[DEBUG] Response: {response}")
+   215→    |
+   216→    = help: Remove extraneous `f` prefix
+   217→
+   218→tests\test_e2e.py:65:15: F541 [*] f-string without any placeholders
+   219→   |
+   220→64 |         recorder = AudioRecorder(sample_rate=16000, channels=1)
+   221→65 |         print(f"[OK] AudioRecorder initialized")
+   222→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   223→66 |         print(f"   - Sample rate: {recorder.sample_rate} Hz")
+   224→67 |         print(f"   - Channels: {recorder.channels}")
+   225→   |
+   226→   = help: Remove extraneous `f` prefix
+   227→
+   228→tests\test_e2e.py:104:15: F541 [*] f-string without any placeholders
+   229→    |
+   230→102 |         # Test initialization
+   231→103 |         service = TranscriptionService(api_key=api_key, language="pt")
+   232→104 |         print(f"[OK] TranscriptionService initialized (Deepgram v5)")
+   233→    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   234→105 |         print(f"   - Client: {type(service.client).__name__}")
+   235→106 |         print(f"   - Language: {service.language}")
+   236→    |
+   237→    = help: Remove extraneous `f` prefix
+   238→
+   239→tests\test_e2e.py:109:15: F541 [*] f-string without any placeholders
+   240→    |
+   241→108 |         # Note: We can't test actual transcription without a real audio file
+   242→109 |         print(f"[INFO] Transcription test requires real audio file")
+   243→    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   244→110 |
+   245→111 |         return True
+   246→    |
+   247→    = help: Remove extraneous `f` prefix
+   248→
+   249→tests\test_e2e.py:182:23: F541 [*] f-string without any placeholders
+   250→    |
+   251→180 |             # Validate hotkey
+   252→181 |             if trigger.is_valid_hotkey(hotkey):
+   253→182 |                 print(f"   - Validation: [OK] Valid")
+   254→    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   255→183 |             else:
+   256→184 |                 print(f"   - Validation: [FAIL] Invalid key")
+   257→    |
+   258→    = help: Remove extraneous `f` prefix
+   259→
+   260→tests\test_e2e.py:184:23: F541 [*] f-string without any placeholders
+   261→    |
+   262→182 |                 print(f"   - Validation: [OK] Valid")
+   263→183 |             else:
+   264→184 |                 print(f"   - Validation: [FAIL] Invalid key")
+   265→    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   266→185 |
+   267→186 |         return True
+   268→    |
+   269→    = help: Remove extraneous `f` prefix
+   270→
+   271→tests\test_e2e_audio_transcription.py:24:1: E402 Module level import not at top of file
+   272→   |
+   273→22 | sys.path.insert(0, SCRIPT_DIR)
+   274→23 |
+   275→24 | from audio_recorder import AudioRecorder
+   276→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   277→25 | from transcription_service import TranscriptionService
+   278→   |
+   279→
+   280→tests\test_e2e_audio_transcription.py:25:1: E402 Module level import not at top of file
+   281→   |
+   282→24 | from audio_recorder import AudioRecorder
+   283→25 | from transcription_service import TranscriptionService
+   284→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   285→26 |
+   286→27 | def load_deepgram_config():
+   287→   |
+   288→
+   289→tests\test_e2e_audio_transcription.py:184:23: F541 [*] f-string without any placeholders
+   290→    |
+   291→183 |             if response.status_code == 200:
+   292→184 |                 print(f"✓ Webhook respondendo corretamente")
+   293→    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   294→185 |                 print(f"[INFO] Resposta: {response.text[:200]}")
+   295→186 |                 tests_passed.append("Webhook funcional")
+   296→    |
+   297→    = help: Remove extraneous `f` prefix
+   298→
+   299→tests\test_final_e2e.py:23:1: E402 Module level import not at top of file
+   300→   |
+   301→21 | sys.path.insert(0, SCRIPT_DIR)
+   302→22 |
+   303→23 | from audio_recorder import AudioRecorder
+   304→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   305→24 | from transcription_service import TranscriptionService
+   306→   |
+   307→
+   308→tests\test_final_e2e.py:24:1: E402 Module level import not at top of file
+   309→   |
+   310→23 | from audio_recorder import AudioRecorder
+   311→24 | from transcription_service import TranscriptionService
+   312→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   313→25 |
+   314→26 | def test_final_e2e():
+   315→   |
+   316→
+   317→tests\test_final_e2e.py:109:15: F541 [*] f-string without any placeholders
+   318→    |
+   319→107 |         passed.append("Transcrição")
+   320→108 |     else:
+   321→109 |         print(f"❌ Transcrição vazia (falhou)")
+   322→    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   323→110 |         failed.append("Transcrição")
+   324→    |
+   325→    = help: Remove extraneous `f` prefix
+   326→
+   327→tests\test_gain_auto.py:24:1: E402 Module level import not at top of file
+   328→   |
+   329→22 | sys.path.insert(0, SCRIPT_DIR)
+   330→23 |
+   331→24 | from audio_recorder import AudioRecorder
+   332→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   333→25 |
+   334→26 | def test_gain_automation():
+   335→   |
+   336→
+   337→tests\test_gain_auto.py:55:15: F541 [*] f-string without any placeholders
+   338→   |
+   339→53 |         )
+   340→54 |
+   341→55 |         print(f"\n[INFO] Gravando 2 segundos de áudio...")
+   342→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   343→56 |         print("[INFO] Fale algo agora!")
+   344→   |
+   345→   = help: Remove extraneous `f` prefix
+   346→
+   347→tests\test_gain_auto.py:74:9: E722 Do not use bare `except`
+   348→   |
+   349→72 |                 actual_amplitude = np.max(np.abs(audio_data)) / 32768.0
+   350→73 |                 print(f"[DEBUG] Amplitude real no arquivo: {actual_amplitude:.4f}")
+   351→74 |         except:
+   352→   |         ^^^^^^ E722
+   353→75 |             actual_amplitude = 0.0
+   354→   |
+   355→
+   356→tests\test_gain_auto.py:92:19: F541 [*] f-string without any placeholders
+   357→   |
+   358→90 |             break
+   359→91 |         elif actual_amplitude > 0.05:
+   360→92 |             print(f"[INFO] Aceitável, mas pode ser melhorado")
+   361→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   362→93 |
+   363→94 |     # Summary
+   364→   |
+   365→   = help: Remove extraneous `f` prefix
+   366→
+   367→tests\test_gain_auto.py:118:15: F541 [*] f-string without any placeholders
+   368→    |
+   369→116 |         highest = max(results, key=lambda x: x['amplitude'])
+   370→117 |         print(f"\n[RECOMENDAÇÃO] Use o maior ganho testado: {highest['gain']:.1f}x")
+   371→118 |         print(f"[INFO] Se ainda assim não funcionar, verifique:")
+   372→    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   373→119 |         print("   - Se o microfone está funcionando")
+   374→120 |         print("   - Se o dispositivo correto está selecionado")
+   375→    |
+   376→    = help: Remove extraneous `f` prefix
+   377→
+   378→tests\test_microphone.py:38:11: F541 [*] f-string without any placeholders
+   379→   |
+   380→36 |     audio_filepath, duration = recorder.stop_recording()
+   381→37 |
+   382→38 |     print(f"\n[OK] Recording completed")
+   383→   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   384→39 |     print(f"[DEBUG] File: {audio_filepath}")
+   385→40 |     print(f"[DEBUG] Duration: {duration:.2f}s")
+   386→   |
+   387→   = help: Remove extraneous `f` prefix
+   388→
+   389→tests\test_transcription.py:62:15: F541 [*] f-string without any placeholders
+   390→   |
+   391→61 |         service = TranscriptionService(api_key=api_key, language="pt")
+   392→62 |         print(f"[OK] TranscriptionService initialized")
+   393→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   394→63 |
+   395→64 |         print("\n[INFO] Attempting to transcribe test audio...")
+   396→   |
+   397→   = help: Remove extraneous `f` prefix
+   398→
+   399→tests\test_transcription.py:67:15: F541 [*] f-string without any placeholders
+   400→   |
+   401→65 |         result = service.transcribe_file_sync(temp_filepath)
+   402→66 |
+   403→67 |         print(f"\n[INFO] Transcription result:")
+   404→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   405→68 |         print(f"  - Text: '{result.get('text', '')}'")
+   406→69 |         print(f"  - Confidence: {result.get('confidence', 0.0):.2%}")
+   407→   |
+   408→   = help: Remove extraneous `f` prefix
+   409→
+   410→tests\test_transcription.py:77:15: F541 [*] f-string without any placeholders
+   411→   |
+   412→75 |         # Cleanup
+   413→76 |         os.unlink(temp_filepath)
+   414→77 |         print(f"\n[OK] Test completed and cleaned up")
+   415→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   416→78 |
+   417→79 |         return True
+   418→   |
+   419→   = help: Remove extraneous `f` prefix
+   420→
+   421→tests\test_transcription.py:82:15: F541 [*] f-string without any placeholders
+   422→   |
+   423→81 |     except Exception as e:
+   424→82 |         print(f"\n[FAIL] Test failed with error:")
+   425→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   426→83 |         print(f"  {type(e).__name__}: {e}")
+   427→84 |         import traceback
+   428→   |
+   429→   = help: Remove extraneous `f` prefix
+   430→
+   431→tests\test_transcription.py:91:13: E722 Do not use bare `except`
+   432→   |
+   433→89 |             try:
+   434→90 |                 os.unlink(temp_filepath)
+   435→91 |             except:
+   436→   |             ^^^^^^ E722
+   437→92 |                 pass
+   438→   |
+   439→
+   440→tests\test_tts_service.py:7:8: F401 [*] `json` imported but unused
+   441→  |
+   442→6 | import unittest
+   443→7 | import json
+   444→  |        ^^^^ F401
+   445→8 | import tempfile
+   446→9 | import shutil
+   447→  |
+   448→  = help: Remove unused import: `json`
+   449→
+   450→tests\test_tts_service.py:10:21: F401 [*] `pathlib.Path` imported but unused
+   451→   |
+   452→ 8 | import tempfile
+   453→ 9 | import shutil
+   454→10 | from pathlib import Path
+   455→   |                     ^^^^ F401
+   456→11 | from unittest.mock import Mock, patch, MagicMock
+   457→12 | import requests
+   458→   |
+   459→   = help: Remove unused import: `pathlib.Path`
+   460→
+   461→tests\test_tts_service.py:11:40: F401 [*] `unittest.mock.MagicMock` imported but unused
+   462→   |
+   463→ 9 | import shutil
+   464→10 | from pathlib import Path
+   465→11 | from unittest.mock import Mock, patch, MagicMock
+   466→   |                                        ^^^^^^^^^ F401
+   467→12 | import requests
+   468→   |
+   469→   = help: Remove unused import: `unittest.mock.MagicMock`
+   470→
+   471→tests\test_tts_service.py:185:20: F401 `pygame` imported but unused; consider using `importlib.util.find_spec` to test for availability
+   472→    |
+   473→183 |         """Test playing audio bytes with pygame (requires pygame installed)"""
+   474→184 |         try:
+   475→185 |             import pygame
+   476→    |                    ^^^^^^ F401
+   477→186 |             player = AudioPlayer()
+   478→187 |             # This test requires pygame to be installed
+   479→    |
+   480→    = help: Remove unused import: `pygame`
+   481→
+   482→tests\test_tts_service.py:186:13: F841 Local variable `player` is assigned to but never used
+   483→    |
+   484→184 |         try:
+   485→185 |             import pygame
+   486→186 |             player = AudioPlayer()
+   487→    |             ^^^^^^ F841
+   488→187 |             # This test requires pygame to be installed
+   489→188 |             # We just verify the player initializes without error
+   490→    |
+   491→    = help: Remove assignment to unused variable `player`
+   492→
+   493→tests\test_tts_service.py:208:20: F401 `pygame` imported but unused; consider using `importlib.util.find_spec` to test for availability
+   494→    |
+   495→206 |         """Test playing audio file with pygame (requires pygame installed)"""
+   496→207 |         try:
+   497→208 |             import pygame
+   498→    |                    ^^^^^^ F401
+   499→209 |             player = AudioPlayer()
+   500→210 |             # This test requires pygame to be installed
+   501→    |
+   502→    = help: Remove unused import: `pygame`
+   503→
+   504→tests\test_tts_service.py:209:13: F841 Local variable `player` is assigned to but never used
+   505→    |
+   506→207 |         try:
+   507→208 |             import pygame
+   508→209 |             player = AudioPlayer()
+   509→    |             ^^^^^^ F841
+   510→210 |             # This test requires pygame to be installed
+   511→211 |             # We just verify the player initializes without error
+   512→    |
+   513→    = help: Remove assignment to unused variable `player`
+   514→
+   515→transcription_service.py:159:9: F841 Local variable `effective_timeout` is assigned to but never used
+   516→    |
+   517→158 |         # Use provided timeout or default from __init__
+   518→159 |         effective_timeout = timeout if timeout is not None else self.timeout
+   519→    |         ^^^^^^^^^^^^^^^^^ F841
+   520→160 |
+   521→161 |         def _do_transcription() -> Dict[str, Any]:
+   522→    |
+   523→    = help: Remove assignment to unused variable `effective_timeout`
+   524→
+   525→trigger.py:4:8: F401 [*] `time` imported but unused
+   526→  |
+   527→2 | import requests
+   528→3 | import json
+   529→4 | import time
+   530→  |        ^^^^ F401
+   531→5 | import os
+   532→6 | import sys
+   533→  |
+   534→  = help: Remove unused import: `time`
+   535→
+   536→trigger.py:79:19: F541 [*] f-string without any placeholders
+   537→   |
+   538→77 |             print(f"[SUCCESS] Sucesso! Resposta: {response.text[:200]}")
+   539→78 |         elif response.status_code == 404:
+   540→79 |             print(f"[ERROR] Webhook nao encontrado (404)")
+   541→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   542→80 |             print(f"[TIP] Verifique:")
+   543→81 |             print(f"   - Se a URL esta' correta")
+   544→   |
+   545→   = help: Remove extraneous `f` prefix
+   546→
+   547→trigger.py:80:19: F541 [*] f-string without any placeholders
+   548→   |
+   549→78 |         elif response.status_code == 404:
+   550→79 |             print(f"[ERROR] Webhook nao encontrado (404)")
+   551→80 |             print(f"[TIP] Verifique:")
+   552→   |                   ^^^^^^^^^^^^^^^^^^^ F541
+   553→81 |             print(f"   - Se a URL esta' correta")
+   554→82 |             print(f"   - Se o webhook existe no n8n")
+   555→   |
+   556→   = help: Remove extraneous `f` prefix
+   557→
+   558→trigger.py:81:19: F541 [*] f-string without any placeholders
+   559→   |
+   560→79 |             print(f"[ERROR] Webhook nao encontrado (404)")
+   561→80 |             print(f"[TIP] Verifique:")
+   562→81 |             print(f"   - Se a URL esta' correta")
+   563→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   564→82 |             print(f"   - Se o webhook existe no n8n")
+   565→83 |             print(f"   - Se o workflow esta' ativo")
+   566→   |
+   567→   = help: Remove extraneous `f` prefix
+   568→
+   569→trigger.py:82:19: F541 [*] f-string without any placeholders
+   570→   |
+   571→80 |             print(f"[TIP] Verifique:")
+   572→81 |             print(f"   - Se a URL esta' correta")
+   573→82 |             print(f"   - Se o webhook existe no n8n")
+   574→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   575→83 |             print(f"   - Se o workflow esta' ativo")
+   576→84 |             print(f"   - Se o me'todo ({method}) esta' correto")
+   577→   |
+   578→   = help: Remove extraneous `f` prefix
+   579→
+   580→trigger.py:83:19: F541 [*] f-string without any placeholders
+   581→   |
+   582→81 |             print(f"   - Se a URL esta' correta")
+   583→82 |             print(f"   - Se o webhook existe no n8n")
+   584→83 |             print(f"   - Se o workflow esta' ativo")
+   585→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   586→84 |             print(f"   - Se o me'todo ({method}) esta' correto")
+   587→85 |             print(f"   - Se o n8n esta' rodando na porta correta")
+   588→   |
+   589→   = help: Remove extraneous `f` prefix
+   590→
+   591→trigger.py:85:19: F541 [*] f-string without any placeholders
+   592→   |
+   593→83 |             print(f"   - Se o workflow esta' ativo")
+   594→84 |             print(f"   - Se o me'todo ({method}) esta' correto")
+   595→85 |             print(f"   - Se o n8n esta' rodando na porta correta")
+   596→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   597→86 |         else:
+   598→87 |             print(f"[WARN] Status {response.status_code}: {response.text[:200]}")
+   599→   |
+   600→   = help: Remove extraneous `f` prefix
+   601→
+   602→trigger.py:159:19: F541 [*] f-string without any placeholders
+   603→    |
+   604→157 |                 return
+   605→158 |
+   606→159 |             print(f"[DEBUG] Initializing TranscriptionService...")
+   607→    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   608→160 |             transcriber = TranscriptionService(api_key=api_key, language="pt")
+   609→161 |             print(f"[DEBUG] Starting transcription...")
+   610→    |
+   611→    = help: Remove extraneous `f` prefix
+   612→
+   613→trigger.py:161:19: F541 [*] f-string without any placeholders
+   614→    |
+   615→159 |             print(f"[DEBUG] Initializing TranscriptionService...")
+   616→160 |             transcriber = TranscriptionService(api_key=api_key, language="pt")
+   617→161 |             print(f"[DEBUG] Starting transcription...")
+   618→    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   619→162 |             sys.stdout.flush()
+   620→    |
+   621→    = help: Remove extraneous `f` prefix
+   622→
+   623→trigger.py:165:19: F541 [*] f-string without any placeholders
+   624→    |
+   625→164 |             result = transcriber.transcribe_file_sync(audio_filepath)
+   626→165 |             print(f"[DEBUG] Transcription completed")
+   627→    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   628→166 |             sys.stdout.flush()
+   629→    |
+   630→    = help: Remove extraneous `f` prefix
+   631→
+   632→trigger.py:200:19: F541 [*] f-string without any placeholders
+   633→    |
+   634→199 |             # Disparar webhook
+   635→200 |             print(f"[INFO] Triggering webhook...")
+   636→    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   637→201 |             trigger_webhook(self.url, self.method, webhook_params, self.name)
+   638→    |
+   639→    = help: Remove extraneous `f` prefix
+   640→
+   641→tts_service.py:6:8: F401 [*] `os` imported but unused
+   642→  |
+   643→4 | """
+   644→5 |
+   645→6 | import os
+   646→  |        ^^ F401
+   647→7 | import requests
+   648→8 | import re
+   649→  |
+   650→  = help: Remove unused import: `os`
+   651→
+   652→Found 63 errors.
+   653→[*] 46 fixable with the `--fix` option (3 hidden fixes can be enabled with the `--unsafe-fixes` option).
+   654→app.py:247:17: E722 Do not use bare `except`
+   655→    |
+   656→245 |                     if i == default_device:
+   657→246 |                         device_info['default'] = True
+   658→247 |                 except:
+   659→    |                 ^^^^^^ E722
+   660→248 |                     pass
+   661→    |
+   662→
+   663→list_audio_devices.py:48:23: F541 [*] f-string without any placeholders
+   664→   |
+   665→46 |             default_device = sd.default.device[0]
+   666→47 |             if device_id == default_device:
+   667→48 |                 print(f"    ⭐ DISPOSITIVO PADRÃO DO SISTEMA")
+   668→   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   669→49 |         except:
+   670→50 |             pass
+   671→   |
+   672→   = help: Remove extraneous `f` prefix
+   673→
+   674→list_audio_devices.py:49:9: E722 Do not use bare `except`
+   675→   |
+   676→47 |             if device_id == default_device:
+   677→48 |                 print(f"    ⭐ DISPOSITIVO PADRÃO DO SISTEMA")
+   678→49 |         except:
+   679→   |         ^^^^^^ E722
+   680→50 |             pass
+   681→   |
+   682→
+   683→tests\test_audio_device.py:58:15: F541 [*] f-string without any placeholders
+   684→   |
+   685→57 |         print("✅ Gravação concluída!")
+   686→58 |         print(f"📊 Resultados:")
+   687→   |               ^^^^^^^^^^^^^^^^^ F541
+   688→59 |         print(f"   - Amplitude máxima: {max_amplitude:.4f}")
+   689→60 |         print(f"   - RMS (volume médio): {rms:.4f}")
+   690→   |
+   691→   = help: Remove extraneous `f` prefix
+   692→
+   693→tests\test_audio_gain.py:24:1: E402 Module level import not at top of file
+   694→   |
+   695→22 | sys.path.insert(0, SCRIPT_DIR)
+   696→23 |
+   697→24 | from audio_recorder import AudioRecorder
+   698→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   699→25 |
+   700→26 | def load_deepgram_config():
+   701→   |
+   702→
+   703→tests\test_audio_gain.py:51:11: F541 [*] f-string without any placeholders
+   704→   |
+   705→50 |     print(f"[CONFIG] Ganho atual: {current_gain:.1f}x")
+   706→51 |     print(f"[INFO] Este teste gravará 3 segundos de áudio com diferentes ganhos")
+   707→   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   708→52 |     print()
+   709→   |
+   710→   = help: Remove extraneous `f` prefix
+   711→
+   712→tests\test_audio_gain.py:70:15: F541 [*] f-string without any placeholders
+   713→   |
+   714→68 |         )
+   715→69 |
+   716→70 |         print(f"\n[INSTRUÇÃO] Fale claramente por 3 segundos...")
+   717→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   718→71 |         print("[INFO] Gravação iniciará em 3...")
+   719→72 |         time.sleep(1)
+   720→   |
+   721→   = help: Remove extraneous `f` prefix
+   722→
+   723→tests\test_audio_gain.py:90:15: F541 [*] f-string without any placeholders
+   724→   |
+   725→88 |         # For this test, we'll trust the debug output that was shown
+   726→89 |         print(f"\n[RESULTADO] Duração: {duration:.2f}s")
+   727→90 |         print(f"[INFO] Verifique a amplitude mostrada acima")
+   728→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   729→91 |
+   730→92 |         # Ask user to verify
+   731→   |
+   732→   = help: Remove extraneous `f` prefix
+   733→
+   734→tests\test_audio_recording.py:35:11: F541 [*] f-string without any placeholders
+   735→   |
+   736→33 |     channels = audio_settings.get('channels', 1)
+   737→34 |
+   738→35 |     print(f"[INFO] Audio settings:")
+   739→   |           ^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   740→36 |     print(f"  - Sample rate: {sample_rate} Hz")
+   741→37 |     print(f"  - Channels: {channels}")
+   742→   |
+   743→   = help: Remove extraneous `f` prefix
+   744→
+   745→tests\test_audio_recording.py:57:15: F541 [*] f-string without any placeholders
+   746→   |
+   747→55 |         audio_filepath, duration = recorder.stop_recording()
+   748→56 |
+   749→57 |         print(f"[OK] Recording stopped")
+   750→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   751→58 |         print(f"[DEBUG] Duration: {duration:.2f}s")
+   752→59 |         print(f"[DEBUG] File: {audio_filepath}")
+   753→   |
+   754→   = help: Remove extraneous `f` prefix
+   755→
+   756→tests\test_audio_recording.py:67:15: F541 [*] f-string without any placeholders
+   757→   |
+   758→65 |         result = transcriber.transcribe_file_sync(audio_filepath)
+   759→66 |
+   760→67 |         print(f"[OK] Transcription completed")
+   761→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   762→68 |         print(f"[DEBUG] Text: '{result.get('text', '')}'")
+   763→69 |         print(f"[DEBUG] Confidence: {result.get('confidence', 0.0):.2%}")
+   764→   |
+   765→   = help: Remove extraneous `f` prefix
+   766→
+   767→tests\test_audio_recording.py:83:19: F541 [*] f-string without any placeholders
+   768→   |
+   769→81 |         if transcript_text:
+   770→82 |             print(f"[SUCCESS] Transcription: \"{transcript_text}\"")
+   771→83 |             print(f"[INFO] This would be sent to the webhook!")
+   772→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   773→84 |         else:
+   774→85 |             print("[WARN] No speech detected")
+   775→   |
+   776→   = help: Remove extraneous `f` prefix
+   777→
+   778→tests\test_deepgram_api.py:22:1: E402 Module level import not at top of file
+   779→   |
+   780→20 | sys.path.insert(0, SCRIPT_DIR)
+   781→21 |
+   782→22 | import requests
+   783→   | ^^^^^^^^^^^^^^^ E402
+   784→23 |
+   785→24 | def load_config():
+   786→   |
+   787→
+   788→tests\test_deepgram_api.py:191:9: E722 Do not use bare `except`
+   789→    |
+   790→189 |         try:
+   791→190 |             os.unlink(temp_filepath)
+   792→191 |         except:
+   793→    |         ^^^^^^ E722
+   794→192 |             pass
+   795→193 |         return False
+   796→    |
+   797→
+   798→tests\test_deepgram_direct.py:67:15: F541 [*] f-string without any placeholders
+   799→   |
+   800→65 |             wav_file.writeframes(silence)
+   801→66 |
+   802→67 |         print(f"\n[TEST 3] Transcribing test audio...")
+   803→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   804→68 |         print(f"[DEBUG] Audio file: {temp_filepath}")
+   805→   |
+   806→   = help: Remove extraneous `f` prefix
+   807→
+   808→tests\test_deepgram_direct.py:83:19: F541 [*] f-string without any placeholders
+   809→   |
+   810→81 |             )
+   811→82 |
+   812→83 |             print(f"[OK] Transcription completed")
+   813→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   814→84 |             print(f"[DEBUG] Response type: {type(response)}")
+   815→   |
+   816→   = help: Remove extraneous `f` prefix
+   817→
+   818→tests\test_deepgram_direct.py:88:23: F541 [*] f-string without any placeholders
+   819→   |
+   820→86 |             # Try to access results
+   821→87 |             if hasattr(response, 'results'):
+   822→88 |                 print(f"[DEBUG] Has 'results' attribute")
+   823→   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   824→89 |                 if response.results:
+   825→90 |                     print(f"[DEBUG] Results not empty")
+   826→   |
+   827→   = help: Remove extraneous `f` prefix
+   828→
+   829→tests\test_deepgram_direct.py:90:27: F541 [*] f-string without any placeholders
+   830→   |
+   831→88 |                 print(f"[DEBUG] Has 'results' attribute")
+   832→89 |                 if response.results:
+   833→90 |                     print(f"[DEBUG] Results not empty")
+   834→   |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   835→91 |
+   836→92 |                     if hasattr(response.results, 'channels'):
+   837→   |
+   838→   = help: Remove extraneous `f` prefix
+   839→
+   840→tests\test_deepgram_direct.py:93:31: F541 [*] f-string without any placeholders
+   841→   |
+   842→92 |                     if hasattr(response.results, 'channels'):
+   843→93 |                         print(f"[DEBUG] Has 'channels'")
+   844→   |                               ^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   845→94 |                         channels = response.results.channels
+   846→95 |                         print(f"[DEBUG] Number of channels: {len(channels)}")
+   847→   |
+   848→   = help: Remove extraneous `f` prefix
+   849→
+   850→tests\test_deepgram_direct.py:100:39: F541 [*] f-string without any placeholders
+   851→    |
+   852→ 98 | …                     channel = channels[0]
+   853→ 99 | …                     if hasattr(channel, 'alternatives'):
+   854→100 | …                         print(f"[DEBUG] Has 'alternatives'")
+   855→    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   856→101 | …                         alts = channel.alternatives
+   857→102 | …                         if len(alts) > 0:
+   858→    |
+   859→    = help: Remove extraneous `f` prefix
+   860→
+   861→tests\test_deepgram_direct.py:109:23: F541 [*] f-string without any placeholders
+   862→    |
+   863→107 |                                         print(f"[DEBUG] Confidence: {alt.confidence}")
+   864→108 |             else:
+   865→109 |                 print(f"[WARN] Response has no 'results' attribute")
+   866→    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   867→110 |                 print(f"[DEBUG] Response: {response}")
+   868→    |
+   869→    = help: Remove extraneous `f` prefix
+   870→
+   871→tests\test_e2e.py:65:15: F541 [*] f-string without any placeholders
+   872→   |
+   873→64 |         recorder = AudioRecorder(sample_rate=16000, channels=1)
+   874→65 |         print(f"[OK] AudioRecorder initialized")
+   875→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   876→66 |         print(f"   - Sample rate: {recorder.sample_rate} Hz")
+   877→67 |         print(f"   - Channels: {recorder.channels}")
+   878→   |
+   879→   = help: Remove extraneous `f` prefix
+   880→
+   881→tests\test_e2e.py:104:15: F541 [*] f-string without any placeholders
+   882→    |
+   883→102 |         # Test initialization
+   884→103 |         service = TranscriptionService(api_key=api_key, language="pt")
+   885→104 |         print(f"[OK] TranscriptionService initialized (Deepgram v5)")
+   886→    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   887→105 |         print(f"   - Client: {type(service.client).__name__}")
+   888→106 |         print(f"   - Language: {service.language}")
+   889→    |
+   890→    = help: Remove extraneous `f` prefix
+   891→
+   892→tests\test_e2e.py:109:15: F541 [*] f-string without any placeholders
+   893→    |
+   894→108 |         # Note: We can't test actual transcription without a real audio file
+   895→109 |         print(f"[INFO] Transcription test requires real audio file")
+   896→    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   897→110 |
+   898→111 |         return True
+   899→    |
+   900→    = help: Remove extraneous `f` prefix
+   901→
+   902→tests\test_e2e.py:182:23: F541 [*] f-string without any placeholders
+   903→    |
+   904→180 |             # Validate hotkey
+   905→181 |             if trigger.is_valid_hotkey(hotkey):
+   906→182 |                 print(f"   - Validation: [OK] Valid")
+   907→    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   908→183 |             else:
+   909→184 |                 print(f"   - Validation: [FAIL] Invalid key")
+   910→    |
+   911→    = help: Remove extraneous `f` prefix
+   912→
+   913→tests\test_e2e.py:184:23: F541 [*] f-string without any placeholders
+   914→    |
+   915→182 |                 print(f"   - Validation: [OK] Valid")
+   916→183 |             else:
+   917→184 |                 print(f"   - Validation: [FAIL] Invalid key")
+   918→    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   919→185 |
+   920→186 |         return True
+   921→    |
+   922→    = help: Remove extraneous `f` prefix
+   923→
+   924→tests\test_e2e_audio_transcription.py:24:1: E402 Module level import not at top of file
+   925→   |
+   926→22 | sys.path.insert(0, SCRIPT_DIR)
+   927→23 |
+   928→24 | from audio_recorder import AudioRecorder
+   929→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   930→25 | from transcription_service import TranscriptionService
+   931→   |
+   932→
+   933→tests\test_e2e_audio_transcription.py:25:1: E402 Module level import not at top of file
+   934→   |
+   935→24 | from audio_recorder import AudioRecorder
+   936→25 | from transcription_service import TranscriptionService
+   937→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   938→26 |
+   939→27 | def load_deepgram_config():
+   940→   |
+   941→
+   942→tests\test_e2e_audio_transcription.py:184:23: F541 [*] f-string without any placeholders
+   943→    |
+   944→183 |             if response.status_code == 200:
+   945→184 |                 print(f"✓ Webhook respondendo corretamente")
+   946→    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   947→185 |                 print(f"[INFO] Resposta: {response.text[:200]}")
+   948→186 |                 tests_passed.append("Webhook funcional")
+   949→    |
+   950→    = help: Remove extraneous `f` prefix
+   951→
+   952→tests\test_final_e2e.py:23:1: E402 Module level import not at top of file
+   953→   |
+   954→21 | sys.path.insert(0, SCRIPT_DIR)
+   955→22 |
+   956→23 | from audio_recorder import AudioRecorder
+   957→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   958→24 | from transcription_service import TranscriptionService
+   959→   |
+   960→
+   961→tests\test_final_e2e.py:24:1: E402 Module level import not at top of file
+   962→   |
+   963→23 | from audio_recorder import AudioRecorder
+   964→24 | from transcription_service import TranscriptionService
+   965→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   966→25 |
+   967→26 | def test_final_e2e():
+   968→   |
+   969→
+   970→tests\test_final_e2e.py:109:15: F541 [*] f-string without any placeholders
+   971→    |
+   972→107 |         passed.append("Transcrição")
+   973→108 |     else:
+   974→109 |         print(f"❌ Transcrição vazia (falhou)")
+   975→    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   976→110 |         failed.append("Transcrição")
+   977→    |
+   978→    = help: Remove extraneous `f` prefix
+   979→
+   980→tests\test_gain_auto.py:24:1: E402 Module level import not at top of file
+   981→   |
+   982→22 | sys.path.insert(0, SCRIPT_DIR)
+   983→23 |
+   984→24 | from audio_recorder import AudioRecorder
+   985→   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ E402
+   986→25 |
+   987→26 | def test_gain_automation():
+   988→   |
+   989→
+   990→tests\test_gain_auto.py:55:15: F541 [*] f-string without any placeholders
+   991→   |
+   992→53 |         )
+   993→54 |
+   994→55 |         print(f"\n[INFO] Gravando 2 segundos de áudio...")
+   995→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+   996→56 |         print("[INFO] Fale algo agora!")
+   997→   |
+   998→   = help: Remove extraneous `f` prefix
+   999→
+  1000→tests\test_gain_auto.py:74:9: E722 Do not use bare `except`
+  1001→   |
+  1002→72 |                 actual_amplitude = np.max(np.abs(audio_data)) / 32768.0
+  1003→73 |                 print(f"[DEBUG] Amplitude real no arquivo: {actual_amplitude:.4f}")
+  1004→74 |         except:
+  1005→   |         ^^^^^^ E722
+  1006→75 |             actual_amplitude = 0.0
+  1007→   |
+  1008→
+  1009→tests\test_gain_auto.py:92:19: F541 [*] f-string without any placeholders
+  1010→   |
+  1011→90 |             break
+  1012→91 |         elif actual_amplitude > 0.05:
+  1013→92 |             print(f"[INFO] Aceitável, mas pode ser melhorado")
+  1014→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1015→93 |
+  1016→94 |     # Summary
+  1017→   |
+  1018→   = help: Remove extraneous `f` prefix
+  1019→
+  1020→tests\test_gain_auto.py:118:15: F541 [*] f-string without any placeholders
+  1021→    |
+  1022→116 |         highest = max(results, key=lambda x: x['amplitude'])
+  1023→117 |         print(f"\n[RECOMENDAÇÃO] Use o maior ganho testado: {highest['gain']:.1f}x")
+  1024→118 |         print(f"[INFO] Se ainda assim não funcionar, verifique:")
+  1025→    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1026→119 |         print("   - Se o microfone está funcionando")
+  1027→120 |         print("   - Se o dispositivo correto está selecionado")
+  1028→    |
+  1029→    = help: Remove extraneous `f` prefix
+  1030→
+  1031→tests\test_microphone.py:38:11: F541 [*] f-string without any placeholders
+  1032→   |
+  1033→36 |     audio_filepath, duration = recorder.stop_recording()
+  1034→37 |
+  1035→38 |     print(f"\n[OK] Recording completed")
+  1036→   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1037→39 |     print(f"[DEBUG] File: {audio_filepath}")
+  1038→40 |     print(f"[DEBUG] Duration: {duration:.2f}s")
+  1039→   |
+  1040→   = help: Remove extraneous `f` prefix
+  1041→
+  1042→tests\test_transcription.py:62:15: F541 [*] f-string without any placeholders
+  1043→   |
+  1044→61 |         service = TranscriptionService(api_key=api_key, language="pt")
+  1045→62 |         print(f"[OK] TranscriptionService initialized")
+  1046→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1047→63 |
+  1048→64 |         print("\n[INFO] Attempting to transcribe test audio...")
+  1049→   |
+  1050→   = help: Remove extraneous `f` prefix
+  1051→
+  1052→tests\test_transcription.py:67:15: F541 [*] f-string without any placeholders
+  1053→   |
+  1054→65 |         result = service.transcribe_file_sync(temp_filepath)
+  1055→66 |
+  1056→67 |         print(f"\n[INFO] Transcription result:")
+  1057→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1058→68 |         print(f"  - Text: '{result.get('text', '')}'")
+  1059→69 |         print(f"  - Confidence: {result.get('confidence', 0.0):.2%}")
+  1060→   |
+  1061→   = help: Remove extraneous `f` prefix
+  1062→
+  1063→tests\test_transcription.py:77:15: F541 [*] f-string without any placeholders
+  1064→   |
+  1065→75 |         # Cleanup
+  1066→76 |         os.unlink(temp_filepath)
+  1067→77 |         print(f"\n[OK] Test completed and cleaned up")
+  1068→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1069→78 |
+  1070→79 |         return True
+  1071→   |
+  1072→   = help: Remove extraneous `f` prefix
+  1073→
+  1074→tests\test_transcription.py:82:15: F541 [*] f-string without any placeholders
+  1075→   |
+  1076→81 |     except Exception as e:
+  1077→82 |         print(f"\n[FAIL] Test failed with error:")
+  1078→   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1079→83 |         print(f"  {type(e).__name__}: {e}")
+  1080→84 |         import traceback
+  1081→   |
+  1082→   = help: Remove extraneous `f` prefix
+  1083→
+  1084→tests\test_transcription.py:91:13: E722 Do not use bare `except`
+  1085→   |
+  1086→89 |             try:
+  1087→90 |                 os.unlink(temp_filepath)
+  1088→91 |             except:
+  1089→   |             ^^^^^^ E722
+  1090→92 |                 pass
+  1091→   |
+  1092→
+  1093→tests\test_tts_service.py:7:8: F401 [*] `json` imported but unused
+  1094→  |
+  1095→6 | import unittest
+  1096→7 | import json
+  1097→  |        ^^^^ F401
+  1098→8 | import tempfile
+  1099→9 | import shutil
+  1100→  |
+  1101→  = help: Remove unused import: `json`
+  1102→
+  1103→tests\test_tts_service.py:10:21: F401 [*] `pathlib.Path` imported but unused
+  1104→   |
+  1105→ 8 | import tempfile
+  1106→ 9 | import shutil
+  1107→10 | from pathlib import Path
+  1108→   |                     ^^^^ F401
+  1109→11 | from unittest.mock import Mock, patch, MagicMock
+  1110→12 | import requests
+  1111→   |
+  1112→   = help: Remove unused import: `pathlib.Path`
+  1113→
+  1114→tests\test_tts_service.py:11:40: F401 [*] `unittest.mock.MagicMock` imported but unused
+  1115→   |
+  1116→ 9 | import shutil
+  1117→10 | from pathlib import Path
+  1118→11 | from unittest.mock import Mock, patch, MagicMock
+  1119→   |                                        ^^^^^^^^^ F401
+  1120→12 | import requests
+  1121→   |
+  1122→   = help: Remove unused import: `unittest.mock.MagicMock`
+  1123→
+  1124→tests\test_tts_service.py:185:20: F401 `pygame` imported but unused; consider using `importlib.util.find_spec` to test for availability
+  1125→    |
+  1126→183 |         """Test playing audio bytes with pygame (requires pygame installed)"""
+  1127→184 |         try:
+  1128→185 |             import pygame
+  1129→    |                    ^^^^^^ F401
+  1130→186 |             player = AudioPlayer()
+  1131→187 |             # This test requires pygame to be installed
+  1132→    |
+  1133→    = help: Remove unused import: `pygame`
+  1134→
+  1135→tests\test_tts_service.py:186:13: F841 Local variable `player` is assigned to but never used
+  1136→    |
+  1137→184 |         try:
+  1138→185 |             import pygame
+  1139→186 |             player = AudioPlayer()
+  1140→    |             ^^^^^^ F841
+  1141→187 |             # This test requires pygame to be installed
+  1142→188 |             # We just verify the player initializes without error
+  1143→    |
+  1144→    = help: Remove assignment to unused variable `player`
+  1145→
+  1146→tests\test_tts_service.py:208:20: F401 `pygame` imported but unused; consider using `importlib.util.find_spec` to test for availability
+  1147→    |
+  1148→206 |         """Test playing audio file with pygame (requires pygame installed)"""
+  1149→207 |         try:
+  1150→208 |             import pygame
+  1151→    |                    ^^^^^^ F401
+  1152→209 |             player = AudioPlayer()
+  1153→210 |             # This test requires pygame to be installed
+  1154→    |
+  1155→    = help: Remove unused import: `pygame`
+  1156→
+  1157→tests\test_tts_service.py:209:13: F841 Local variable `player` is assigned to but never used
+  1158→    |
+  1159→207 |         try:
+  1160→208 |             import pygame
+  1161→209 |             player = AudioPlayer()
+  1162→    |             ^^^^^^ F841
+  1163→210 |             # This test requires pygame to be installed
+  1164→211 |             # We just verify the player initializes without error
+  1165→    |
+  1166→    = help: Remove assignment to unused variable `player`
+  1167→
+  1168→transcription_service.py:159:9: F841 Local variable `effective_timeout` is assigned to but never used
+  1169→    |
+  1170→158 |         # Use provided timeout or default from __init__
+  1171→159 |         effective_timeout = timeout if timeout is not None else self.timeout
+  1172→    |         ^^^^^^^^^^^^^^^^^ F841
+  1173→160 |
+  1174→161 |         def _do_transcription() -> Dict[str, Any]:
+  1175→    |
+  1176→    = help: Remove assignment to unused variable `effective_timeout`
+  1177→
+  1178→trigger.py:4:8: F401 [*] `time` imported but unused
+  1179→  |
+  1180→2 | import requests
+  1181→3 | import json
+  1182→4 | import time
+  1183→  |        ^^^^ F401
+  1184→5 | import os
+  1185→6 | import sys
+  1186→  |
+  1187→  = help: Remove unused import: `time`
+  1188→
+  1189→trigger.py:79:19: F541 [*] f-string without any placeholders
+  1190→   |
+  1191→77 |             print(f"[SUCCESS] Sucesso! Resposta: {response.text[:200]}")
+  1192→78 |         elif response.status_code == 404:
+  1193→79 |             print(f"[ERROR] Webhook nao encontrado (404)")
+  1194→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1195→80 |             print(f"[TIP] Verifique:")
+  1196→81 |             print(f"   - Se a URL esta' correta")
+  1197→   |
+  1198→   = help: Remove extraneous `f` prefix
+  1199→
+  1200→trigger.py:80:19: F541 [*] f-string without any placeholders
+  1201→   |
+  1202→78 |         elif response.status_code == 404:
+  1203→79 |             print(f"[ERROR] Webhook nao encontrado (404)")
+  1204→80 |             print(f"[TIP] Verifique:")
+  1205→   |                   ^^^^^^^^^^^^^^^^^^^ F541
+  1206→81 |             print(f"   - Se a URL esta' correta")
+  1207→82 |             print(f"   - Se o webhook existe no n8n")
+  1208→   |
+  1209→   = help: Remove extraneous `f` prefix
+  1210→
+  1211→trigger.py:81:19: F541 [*] f-string without any placeholders
+  1212→   |
+  1213→79 |             print(f"[ERROR] Webhook nao encontrado (404)")
+  1214→80 |             print(f"[TIP] Verifique:")
+  1215→81 |             print(f"   - Se a URL esta' correta")
+  1216→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1217→82 |             print(f"   - Se o webhook existe no n8n")
+  1218→83 |             print(f"   - Se o workflow esta' ativo")
+  1219→   |
+  1220→   = help: Remove extraneous `f` prefix
+  1221→
+  1222→trigger.py:82:19: F541 [*] f-string without any placeholders
+  1223→   |
+  1224→80 |             print(f"[TIP] Verifique:")
+  1225→81 |             print(f"   - Se a URL esta' correta")
+  1226→82 |             print(f"   - Se o webhook existe no n8n")
+  1227→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1228→83 |             print(f"   - Se o workflow esta' ativo")
+  1229→84 |             print(f"   - Se o me'todo ({method}) esta' correto")
+  1230→   |
+  1231→   = help: Remove extraneous `f` prefix
+  1232→
+  1233→trigger.py:83:19: F541 [*] f-string without any placeholders
+  1234→   |
+  1235→81 |             print(f"   - Se a URL esta' correta")
+  1236→82 |             print(f"   - Se o webhook existe no n8n")
+  1237→83 |             print(f"   - Se o workflow esta' ativo")
+  1238→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1239→84 |             print(f"   - Se o me'todo ({method}) esta' correto")
+  1240→85 |             print(f"   - Se o n8n esta' rodando na porta correta")
+  1241→   |
+  1242→   = help: Remove extraneous `f` prefix
+  1243→
+  1244→trigger.py:85:19: F541 [*] f-string without any placeholders
+  1245→   |
+  1246→83 |             print(f"   - Se o workflow esta' ativo")
+  1247→84 |             print(f"   - Se o me'todo ({method}) esta' correto")
+  1248→85 |             print(f"   - Se o n8n esta' rodando na porta correta")
+  1249→   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1250→86 |         else:
+  1251→87 |             print(f"[WARN] Status {response.status_code}: {response.text[:200]}")
+  1252→   |
+  1253→   = help: Remove extraneous `f` prefix
+  1254→
+  1255→trigger.py:159:19: F541 [*] f-string without any placeholders
+  1256→    |
+  1257→157 |                 return
+  1258→158 |
+  1259→159 |             print(f"[DEBUG] Initializing TranscriptionService...")
+  1260→    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1261→160 |             transcriber = TranscriptionService(api_key=api_key, language="pt")
+  1262→161 |             print(f"[DEBUG] Starting transcription...")
+  1263→    |
+  1264→    = help: Remove extraneous `f` prefix
+  1265→
+  1266→trigger.py:161:19: F541 [*] f-string without any placeholders
+  1267→    |
+  1268→159 |             print(f"[DEBUG] Initializing TranscriptionService...")
+  1269→160 |             transcriber = TranscriptionService(api_key=api_key, language="pt")
+  1270→161 |             print(f"[DEBUG] Starting transcription...")
+  1271→    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1272→162 |             sys.stdout.flush()
+  1273→    |
+  1274→    = help: Remove extraneous `f` prefix
+  1275→
+  1276→trigger.py:165:19: F541 [*] f-string without any placeholders
+  1277→    |
+  1278→164 |             result = transcriber.transcribe_file_sync(audio_filepath)
+  1279→165 |             print(f"[DEBUG] Transcription completed")
+  1280→    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1281→166 |             sys.stdout.flush()
+  1282→    |
+  1283→    = help: Remove extraneous `f` prefix
+  1284→
+  1285→trigger.py:200:19: F541 [*] f-string without any placeholders
+  1286→    |
+  1287→199 |             # Disparar webhook
+  1288→200 |             print(f"[INFO] Triggering webhook...")
+  1289→    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ F541
+  1290→201 |             trigger_webhook(self.url, self.method, webhook_params, self.name)
+  1291→    |
+  1292→    = help: Remove extraneous `f` prefix
+  1293→
+  1294→tts_service.py:6:8: F401 [*] `os` imported but unused
+  1295→  |
+  1296→4 | """
+  1297→5 |
+  1298→6 | import os
+  1299→  |        ^^ F401
+  1300→7 | import requests
+  1301→8 | import re
+  1302→  |
+  1303→  = help: Remove unused import: `os`
+  1304→
+  1305→Found 63 errors.
+  1306→[*] 46 fixable with the `--fix` option (3 hidden fixes can be enabled with the `--unsafe-fixes` option).
+  1307→ruff not available
+  1308→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>
