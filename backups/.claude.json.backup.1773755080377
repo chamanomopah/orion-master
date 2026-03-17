@@ -1,0 +1,947 @@
+{
+  "numStartups": 455,
+  "installMethod": "global",
+  "hasSeenTasksHint": true,
+  "customApiKeyResponses": {
+    "approved": [
+      "a0ca.cLjlAhcimNddAKt"
+    ],
+    "rejected": []
+  },
+  "tipsHistory": {
+    "new-user-warmup": 1,
+    "plan-mode-for-complex-tasks": 431,
+    "memory-command": 443,
+    "shift-enter": 443,
+    "theme-command": 454,
+    "prompt-queue": 19,
+    "enter-to-steer-in-relatime": 454,
+    "todo-list": 435,
+    "install-github-app": 443,
+    "install-slack-app": 443,
+    "drag-and-drop-images": 443,
+    "double-esc-code-restore": 445,
+    "continue": 445,
+    "shift-tab": 445,
+    "image-paste": 438,
+    "custom-agents": 450,
+    "agent-flag": 448,
+    "desktop-app": 438,
+    "web-app": 440,
+    "mobile-app": 440,
+    "frontend-design-plugin": 398,
+    "permissions": 443,
+    "rename-conversation": 446,
+    "custom-commands": 448,
+    "status-line": 430,
+    "git-worktrees": 443,
+    "feedback-command": 443,
+    "default-permission-mode-config": 450,
+    "color-when-multi-clauding": 443
+  },
+  "promptQueueUseCount": 664,
+  "cachedGrowthBookFeatures": {
+    "tengu_scarf_coffee": false,
+    "tengu_file_write_optimization": false,
+    "tengu_bergotte_lantern": false,
+    "ccr_auto_permission_mode": false,
+    "tengu_cache_plum_violet": false,
+    "tengu_marble_whisper": true,
+    "tengu_moth_copse": false,
+    "auto_migrate_to_native": false,
+    "tengu_auto_mode_config": {
+      "enabled": "disabled"
+    },
+    "tengu_snippet_save": false,
+    "tengu_penguins_enabled": true,
+    "tengu_turtle_carbon": true,
+    "tengu_vinteuil_phrase": true,
+    "tengu_year_end_2025_campaign_promo": false,
+    "tengu_pebble_leaf_prune": false,
+    "tengu_passport_quail": false,
+    "tengu_system_prompt_global_cache": false,
+    "tengu_cobalt_compass": true,
+    "tengu_bridge_poll_interval_ms": 0,
+    "tengu_defer_all_bn4": false,
+    "tengu_workout2": true,
+    "tengu_amber_flint": true,
+    "tengu_worktree_mode": true,
+    "tengu_chomp_inflection": false,
+    "tengu_slate_ridge": true,
+    "tengu_grey_step": true,
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 10000,
+      "maxExportBatchSize": 400,
+      "maxQueueSize": 8192
+    },
+    "tengu_streaming_tool_execution2": true,
+    "tengu_plank_river_frost": "user_intent",
+    "tengu_opus_default_pro_plan": false,
+    "tengu_sm_compact": false,
+    "tengu_marble_sandcastle": false,
+    "tengu_vscode_onboarding": false,
+    "tengu_bramble_lintel": 1,
+    "tengu_mcp_elicitation": true,
+    "tengu_marble_whisper2": true,
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_copper_bridge": true,
+    "tengu_ccr_bridge": false,
+    "tengu_native_installation": false,
+    "tengu_negative_interaction_transcript_ask_config": {
+      "probability": 0
+    },
+    "tengu_claudeai_mcp_connectors": true,
+    "tengu_pid_based_version_locking": true,
+    "tengu_grey_step2": {
+      "enabled": true,
+      "dialogTitle": "We recommend medium effort for Opus",
+      "dialogDescription": "Effort determines how long Claude thinks for when completing your task. We recommend medium effort for most tasks to balance speed and intelligence and maximize rate limits. Use ultrathink to trigger high effort when needed."
+    },
+    "tengu_ccr_bridge_multi_session": false,
+    "tengu_hawthorn_steeple": false,
+    "tengu_mcp_tool_search": false,
+    "tengu_tool_search_unsupported_models": [
+      "haiku"
+    ],
+    "tengu_onyx_plover": {
+      "enabled": false,
+      "minHours": 24,
+      "minSessions": 3
+    },
+    "tengu_ant_attribution_header_new": true,
+    "tengu_collage_kaleidoscope": true,
+    "tengu_walrus_canteen": false,
+    "tengu_vscode_review_upsell": false,
+    "tengu_red_coaster": false,
+    "tengu_glacier_2xr": false,
+    "tengu_orchid_trellis": false,
+    "tengu_good_survey_transcript_ask_config": {
+      "probability": 0
+    },
+    "tengu_sm_config": {
+      "minimumMessageTokensToInit": 150000,
+      "minimumTokensBetweenUpdate": 40000,
+      "toolCallsBetweenUpdates": 10
+    },
+    "tengu_cobalt_raccoon": false,
+    "doorbell_bottle": "inherit",
+    "tengu_max_version_config": {},
+    "tengu_herring_clock": false,
+    "tengu_amber_wren": {},
+    "tengu_sotto_voce": true,
+    "tengu_grey_wool": true,
+    "tengu_trace_lantern": false,
+    "tengu_penguin_mode_promo": {
+      "discountPercent": 0,
+      "endDate": "Feb 16"
+    },
+    "tengu_frozen_nest": false,
+    "tengu_tool_result_persistence": false,
+    "tengu_pr_status_cli": true,
+    "tengu_kv7_prompt_sort": false,
+    "tengu_swinburne_dune": true,
+    "tengu_cork_lantern": false,
+    "tengu_c4w_usage_limit_notifications_enabled": true,
+    "tengu_turnip_cathedral": false,
+    "tengu-top-of-feed-tip": {
+      "tip": "",
+      "color": ""
+    },
+    "tengu_oboe": true,
+    "tengu_gha_plugin_code_review": false,
+    "tengu_permission_explainer": true,
+    "tengu_desktop_upsell": {
+      "enable_shortcut_tip": false,
+      "enable_startup_dialog": false
+    },
+    "tengu_plum_vx3": false,
+    "tengu_coral_fern": false,
+    "tengu_cork_m4q": false,
+    "tengu_mulberry_fog": false,
+    "tengu_copper_lantern": false,
+    "tengu_kairos_cron": true,
+    "tengu_frond_boric": {},
+    "tengu_miraculo_the_bard": false,
+    "tengu_bridge_min_version": {
+      "minVersion": "0.0.0"
+    },
+    "tengu_session_memory": false,
+    "tengu_event_sampling_config": {},
+    "tengu_brief_tool_enabled": false,
+    "tengu_quartz_lantern": true,
+    "tengu_cobalt_frost": true,
+    "tengu_birch_mist": false,
+    "tengu_amber_quartz": true,
+    "tengu_coral_whistle": false,
+    "tengu_silver_lantern": false,
+    "tengu_chair_sermon": false,
+    "tengu_accept_with_feedback": true,
+    "tengu_copper_wren": false,
+    "tengu_attribution_header": true,
+    "tengu_slate_nexus": false,
+    "tengu_thinkback": false,
+    "tengu_code_diff_cli": true,
+    "tengu_hawthorn_window": 200000,
+    "tengu_amber_prism": false,
+    "tengu_swann_brevity": "focused",
+    "tengu_bridge_poll_interval_config": {
+      "poll_interval_ms_not_at_capacity": 2000,
+      "poll_interval_ms_at_capacity": 600000,
+      "heartbeat_interval_ms": 0,
+      "multisession_poll_interval_ms_not_at_capacity": 5000,
+      "multisession_poll_interval_ms_at_capacity": 60000,
+      "multisession_poll_interval_ms_partial_capacity": 5000,
+      "non_exclusive_heartbeat_interval_ms": 180000,
+      "session_keepalive_interval_ms": 0,
+      "session_keepalive_interval_v2_ms": 0
+    },
+    "tengu_hayate": false,
+    "tengu_post_compact_survey": false,
+    "tengu_birthday_hat": false,
+    "tengu_immediate_model_command": false,
+    "tengu_harbor_ledger": [
+      {
+        "marketplace": "channels",
+        "plugin": "discord"
+      },
+      {
+        "marketplace": "channels",
+        "plugin": "imessage"
+      }
+    ],
+    "tengu_quiet_hollow": true,
+    "tengu_marble_anvil": true,
+    "tengu_marble_fox": false,
+    "tengu_blue_coaster": false,
+    "tengu_pewter_ledger": "OFF",
+    "tengu-off-switch": {
+      "activated": false
+    },
+    "tengu_sm_compact_config": {
+      "minTokens": 2000,
+      "maxTokens": 20000,
+      "minTextBlockMessages": 5
+    },
+    "tengu_summarize_tool_results": false,
+    "tengu_react_vulnerability_warning": false,
+    "tengu_pewter_gull": false,
+    "tengu_version_config": {
+      "minVersion": "1.0.24"
+    },
+    "tengu_brass_pebble": false,
+    "tengu_scratch": false,
+    "tengu_prompt_suggestion": true,
+    "tengu_destructive_command_warning": false,
+    "tengu_olive_hinge": "",
+    "tengu_log_datadog_events": true,
+    "tengu_keybinding_customization_release": true,
+    "tengu_vscode_cc_auth": false,
+    "tengu_streaming_text": false,
+    "tengu_crystal_beam": {
+      "budgetTokens": 0
+    },
+    "tengu_log_segment_events": false,
+    "tengu_bad_survey_transcript_ask_config": {
+      "probability": 0
+    },
+    "tengu_prompt_cache_1h_config": {
+      "allowlist": [
+        "repl_main_thread*",
+        "sdk",
+        "auto_mode"
+      ]
+    },
+    "tengu_tool_pear": false,
+    "tengu_quiet_fern": true,
+    "tengu_compact_cache_prefix": false,
+    "tengu_feedback_survey_config": {
+      "minTimeBeforeFeedbackMs": 600000,
+      "minTimeBetweenFeedbackMs": 100000000,
+      "minTimeBetweenGlobalFeedbackMs": 100000000,
+      "minUserTurnsBeforeFeedback": 5,
+      "minUserTurnsBetweenFeedback": 25,
+      "hideThanksAfterMs": 3000,
+      "onForModels": [
+        "*"
+      ],
+      "probability": 0.01
+    },
+    "tengu_pewter_kestrel": {
+      "global": 50000,
+      "Bash": 30000,
+      "PowerShell": 30000,
+      "Grep": 20000,
+      "Snip": 1000,
+      "StrReplaceBasedEditTool": 30000,
+      "BashSearchTool": 20000
+    },
+    "tengu_tangerine_ladder_boost": true,
+    "tengu_sumi": true
+  },
+  "userID": "fddc8fefeb7fe55f09ad5f4228e1c99a5febf599a50573aa5d9b7a9ba8f98912",
+  "clientDataCache": {
+    "data": null,
+    "timestamp": 1772391281214
+  },
+  "showSpinnerTree": false,
+  "lastReleaseNotesSeen": "2.1.77",
+  "changelogLastFetched": 1773752950655,
+  "firstStartTime": "2026-02-10T15:04:49.832Z",
+  "opusProMigrationComplete": true,
+  "cachedChromeExtensionInstalled": true,
+  "shiftEnterKeyBindingInstalled": true,
+  "hasCompletedOnboarding": true,
+  "lastOnboardingVersion": "2.1.38",
+  "officialMarketplaceAutoInstallAttempted": true,
+  "officialMarketplaceAutoInstalled": true,
+  "sonnet45MigrationComplete": true,
+  "opus45MigrationComplete": true,
+  "thinkingMigrationComplete": true,
+  "githubRepoPaths": {
+    "chamanomopah/orion-master": [
+      "C:\\Users\\JOSE\\.claude"
+    ],
+    "chamanomopah/nero-voice-assistant-sdk": [
+      "C:\\Users\\JOSE\\Downloads\\niveis_claude_agent_SDK"
+    ],
+    "chamanomopah/niveis-claude-agent-sdk": [
+      "C:\\Users\\JOSE\\Downloads\\niveis_claude_agent_SDK\\youtube-channel",
+      "C:\\Users\\JOSE\\Downloads\\niveis_claude_agent_SDK"
+    ],
+    "chamanomopah/gerador_nodes_infinito": [
+      "C:\\Users\\JOSE\\Downloads\\gerador_nodes_infinito"
+    ],
+    "chamanomopah/nero_prime": [
+      "C:\\Users\\JOSE\\Downloads\\projects\\nero"
+    ],
+    "chamanomopah/n8n_local_trigger": [
+      "C:\\Users\\JOSE\\Downloads\\n8n_cc_workflows\\n8n_local_trigger",
+      "C:\\Users\\JOSE\\Downloads\\projects\\n8n_local_trigger"
+    ],
+    "chamanomopah/claude_code_n8n_manager": [
+      "C:\\Users\\JOSE\\Downloads\\cc_n8n_generator"
+    ],
+    "chamanomopah/youtube-channel": [
+      "C:\\Users\\JOSE\\Downloads\\youtube-channel",
+      "C:\\Users\\JOSE\\Downloads\\youtube-channel\\.claude\\worktrees\\comic"
+    ],
+    "chamanomopah/pi-agent": [
+      "C:\\Users\\JOSE\\Downloads\\pi-agent"
+    ],
+    "chamanomopah/my-video": [
+      "C:\\Users\\JOSE\\Downloads\\youtube-channel\\my-video"
+    ],
+    "chamanomopah/nero_easy": [
+      "C:\\Users\\JOSE\\Downloads\\n8n_cc_workflows\\Nero",
+      "C:\\Users\\JOSE\\Downloads\\Nero_easy"
+    ],
+    "chamanomopah/docs": [
+      "C:\\.nero\\docs"
+    ],
+    "chamanomopah/plan": [
+      "C:\\Users\\JOSE\\Downloads\\n8n_cc_workflows\\plan"
+    ],
+    "chamanomopah/research": [
+      "C:\\Users\\JOSE\\Downloads\\n8n_cc_workflows\\research"
+    ]
+  },
+  "projects": {
+    "C:/Users/JOSE/.claude": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "hasCompletedProjectOnboarding": true
+    },
+    "C:/Users/JOSE/Downloads/tentativa 52": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 13,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": []
+    },
+    "C:/Users/JOSE/Downloads/tentativa-50/companion": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 13,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": []
+    },
+    "C:/Users/JOSE": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 4,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 7528,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {},
+      "lastSessionId": "55df440c-1db8-4e04-a052-fa587a9a05e7",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 14,
+        "frame_duration_ms_min": 0.02999999999974534,
+        "frame_duration_ms_max": 9.240899999999897,
+        "frame_duration_ms_avg": 1.3777857142856564,
+        "frame_duration_ms_p50": 0.0998499999999467,
+        "frame_duration_ms_p95": 7.943499999999909,
+        "frame_duration_ms_p99": 8.981419999999897
+      }
+    },
+    "C:/Users/JOSE/my-agent": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 62911,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 1.76,
+      "lastFpsLow1Pct": 140.33,
+      "lastModelUsage": {},
+      "lastSessionId": "87ba9b74-4413-4c00-978a-1ef9f61f096f",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 107,
+        "frame_duration_ms_min": 0.03280000000086147,
+        "frame_duration_ms_max": 15.302400000000148,
+        "frame_duration_ms_avg": 1.2031102803740517,
+        "frame_duration_ms_p50": 0.9182999999975436,
+        "frame_duration_ms_p95": 2.606969999999635,
+        "frame_duration_ms_p99": 7.094180000001237
+      }
+    },
+    "C:/Users/JOSE/Downloads/niveis_claude_agent_SDK": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 7,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 90471,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {},
+      "lastSessionId": "578abd74-1112-456a-beb7-3e2b9b8c5bb4"
+    },
+    "C:/Users/JOSE/Downloads": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 3,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "hasCompletedProjectOnboarding": true
+    },
+    "C:/Users/JOSE/Downloads/youtube-channel": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 3787,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {},
+      "lastSessionId": "374ca692-43fe-428b-be35-122acc15ac56",
+      "activeWorktreeSession": {
+        "originalCwd": "C:\\Users\\JOSE\\Downloads\\youtube-channel",
+        "worktreePath": "C:\\Users\\JOSE\\Downloads\\youtube-channel\\.claude\\worktrees\\comic",
+        "worktreeName": "comic",
+        "worktreeBranch": "worktree-comic",
+        "originalBranch": "master",
+        "originalHeadCommit": "b6ef9fabec1ba087478189932510f288c5ced19a",
+        "sessionId": "aa53d045-5195-4378-8e58-42f0c5a42ad5"
+      }
+    },
+    "C:/Users/JOSE/Downloads/pi-agent": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 5579,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {},
+      "lastSessionId": "28651494-43ac-4e29-b912-a818a460bff3",
+      "hasCompletedProjectOnboarding": true
+    },
+    "C:/Users/JOSE/Downloads/Nero_easy": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "hasCompletedProjectOnboarding": true
+    },
+    "C:/Users/JOSE/Downloads/n8n_cc_workflows/Nero": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 15883,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {},
+      "lastSessionId": "aa76c8f9-6c58-4fd2-bd2f-2e3d574f8727",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 25,
+        "frame_duration_ms_min": 0.04199999999946158,
+        "frame_duration_ms_max": 12.29600000000005,
+        "frame_duration_ms_avg": 1.117408000000769,
+        "frame_duration_ms_p50": 0.43369999999777065,
+        "frame_duration_ms_p95": 2.5683800000000674,
+        "frame_duration_ms_p99": 10.00592000000005
+      }
+    },
+    "C:/.nero/docs": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 48209,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 1.17,
+      "lastFpsLow1Pct": 117.33,
+      "lastModelUsage": {},
+      "lastSessionId": "d81f1093-3942-420c-9181-93e5cfa42ef8",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 55,
+        "frame_duration_ms_min": 0.05789999999979045,
+        "frame_duration_ms_max": 8.522899999999936,
+        "frame_duration_ms_avg": 1.2030163636362616,
+        "frame_duration_ms_p50": 0.5743000000002212,
+        "frame_duration_ms_p95": 4.608029999999417,
+        "frame_duration_ms_p99": 8.145385999999974
+      }
+    },
+    "C:/Users": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false
+    },
+    "C:/Users/JOSE/Downloads/n8n_cc_workflows/plan": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 19,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 5492,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {},
+      "lastSessionId": "518dfac5-9c27-42f4-96c4-fd10546fe463",
+      "hasCompletedProjectOnboarding": true
+    },
+    "C:/Users/JOSE/Downloads/n8n_cc_workflows/research": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {
+        "tavily-remote-mcp": {
+          "type": "http",
+          "url": "https://mcp.tavily.com/mcp/"
+        },
+        "firecrawl": {
+          "type": "http",
+          "url": "https://mcp.firecrawl.dev/fc-0da08512300a4f3c84dc67f2e8219af4/v2/mcp"
+        }
+      },
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 7,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "disabledMcpServers": [
+        "firecrawl",
+        "context7",
+        "playwright"
+      ]
+    },
+    "C:/Users/JOSE/Downloads/n8n_cc_workflows/n8n_local_trigger": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": []
+    }
+  },
+  "skillUsage": {
+    "PAI": {
+      "usageCount": 1,
+      "lastUsedAt": 1770739777641
+    },
+    "deploy-team": {
+      "usageCount": 1,
+      "lastUsedAt": 1770764923718
+    },
+    "Browser": {
+      "usageCount": 1,
+      "lastUsedAt": 1770804874945
+    },
+    "bug": {
+      "usageCount": 21,
+      "lastUsedAt": 1772382531526
+    },
+    "plan": {
+      "usageCount": 27,
+      "lastUsedAt": 1773320101392
+    },
+    "implement": {
+      "usageCount": 46,
+      "lastUsedAt": 1773322222060
+    },
+    "test": {
+      "usageCount": 19,
+      "lastUsedAt": 1773321125823
+    },
+    "test-e2e": {
+      "usageCount": 24,
+      "lastUsedAt": 1772982215691
+    },
+    "review": {
+      "usageCount": 9,
+      "lastUsedAt": 1772983584570
+    },
+    "patch": {
+      "usageCount": 5,
+      "lastUsedAt": 1773322178880
+    },
+    "orchestrate-agents": {
+      "usageCount": 3,
+      "lastUsedAt": 1771174753648
+    },
+    "reduce-command": {
+      "usageCount": 1,
+      "lastUsedAt": 1771175387780
+    },
+    "modify-comand": {
+      "usageCount": 7,
+      "lastUsedAt": 1772545617769
+    },
+    "review2": {
+      "usageCount": 11,
+      "lastUsedAt": 1773322292996
+    },
+    "plan_w_team": {
+      "usageCount": 1,
+      "lastUsedAt": 1771590624339
+    },
+    "feature": {
+      "usageCount": 5,
+      "lastUsedAt": 1772033870048
+    },
+    "add_existingWorkflow": {
+      "usageCount": 1,
+      "lastUsedAt": 1771629549235
+    },
+    "prime": {
+      "usageCount": 1,
+      "lastUsedAt": 1771883760831
+    },
+    "workflows:bug_implement": {
+      "usageCount": 4,
+      "lastUsedAt": 1772116589201
+    },
+    "context7-docs-lookup": {
+      "usageCount": 3,
+      "lastUsedAt": 1772650416159
+    },
+    "mcp": {
+      "usageCount": 2,
+      "lastUsedAt": 1772282395432
+    },
+    "oi": {
+      "usageCount": 5,
+      "lastUsedAt": 1772897462157
+    },
+    "meta-command": {
+      "usageCount": 4,
+      "lastUsedAt": 1772574995288
+    },
+    "qa-test": {
+      "usageCount": 2,
+      "lastUsedAt": 1772539743582
+    },
+    "devils-advocate": {
+      "usageCount": 5,
+      "lastUsedAt": 1772545739590
+    },
+    "resolve-failed-test": {
+      "usageCount": 11,
+      "lastUsedAt": 1773321167801
+    },
+    "e2e-test-design": {
+      "usageCount": 7,
+      "lastUsedAt": 1773510548130
+    },
+    "resolve-failed-e2e-test": {
+      "usageCount": 6,
+      "lastUsedAt": 1772982398354
+    },
+    "document": {
+      "usageCount": 1,
+      "lastUsedAt": 1772982830195
+    },
+    "create-readme": {
+      "usageCount": 1,
+      "lastUsedAt": 1772986154564
+    },
+    "mermaid-diagram": {
+      "usageCount": 4,
+      "lastUsedAt": 1773510556202
+    }
+  },
+  "mcpServers": {
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@upstash/context7-mcp",
+        "--api-key",
+        "ctx7sk-25a5ef17-a8f4-4569-ade6-d69fc8e137d6"
+      ],
+      "env": {}
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ],
+      "env": {}
+    }
+  },
+  "teammateMode": "auto",
+  "sonnet1m45MigrationComplete": true,
+  "birthdayHatAnimationCount": 3,
+  "lastPlanModeUse": 1773663006964,
+  "toolUsage": {
+    "Read": {
+      "usageCount": 258,
+      "lastUsedAt": 1772117220676
+    },
+    "Grep": {
+      "usageCount": 5,
+      "lastUsedAt": 1771948365015
+    },
+    "Glob": {
+      "usageCount": 29,
+      "lastUsedAt": 1772116661346
+    },
+    "Write": {
+      "usageCount": 53,
+      "lastUsedAt": 1772117173782
+    },
+    "Edit": {
+      "usageCount": 188,
+      "lastUsedAt": 1772117100181
+    },
+    "Bash": {
+      "usageCount": 366,
+      "lastUsedAt": 1772139639427
+    },
+    "Task": {
+      "usageCount": 9,
+      "lastUsedAt": 1772117182706
+    },
+    "TaskOutput": {
+      "usageCount": 7,
+      "lastUsedAt": 1772021785423
+    },
+    "TaskStop": {
+      "usageCount": 2,
+      "lastUsedAt": 1772021350034
+    },
+    "TaskCreate": {
+      "usageCount": 23,
+      "lastUsedAt": 1772116830247
+    },
+    "TaskUpdate": {
+      "usageCount": 47,
+      "lastUsedAt": 1772117189845
+    },
+    "TeamCreate": {
+      "usageCount": 1,
+      "lastUsedAt": 1772109243641
+    },
+    "TaskList": {
+      "usageCount": 3,
+      "lastUsedAt": 1772117193839
+    },
+    "SendMessage": {
+      "usageCount": 13,
+      "lastUsedAt": 1772113928803
+    },
+    "TeamDelete": {
+      "usageCount": 1,
+      "lastUsedAt": 1772113941519
+    },
+    "Skill": {
+      "usageCount": 4,
+      "lastUsedAt": 1772116801309
+    }
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1772644759874
+  },
+  "hasIdeOnboardingBeenShown": {
+    "vscode": true
+  },
+  "ideHintShownCount": 5,
+  "opus1mMergeNoticeSeenCount": 6,
+  "effortCalloutV2Dismissed": true
+}

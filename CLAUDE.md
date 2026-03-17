@@ -16,3 +16,12 @@ obrigatorio: sempre que o usuario fale "use o docs" ou "leia o docs" no final de
 C:\Users\JOSE\Downloads\n8n_cc_workflows\ASSETS\DOCS
 liste os docs e veja aquele que mais se encaixa com o que o usuario necessita
 apenas ative isso quando o usuario citar "use o docs" ou "leia o docs" no final de uma frase
+
+
+pastas principais 
+
+
+
+
+projetos principais
+C:\Users\JOSE\Downloads\n8n_cc_workflows\n8n_local_trigger
