@@ -3,3 +3,5 @@ projects/
 shell-snapshots/
 backups/
 plugins/
+sessions/
+history.jsonl
