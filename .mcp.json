@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "tavily-remote-mcp": {
+      "transport": {
+        "type": "oauth",
+        "serverUrl": "https://mcp.tavily.com/mcp/"
+      }
+    },
+    "web_reader": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-web-reader"]
+    },
+    "4-5v-mcp": {
+      "command": "npx",
+      "args": ["-y", "4-5v-mcp"]
+    }
+  }
+}
