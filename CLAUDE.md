@@ -2,6 +2,29 @@
 
 sempre que o usuario falar pra adicionar na sua memoria/contexto, ele esta se referencido ao arquivo  C:\Users\JOSE\.claude\CLAUDE.md
 
+---
+
+## Sistema de Referências Unificado
+
+Todas as citações seguem o formato: **[Letras][Número]**
+
+- **Pastas = Letras** (A, B, AB, ABC...)
+- **Arquivos = Números** (1, 2, 3...)
+- **Categoria = falada** ("documentação", "pesquisa", "diagrama", "projeto", "cliente")
+
+### Exemplos
+- "documentação A1" → DOCS, Pasta A, Arquivo 1
+- "pesquisa B2" → RESEARCH, Pasta B, Arquivo 2
+- "diagrama C1" → DIAGRAMS, Pasta C, Arquivo 1
+- "projeto D5" → PROJECTS, Projeto D, Arquivo 5
+
+### Hierarquia
+- `A1` = Pasta A, Arquivo 1
+- `AB1` = Pasta A → Sub B, Arquivo 1
+- `ABC1` = Pasta A → Sub B → Sub C, Arquivo 1
+
+---
+
 ## Agentes Disponíveis (pasta: C:\Users\JOSE\.claude\agents)
 
 **Total: 7 agentes** (6 numerados + 1 não numerado)
@@ -32,35 +55,30 @@ sempre que o usuario falar pra adicionar na sua memoria/contexto, ele esta se re
 
 **Curso de documentação em inglês sobre agentes AI**
 
-**Total: 5 pastas numeradas | 35 arquivos numerados**
+**Total: 5 pastas | 35 arquivos**
 
 ### Índice de Pastas
 
 | Referência | Pasta | Conteúdo |
 |------------|-------|----------|
-| DOCS 1 | 1-essentials | Módulos Claude Code, MCP |
-| DOCS 2 | 2-human-in-a-loop | Human-in-the-loop patterns (3 arquivos) |
-| DOCS 3 | 3-individual_agents | Agentes individuais (12 arquivos) |
-| DOCS 4 | 4-orchestration | Orquestração (5 arquivos) |
-| DOCS 5 | 5-workflows | Workflows e padrões (13 arquivos) |
+| documentação A | A-essentials | Módulos Claude Code, MCP |
+| documentação B | B-human-in-a-loop | Human-in-the-loop patterns (3 arquivos) |
+| documentação C | C-individual_agents | Agentes individuais (12 arquivos) |
+| documentação D | D-orchestration | Orquestração (5 arquivos) |
+| documentação E | E-workflows | Workflows e padrões (13 arquivos) |
 
 ### Como Citar
 
-- **Formato simples:** `DOCS [pasta]-[arquivo]`
-- **Com subpasta:** `DOCS [pasta]-[subpasta]-[arquivo]`
-- **Múltiplos arquivos:** `DOCS [pasta] arquivo(s) [n1, n2, n3]`
-
-### Exemplos
-
-- "Use a documentação DOCS 2-3" → Pasta 2, Arquivo 3 (`review-vs-test.md`)
-- "Use DOCS 3 arquivos 5, 7 e 9" → Pasta 3, Arquivos 5, 7, 9
-- "Consulte DOCS 1-1-2" → Pasta 1, Subpasta 1, Arquivo 2 (`skills.md`)
+- **Formato:** "documentação" + `[Letras][Número]`
+- **Exemplo:** "documentação A1" → Pasta A, Arquivo 1
+- **Exemplo:** "documentação AB1" → Pasta A → Sub B, Arquivo 1
+- **Múltiplos:** "documentação A arquivos 1, 2 e 3"
 
 ### Índice Completo
 
 Veja arquivo `INDEX.md` em `C:\Users\JOSE\.claude\ASSETS\DOCS\INDEX.md` para referência completa.
 
-**IMPORTANTE:** Quando o usuário citar documentação (ex: "use a doc da pasta 3 arquivo 5"), ler automaticamente o arquivo correspondente e usar como contexto para construir/responder a solicitação.
+**IMPORTANTE:** Quando o usuário citar documentação (ex: "use a documentação A1"), ler automaticamente o arquivo correspondente e usar como contexto.
 
 ---
 
@@ -68,28 +86,22 @@ Veja arquivo `INDEX.md` em `C:\Users\JOSE\.claude\ASSETS\DOCS\INDEX.md` para ref
 
 **Diagramas em Mermaid (.mmd, .mermaid) organizados por categoria**
 
-**Total: 5 pastas numeradas | 1 arquivo**
+**Total: 5 pastas | 1 arquivo**
 
 ### Índice de Pastas
 
 | Referência | Pasta | Conteúdo |
 |------------|-------|----------|
-| DIAGRAMS 1 | 1-flowcharts | Fluxogramas e diagramas de processo |
-| DIAGRAMS 2 | 2-sequences | Diagramas de sequência |
-| DIAGRAMS 3 | 3-architecture | Diagramas de arquitetura |
-| DIAGRAMS 4 | 4-mindmaps | Mapas mentais |
-| DIAGRAMS 5 | 5-entity-relationship | Diagramas entidade-relacionamento |
+| diagrama A | A-flowcharts | Fluxogramas e diagramas de processo |
+| diagrama B | B-sequences | Diagramas de sequência |
+| diagrama C | C-architecture | Diagramas de arquitetura |
+| diagrama D | D-mindmaps | Mapas mentais |
+| diagrama E | E-entity-relationship | Diagramas entidade-relacionamento |
 
 ### Como Citar
 
-- **Formato simples:** `D[pasta]-[arquivo]`
-- **Com subpasta:** `D[pasta]-[subpasta]-[arquivo]`
-- **Múltiplos arquivos:** `D[pasta] arquivo(s) [n1, n2, n3]`
-
-### Exemplos
-
-- "Use o diagrama D1-1" → Diagramas Pasta 1, Arquivo 1 (`ciclo_agua.mmd`)
-- "Renderize D3 arquivos 2 e 4" → Diagramas Pasta 3, Arquivos 2, 4
+- **Formato:** "diagrama" + `[Letras][Número]`
+- **Exemplo:** "diagrama A1" → Pasta A, Arquivo 1 (`ciclo_agua.mmd`)
 
 ### Índice Completo
 
@@ -101,28 +113,22 @@ Veja arquivo `INDEX.md` em `C:\Users\JOSE\.claude\ASSETS\DIAGRAMS\INDEX.md` para
 
 **Pesquisas e estudos sobre agentes AI e padrões**
 
-**Total: 5 pastas numeradas | 0 arquivos**
+**Total: 5 pastas | 0 arquivos**
 
 ### Índice de Pastas
 
 | Referência | Pasta | Conteúdo |
 |------------|-------|----------|
-| RESEARCH 1 | 1-ai-agents | Pesquisas sobre agentes de IA |
-| RESEARCH 2 | 2-orchestration | Orquestração de multi-agentes |
-| RESEARCH 3 | 3-workflows | Workflows e padrões de execução |
-| RESEARCH 4 | 4-patterns | Padrões de design e implementação |
-| RESEARCH 5 | 5-case-studies | Estudos de caso e exemplos práticos |
+| pesquisa A | A-ai-agents | Pesquisas sobre agentes de IA |
+| pesquisa B | B-orchestration | Orquestração de multi-agentes |
+| pesquisa C | C-workflows | Workflows e padrões de execução |
+| pesquisa D | D-patterns | Padrões de design e implementação |
+| pesquisa E | E-case-studies | Estudos de caso e exemplos práticos |
 
 ### Como Citar
 
-- **Formato simples:** `R[pasta]-[arquivo]`
-- **Com subpasta:** `R[pasta]-[subpasta]-[arquivo]`
-- **Múltiplos arquivos:** `R[pasta] arquivo(s) [n1, n2, n3]`
-
-### Exemplos
-
-- "Use a pesquisa R1-1" → Research Pasta 1, Arquivo 1
-- "Consulte R2 arquivos 3 e 5" → Research Pasta 2, Arquivos 3, 5
+- **Formato:** "pesquisa" + `[Letras][Número]`
+- **Exemplo:** "pesquisa A1" → Pasta A, Arquivo 1
 
 ### Índice Completo
 

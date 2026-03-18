@@ -4,60 +4,60 @@
 
 ## Estrutura de Citação
 
-- **Formato:** `D[pasta]-[arquivo]` ou `D[pasta]-[subpasta]-[arquivo]`
-- **Prefixo:** `D` (de Diagrams) para diferenciar de DOCS
-- **Exemplo:** `D2-3` = Diagramas Pasta 2, Arquivo 3
-- **Exemplo:** `D1-1-2` = Diagramas Pasta 1, Subpasta 1, Arquivo 2
+- **Formato:** `[Letras][Número]`
+- **Como falar:** "diagrama" + `[Letras][Número]`
+- **Exemplo:** `A1` = Pasta A, Arquivo 1
+- **Exemplo:** `AB1` = Pasta A → Sub B, Arquivo 1
 
 ---
 
-## 1-FLOWCHARTS
+## A - FLOWCHARTS
 
 Fluxogramas e diagramas de processo.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| D1-1 | ciclo_agua.mmd | Exemplo: Ciclo da Água |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| A1 | ciclo_agua.mmd | Exemplo: Ciclo da Água |
 
 ---
 
-## 2-SEQUENCES
+## B - SEQUENCES
 
 Diagramas de sequência e interações temporais.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| D2-1 | | *(vazio)* |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| B1 | | *(vazio)* |
 
 ---
 
-## 3-ARCHITECTURE
+## C - ARCHITECTURE
 
 Diagramas de arquitetura de sistemas e componentes.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| D3-1 | | *(vazio)* |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| C1 | | *(vazio)* |
 
 ---
 
-## 4-MINDMAPS
+## D - MINDMAPS
 
 Mapas mentais e diagramas de hierarquia.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| D4-1 | | *(vazio)* |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| D1 | | *(vazio)* |
 
 ---
 
-## 5-ENTITY-RELATIONSHIP
+## E - ENTITY-RELATIONSHIP
 
 Diagramas entidade-relacionamento e esquemas de dados.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| D5-1 | | *(vazio)* |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| E1 | | *(vazio)* |
 
 ---
 

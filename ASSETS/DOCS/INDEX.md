@@ -4,87 +4,98 @@
 
 ## Estrutura de Citação
 
-- **Formato:** `[pasta]-[arquivo]` ou `[pasta]-[subpasta]-[arquivo]`
-- **Exemplo:** `2-3` = Pasta 2, Arquivo 3
-- **Exemplo:** `1-1-2` = Pasta 1, Subpasta 1, Arquivo 2
+- **Formato:** `[Letras][Número]`
+- **Como falar:** "documentação" + `[Letras][Número]`
+- **Exemplo:** `A1` = Pasta A, Arquivo 1
+- **Exemplo:** `AB1` = Pasta A → Sub B, Arquivo 1
 
 ---
 
-## 1-ESSENTIALS
+## A - ESSENTIALS
 
-### 1.1-claude_code_modules
-| ID | Arquivo |
-|----|---------|
-| 1-1-1 | claude_code_mcp.md |
-| 1-1-2 | skills.md |
-| 1-1-3 | sub-agents.md |
+Módulos Claude Code, MCP e fundamentos.
 
-### 1.2-mcp
-| ID | Arquivo |
-|----|---------|
-| 1-2-1 | firecrawl_mcp.md |
-| 1-2-2 | tavily_mcp.md |
+### AB - claude_code_modules
+| Ref | Arquivo |
+|-----|---------|
+| AB1 | claude_code_mcp.md |
+| AB2 | skills.md |
+| AB3 | sub-agents.md |
 
----
-
-## 2-HUMAN-IN-A-LOOP
-
-| ID | Arquivo |
-|----|---------|
-| 2-1 | inloop-vs-outloop.md |
-| 2-2 | issue-severity-classification.md |
-| 2-3 | review-vs-test.md |
+### AC - mcp
+| Ref | Arquivo |
+|-----|---------|
+| AC1 | firecrawl_mcp.md |
+| AC2 | tavily_mcp.md |
 
 ---
 
-## 3-INDIVIDUAL_AGENTS
+## B - HUMAN-IN-A-LOOP
 
-| ID | Arquivo |
-|----|---------|
-| 3-1 | 12-leverage-points.md |
-| 3-2 | agent-perspective-checklist.md |
-| 3-3 | agentic-kpis.md |
-| 3-4 | composable-primitives.md |
-| 3-5 | core-four-framework.md |
-| 3-6 | fresh-agent-rationale.md |
-| 3-7 | meta-prompt-patterns.md |
-| 3-8 | minimum-context-principle.md |
-| 3-9 | prompt-sections-reference.md |
-| 3-10 | seven-levels.md |
-| 3-11 | template-engineering.md |
-| 3-12 | variable-patterns.md |
+Padrões de interação humana com agentes.
+
+| Ref | Arquivo |
+|-----|---------|
+| B1 | inloop-vs-outloop.md |
+| B2 | issue-severity-classification.md |
+| B3 | review-vs-test.md |
 
 ---
 
-## 4-ORCHESTRATION
+## C - INDIVIDUAL_AGENTS
 
-| ID | Arquivo |
-|----|---------|
-| 4-1 | agentic-layer-structure.md |
-| 4-2 | stakeholder-trifecta.md |
-| 4-3 | tac-philosophy.md |
-| 4-4 | the-guiding-question.md |
-| 4-5 | three-pillars-orchestration.md |
+Conceitos sobre agentes individuais.
+
+| Ref | Arquivo |
+|-----|---------|
+| C1 | 12-leverage-points.md |
+| C2 | agent-perspective-checklist.md |
+| C3 | agentic-kpis.md |
+| C4 | composable-primitives.md |
+| C5 | core-four-framework.md |
+| C6 | fresh-agent-rationale.md |
+| C7 | meta-prompt-patterns.md |
+| C8 | minimum-context-principle.md |
+| C9 | prompt-sections-reference.md |
+| C10 | seven-levels.md |
+| C11 | template-engineering.md |
+| C12 | variable-patterns.md |
 
 ---
 
-## 5-WORKFLOWS
+## D - ORCHESTRATION
 
-| ID | Arquivo |
-|----|---------|
-| 5-1 | adw-framework.md |
-| 5-2 | agent-evolution-path.md |
-| 5-3 | closed-loop-anatomy.md |
-| 5-4 | context-rot-vs-pollution.md |
-| 5-5 | multi-agent-context-protection.md |
-| 5-6 | one-agent-one-purpose.md |
-| 5-7 | plan-format-guide.md |
-| 5-8 | rd-framework.md |
-| 5-9 | system-prompt-architecture.md |
-| 5-10 | system-vs-user-prompts.md |
-| 5-11 | test-leverage-point.md |
-| 5-12 | zte-confidence-building.md |
-| 5-13 | zte-progression.md |
+Orquestração de multi-agentes.
+
+| Ref | Arquivo |
+|-----|---------|
+| D1 | agentic-layer-structure.md |
+| D2 | stakeholder-trifecta.md |
+| D3 | tac-philosophy.md |
+| D4 | the-guiding-question.md |
+| D5 | three-pillars-orchestration.md |
+
+---
+
+## E - WORKFLOWS
+
+Workflows e padrões de execução.
+
+| Ref | Arquivo |
+|-----|---------|
+| E1 | adw-framework.md |
+| E2 | agent-evolution-path.md |
+| E3 | closed-loop-anatomy.md |
+| E4 | context-rot-vs-pollution.md |
+| E5 | multi-agent-context-protection.md |
+| E6 | one-agent-one-purpose.md |
+| E7 | plan-format-guide.md |
+| E8 | rd-framework.md |
+| E9 | system-prompt-architecture.md |
+| E10 | system-vs-user-prompts.md |
+| E11 | test-leverage-point.md |
+| E12 | zte-confidence-building.md |
+| E13 | zte-progression.md |
 
 ---
 

@@ -4,60 +4,60 @@
 
 ## Estrutura de Citação
 
-- **Formato:** `R[pasta]-[arquivo]` ou `R[pasta]-[subpasta]-[arquivo]`
-- **Prefixo:** `R` (de Research) para diferenciar de DOCS
-- **Exemplo:** `R2-3` = Research Pasta 2, Arquivo 3
-- **Exemplo:** `R1-1-2` = Research Pasta 1, Subpasta 1, Arquivo 2
+- **Formato:** `[Letras][Número]`
+- **Como falar:** "pesquisa" + `[Letras][Número]`
+- **Exemplo:** `A1` = Pasta A, Arquivo 1
+- **Exemplo:** `AB1` = Pasta A → Sub B, Arquivo 1
 
 ---
 
-## 1-AI-AGENTS
+## A - AI-AGENTS
 
 Pesquisas sobre agentes de IA, arquiteturas e padrões.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| R1-1 | | *(vazio)* |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| A1 | | *(vazio)* |
 
 ---
 
-## 2-ORCHESTRATION
+## B - ORCHESTRATION
 
 Pesquisas sobre orquestração de multi-agentes.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| R2-1 | | *(vazio)* |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| B1 | | *(vazio)* |
 
 ---
 
-## 3-WORKFLOWS
+## C - WORKFLOWS
 
 Pesquisas sobre workflows e padrões de execução.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| R3-1 | | *(vazio)* |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| C1 | | *(vazio)* |
 
 ---
 
-## 4-PATTERNS
+## D - PATTERNS
 
 Pesquisas sobre padrões de design e implementação.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| R4-1 | | *(vazio)* |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| D1 | | *(vazio)* |
 
 ---
 
-## 5-CASE-STUDIES
+## E - CASE-STUDIES
 
 Estudos de caso e exemplos práticos.
 
-| ID | Arquivo | Descrição |
-|----|---------|-----------|
-| R5-1 | | *(vazio)* |
+| Ref | Arquivo | Descrição |
+|-----|---------|-----------|
+| E1 | | *(vazio)* |
 
 ---
 
