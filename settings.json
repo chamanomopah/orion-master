@@ -3,5 +3,19 @@
   "model": "opus[1m]",
   "effortLevel": "high",
   "autoMemoryEnabled": false,
-  "permissions": { "defaultMode": "bypassPermissions" }
+  "permissions": { "defaultMode": "bypassPermissions" },
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python C:/Users/JOSE/.claude/scripts/update_indexes.py 2>&1 || true",
+            "timeout": 30,
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
 }
