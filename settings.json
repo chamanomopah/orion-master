@@ -2,5 +2,6 @@
   "skipDangerousModePermissionPrompt": true,
   "model": "opus[1m]",
   "effortLevel": "high",
-  "autoMemoryEnabled": false
+  "autoMemoryEnabled": false,
+  "permissions": { "defaultMode": "bypassPermissions" }
 }

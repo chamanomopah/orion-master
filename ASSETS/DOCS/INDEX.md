@@ -1,105 +1,89 @@
-# DOCS Index - Referência Rápida
+# DOCS Index - Referencia Rapida
 
-**Localização:** `C:\Users\JOSE\.claude\ASSETS\DOCS`
+**Localizacao:** `C:\Users\JOSE\.claude\ASSETS\DOCS`
 
-## Estrutura de Citação
+## Estrutura de Citacao
 
-- **Formato:** `[Letras][Número]`
-- **Como falar:** "documentação" + `[Letras][Número]`
+- **Formato:** `[Letras][Numero]`
+- **Como falar:** "documentacao" + `[Letras][Numero]`
 - **Exemplo:** `A1` = Pasta A, Arquivo 1
-- **Exemplo:** `AB1` = Pasta A → Sub B, Arquivo 1
-
+- **Exemplo:** `AB1` = Pasta A -> Sub B, Arquivo 1
 ---
 
 ## A - ESSENTIALS
+Modulos Claude Code, MCP e fundamentos.
 
-Módulos Claude Code, MCP e fundamentos.
-
-### AB - claude_code_modules
+### AA - claude_code_modules
 | Ref | Arquivo |
 |-----|---------|
-| AB1 | claude_code_mcp.md |
-| AB2 | skills.md |
-| AB3 | sub-agents.md |
+| AA1 | 1-claude_code_mcp.md |
+| AA2 | 2-skills.md |
+| AA3 | 3-sub-agents.md |
 
-### AC - mcp
+### AB - mcp
 | Ref | Arquivo |
 |-----|---------|
-| AC1 | firecrawl_mcp.md |
-| AC2 | tavily_mcp.md |
-
----
+| AB1 | 1-firecrawl_mcp.md |
+| AB2 | 2-tavily_mcp.md |
 
 ## B - HUMAN-IN-A-LOOP
-
-Padrões de interação humana com agentes.
+Padroes de interacao humana com agentes.
 
 | Ref | Arquivo |
 |-----|---------|
-| B1 | inloop-vs-outloop.md |
-| B2 | issue-severity-classification.md |
-| B3 | review-vs-test.md |
-
----
+| B1 | 1-inloop-vs-outloop.md |
+| B2 | 2-issue-severity-classification.md |
+| B3 | 3-review-vs-test.md |
 
 ## C - INDIVIDUAL_AGENTS
-
 Conceitos sobre agentes individuais.
 
 | Ref | Arquivo |
 |-----|---------|
-| C1 | 12-leverage-points.md |
-| C2 | agent-perspective-checklist.md |
-| C3 | agentic-kpis.md |
-| C4 | composable-primitives.md |
-| C5 | core-four-framework.md |
-| C6 | fresh-agent-rationale.md |
-| C7 | meta-prompt-patterns.md |
-| C8 | minimum-context-principle.md |
-| C9 | prompt-sections-reference.md |
-| C10 | seven-levels.md |
-| C11 | template-engineering.md |
-| C12 | variable-patterns.md |
-
----
+| C1 | 1-12-leverage-points.md |
+| C2 | 10-seven-levels.md |
+| C3 | 11-template-engineering.md |
+| C4 | 12-variable-patterns.md |
+| C5 | 2-agent-perspective-checklist.md |
+| C6 | 3-agentic-kpis.md |
+| C7 | 4-composable-primitives.md |
+| C8 | 5-core-four-framework.md |
+| C9 | 6-fresh-agent-rationale.md |
+| C10 | 7-meta-prompt-patterns.md |
+| C11 | 8-minimum-context-principle.md |
+| C12 | 9-prompt-sections-reference.md |
 
 ## D - ORCHESTRATION
-
-Orquestração de multi-agentes.
+Orquestracao de multi-agentes.
 
 | Ref | Arquivo |
 |-----|---------|
-| D1 | agentic-layer-structure.md |
-| D2 | stakeholder-trifecta.md |
-| D3 | tac-philosophy.md |
-| D4 | the-guiding-question.md |
-| D5 | three-pillars-orchestration.md |
-
----
+| D1 | 1-agentic-layer-structure.md |
+| D2 | 2-stakeholder-trifecta.md |
+| D3 | 3-tac-philosophy.md |
+| D4 | 4-the-guiding-question.md |
+| D5 | 5-three-pillars-orchestration.md |
 
 ## E - WORKFLOWS
-
-Workflows e padrões de execução.
+Workflows e padroes de execucao.
 
 | Ref | Arquivo |
 |-----|---------|
-| E1 | adw-framework.md |
-| E2 | agent-evolution-path.md |
-| E3 | closed-loop-anatomy.md |
-| E4 | context-rot-vs-pollution.md |
-| E5 | multi-agent-context-protection.md |
-| E6 | one-agent-one-purpose.md |
-| E7 | plan-format-guide.md |
-| E8 | rd-framework.md |
-| E9 | system-prompt-architecture.md |
-| E10 | system-vs-user-prompts.md |
-| E11 | test-leverage-point.md |
-| E12 | zte-confidence-building.md |
-| E13 | zte-progression.md |
+| E1 | 1-adw-framework.md |
+| E2 | 10-system-vs-user-prompts.md |
+| E3 | 11-test-leverage-point.md |
+| E4 | 12-zte-confidence-building.md |
+| E5 | 13-zte-progression.md |
+| E6 | 2-agent-evolution-path.md |
+| E7 | 3-closed-loop-anatomy.md |
+| E8 | 4-context-rot-vs-pollution.md |
+| E9 | 5-multi-agent-context-protection.md |
+| E10 | 6-one-agent-one-purpose.md |
+| E11 | 7-plan-format-guide.md |
+| E12 | 8-rd-framework.md |
+| E13 | 9-system-prompt-architecture.md |
 
 ---
-
 ## Resumo
-
 - **Total Pastas:** 5
-- **Total Arquivos:** 35
+- **Total Arquivos:** 38

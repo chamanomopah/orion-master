@@ -4,132 +4,72 @@ sempre que o usuario falar pra adicionar na sua memoria/contexto, ele esta se re
 
 ---
 
-## Sistema de Referências Unificado
+## Sistema de Referências
 
-Todas as citações seguem o formato: **[Letras][Número]**
+Formato: **[Letras][Número]** → Pastas=Letras, Arquivos=Números
 
 - **Pastas = Letras** (A, B, AB, ABC...)
 - **Arquivos = Números** (1, 2, 3...)
-- **Categoria = falada** ("documentação", "pesquisa", "diagrama", "projeto", "cliente")
+- **Categoria = falada** ("documentação", "pesquisa", "diagrama", "especificação", "implementação", "transcrição", "template")
 
-### Exemplos
-- "documentação A1" → DOCS, Pasta A, Arquivo 1
-- "pesquisa B2" → RESEARCH, Pasta B, Arquivo 2
-- "diagrama C1" → DIAGRAMS, Pasta C, Arquivo 1
-- "projeto D5" → PROJECTS, Projeto D, Arquivo 5
+**Exemplos:** "documentação A1", "pesquisa B2", "diagrama C1", "especificação A1", "implementação A1"
 
-### Hierarquia
-- `A1` = Pasta A, Arquivo 1
-- `AB1` = Pasta A → Sub B, Arquivo 1
-- `ABC1` = Pasta A → Sub B → Sub C, Arquivo 1
+**Hierarquia:** `A1` = Pasta A/Arquivo 1 | `AB1` = Pasta A→Sub B/Arquivo 1
 
 ---
 
-## Agentes Disponíveis (pasta: C:\Users\JOSE\.claude\agents)
+## Recursos Disponíveis (carregar sob demanda)
 
-**Total: 7 agentes** (6 numerados + 1 não numerado)
+### Agents (`agents/`)
+Quando usuário citar "agente X", usar `agents/X-nome.md`
 
-| Referência | Nome do Arquivo |
-|------------|-----------------|
-| Agente 1 | 1-meta-comp.md |
-| Agente 2 | 2-gerente.md |
-| Agente 3 | 3-n8n-nodes-generator.md |
-| Agente 4 | 4-research_agent.md |
-| Agente 5 | 5-browser-agent.md |
-| Agente 6 | 6-computer-use-agent.md |
-| Não numerado | meirmaid-diagram-builder.md |
+### Skills (`skills/`)
+Quando usuário citar "skill X", usar pasta numerada correspondente
 
-**Nota:** Quando o usuário se referir a "agente X" (ex: "agente 1"), usar o agente correspondente pelo número no início do nome do arquivo.
+### ASSETS (Contextos para agentes)
 
-## Habilidades/Skills Disponíveis (pasta: C:\Users\JOSE\.claude\skills)
+#### Documentação (`ASSETS/DOCS/`)
+Curso sobre agentes AI (35 arquivos em 5 pastas)
+- A-essentials | B-human-in-a-loop | C-individual_agents | D-orchestration | E-workflows
+- **IMPORTANTE:** Quando usuário citar "documentação X", ler arquivo correspondente automaticamente
+- Referência completa: `ASSETS/DOCS/INDEX.md`
 
-**Total: 1 skill numerada**
+#### Diagramas (`ASSETS/DIAGRAMS/`)
+Mermaid (.mmd, .mermaid)
+- A-flowcharts | B-sequences | C-architecture | D-mindmaps | E-entity-relationship
+- Referência completa: `ASSETS/DIAGRAMS/INDEX.md`
 
-| Referência | Nome da Pasta | Nome da Skill |
-|------------|---------------|---------------|
-| Skill 1 | 1-mermaid-diagram | mermaid-diagram |
+#### Pesquisas (`ASSETS/RESEARCH/`)
+Estudos sobre agentes AI
+- A-ai-agents | B-orchestration | C-workflows | D-patterns | E-case-studies
+- Referência completa: `ASSETS/RESEARCH/INDEX.md`
 
-**Nota:** Quando o usuário se referir a "skill X" (ex: "skill 1"), usar a skill correspondente pelo número no início do nome da pasta.
+#### Especificações (`ASSETS/SPECS/`)
+Contextos em inglês para agentes
+- A-minimum-context | [adicionar mais conforme necessário]
+- **IMPORTANTE:** Quando usuário citar "especificação X", ler arquivo correspondente automaticamente
+- Referência completa: `ASSETS/SPECS/INDEX.md`
 
-## Documentação DOCS (pasta: C:\Users\JOSE\.claude\ASSETS\DOCS)
+### IMPLEMENTATION (Recursos técnicos)
 
-**Curso de documentação em inglês sobre agentes AI**
+Scripts, workflows N8N, projetos e automações
 
-**Total: 5 pastas | 35 arquivos**
-
-### Índice de Pastas
-
-| Referência | Pasta | Conteúdo |
-|------------|-------|----------|
-| documentação A | A-essentials | Módulos Claude Code, MCP |
-| documentação B | B-human-in-a-loop | Human-in-the-loop patterns (3 arquivos) |
-| documentação C | C-individual_agents | Agentes individuais (12 arquivos) |
-| documentação D | D-orchestration | Orquestração (5 arquivos) |
-| documentação E | E-workflows | Workflows e padrões (13 arquivos) |
-
-### Como Citar
-
-- **Formato:** "documentação" + `[Letras][Número]`
-- **Exemplo:** "documentação A1" → Pasta A, Arquivo 1
-- **Exemplo:** "documentação AB1" → Pasta A → Sub B, Arquivo 1
-- **Múltiplos:** "documentação A arquivos 1, 2 e 3"
-
-### Índice Completo
-
-Veja arquivo `INDEX.md` em `C:\Users\JOSE\.claude\ASSETS\DOCS\INDEX.md` para referência completa.
-
-**IMPORTANTE:** Quando o usuário citar documentação (ex: "use a documentação A1"), ler automaticamente o arquivo correspondente e usar como contexto.
+- n8n-workflows/ | scripts/ | projects/
+- Referência completa: `IMPLEMENTATION/INDEX.md`
 
 ---
 
-## Diagramas DIAGRAMS (pasta: C:\Users\JOSE\.claude\ASSETS\DIAGRAMS)
+## Regra de Ouro: Manter Indices Atualizados
 
-**Diagramas em Mermaid (.mmd, .mermaid) organizados por categoria**
+**SEMPRE** que adicionar, remover ou mover arquivos em ASSETS/ ou IMPLEMENTATION/, execute:
 
-**Total: 5 pastas | 1 arquivo**
+```bash
+/update-index
+```
 
-### Índice de Pastas
+Ou execute diretamente:
+```bash
+python C:/Users/JOSE/.claude/scripts/update_indexes.py
+```
 
-| Referência | Pasta | Conteúdo |
-|------------|-------|----------|
-| diagrama A | A-flowcharts | Fluxogramas e diagramas de processo |
-| diagrama B | B-sequences | Diagramas de sequência |
-| diagrama C | C-architecture | Diagramas de arquitetura |
-| diagrama D | D-mindmaps | Mapas mentais |
-| diagrama E | E-entity-relationship | Diagramas entidade-relacionamento |
-
-### Como Citar
-
-- **Formato:** "diagrama" + `[Letras][Número]`
-- **Exemplo:** "diagrama A1" → Pasta A, Arquivo 1 (`ciclo_agua.mmd`)
-
-### Índice Completo
-
-Veja arquivo `INDEX.md` em `C:\Users\JOSE\.claude\ASSETS\DIAGRAMS\INDEX.md` para referência completa.
-
----
-
-## Pesquisas RESEARCH (pasta: C:\Users\JOSE\.claude\ASSETS\RESEARCH)
-
-**Pesquisas e estudos sobre agentes AI e padrões**
-
-**Total: 5 pastas | 0 arquivos**
-
-### Índice de Pastas
-
-| Referência | Pasta | Conteúdo |
-|------------|-------|----------|
-| pesquisa A | A-ai-agents | Pesquisas sobre agentes de IA |
-| pesquisa B | B-orchestration | Orquestração de multi-agentes |
-| pesquisa C | C-workflows | Workflows e padrões de execução |
-| pesquisa D | D-patterns | Padrões de design e implementação |
-| pesquisa E | E-case-studies | Estudos de caso e exemplos práticos |
-
-### Como Citar
-
-- **Formato:** "pesquisa" + `[Letras][Número]`
-- **Exemplo:** "pesquisa A1" → Pasta A, Arquivo 1
-
-### Índice Completo
-
-Veja arquivo `INDEX.md` em `C:\Users\JOSE\.claude\ASSETS\RESEARCH\INDEX.md` para referência completa.
+Isso garante que as citacoes (A1, B2, etc.) permanecam sincronizadas com os arquivos reais.
