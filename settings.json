@@ -13,19 +13,5 @@
       "Read(~/.claude/**)",
       "Write(~/.claude/**)"
     ]
-  },
-  "hooks": {
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python C:/Users/JOSE/.claude/scripts/update_indexes.py 2>&1 || true",
-            "timeout": 30,
-            "async": true
-          }
-        ]
-      }
-    ]
   }
 }

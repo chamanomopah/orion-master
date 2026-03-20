@@ -40,6 +40,10 @@ Quando usuário citar "agente X", usar `agents/X-nome.md`
 ### Skills (`skills/`)
 Quando usuário citar "skill X", usar pasta numerada correspondente
 
+### commands (`commands/`)
+quando o usuario citar "comando X".
+
+
 ### .assets (Contextos para agentes)
 
 #### Documentação (`.assets/DOCS/`)
