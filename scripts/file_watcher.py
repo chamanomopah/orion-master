@@ -1,17 +1,9 @@
 #!/usr/bin/env python3
-import sys
-import os
-import time
-import logging
-import signal
-import subprocess
+import sys, os, time, logging, signal, subprocess
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from scripts.naming_utils import (
-    should_monitor, get_correct_name, MONITORED_DIRS, BASE_DIR,
-)
+from scripts.naming_utils import should_monitor, get_correct_name, MONITORED_DIRS, BASE_DIR
 
 PID_FILE = BASE_DIR / ".watcher.pid"
 LOG_FILE = BASE_DIR / "watcher.log"
@@ -19,7 +11,8 @@ POLL_INTERVAL = 1
 COOLDOWN_SECONDS = 5
 
 _known_files = {}
-_pending_renames = {}
+_pending_renames = []
+_lock = None
 
 logging.basicConfig(
     level=logging.INFO,
@@ -51,31 +44,48 @@ def get_file_mtime(filepath: Path) -> float:
         return 0
 
 
-def process_new_file(filepath: Path, current_time: float):
-    if not should_monitor(filepath):
-        return
-    correct_path = get_correct_name(filepath)
-    if not correct_path or filepath == correct_path:
-        return
-    _pending_renames[filepath] = (correct_path, current_time + COOLDOWN_SECONDS)
-    logger.info(f"[SCHEDULED] {filepath.name} -> {correct_path.name} ({COOLDOWN_SECONDS)s)")
+def schedule_rename(filepath: Path, deadline: float):
+    global _pending_renames
+    # Check if already scheduled
+    for item in _pending_renames:
+        if item["filepath"] == filepath:
+            item["deadline"] = deadline
+            return
+    # Add new entry
+    _pending_renames.append({"filepath": filepath, "deadline": deadline})
 
 
 def process_pending_renames(current_time: float):
     global _known_files, _pending_renames
-    ready = [(fp, np) for fp, (np, dl) in list(_pending_renames.items()) if current_time >= dl]
-    _pending_renames = {fp: (np, dl) for fp, (np, dl) in list(_pending_renames.items()) if current_time < dl}
-
-    for filepath, new_path in ready:
-        if not filepath.exists() or new_path.exists():
+    
+    # Find ready items
+    ready = [item for item in _pending_renames if current_time >= item["deadline"]]
+    _pending_renames = [item for item in _pending_renames if current_time < item["deadline"]]
+    
+    # Sort ready items by original file path to ensure consistent order
+    ready.sort(key=lambda x: str(x["filepath"]))
+    
+    for item in ready:
+        filepath = item["filepath"]
+        if not filepath.exists():
             continue
+        
+        # Get correct name at rename time (accounts for previous renames)
+        correct_path = get_correct_name(filepath)
+        if not correct_path or filepath == correct_path:
+            continue
+            
+        if correct_path.exists():
+            logger.warning("[SKIP] %s -> %s (target exists)", filepath.name, correct_path.name)
+            continue
+            
         try:
-            filepath.rename(new_path)
-            logger.info(f"[RENAMED] {filepath.name} -> {new_path.name}")
+            filepath.rename(correct_path)
+            logger.info("[RENAMED] %s -> %s", filepath.name, correct_path.name)
             _known_files.pop(filepath, None)
-            _known_files[new_path] = get_file_mtime(new_path)
+            _known_files[correct_path] = get_file_mtime(correct_path)
         except Exception as e:
-            logger.error(f"Error: {e}")
+            logger.error("[ERROR] %s: %s", filepath, e)
 
 
 def check_running() -> bool:
@@ -114,7 +124,7 @@ def main_loop(verbose: bool = False):
         for filepath in scan_directory(directory, recursive=True):
             if should_monitor(filepath):
                 _known_files[filepath] = get_file_mtime(filepath)
-    logger.info(f"[SCAN] {len(_known_files)} files monitored")
+    logger.info("[SCAN] %d files monitored", len(_known_files))
     logger.info("[START] File watcher started! (Ctrl+C to stop)")
 
     try:
@@ -126,7 +136,6 @@ def main_loop(verbose: bool = False):
                 for filepath in scan_directory(directory, recursive=True):
                     current_files[filepath] = get_file_mtime(filepath)
             
-            # Detect new or modified files
             for filepath, mtime in current_files.items():
                 if not should_monitor(filepath):
                     continue
@@ -134,15 +143,13 @@ def main_loop(verbose: bool = False):
                 old_mtime = _known_files.get(filepath, 0)
                 
                 if old_mtime == 0 and mtime > 0:
-                    # New file
-                    logger.debug(f"[NEW] {filepath}")
-                    process_new_file(filepath, current_time)
+                    if get_correct_name(filepath):
+                        schedule_rename(filepath, current_time + COOLDOWN_SECONDS)
+                        logger.info("[DETECTED] %s (rename in %ds)", filepath.name, COOLDOWN_SECONDS)
                     _known_files[filepath] = mtime
                 elif mtime != old_mtime:
-                    # Modified file
                     _known_files[filepath] = mtime
             
-            # Remove deleted files
             for filepath in list(_known_files.keys()):
                 if filepath not in current_files:
                     _known_files.pop(filepath)
