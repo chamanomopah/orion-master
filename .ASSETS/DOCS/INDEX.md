@@ -1,6 +1,6 @@
 # DOCS Index - Referencia Rapida
 
-**Localizacao:** `C:\Users\JOSE\.claude\ASSETS\DOCS`
+**Localizacao:** `C:\Users\JOSE\.claude\.ASSETS\DOCS`
 
 ## Estrutura de Citacao
 

@@ -8,7 +8,6 @@
 |-------|----------|
 | n8n-workflows/ | Workflows do N8N |
 | projects/ | Projetos de codigo |
-| scripts/ | Scripts utilitarios |
 
 ## Como Citar
 - **Formato:** "implementacao" + `[Letras][Numero]`

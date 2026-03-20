@@ -6,8 +6,8 @@ import sys
 from pathlib import Path
 
 BASE_DIR = Path("C:/Users/JOSE/.claude")
-ASSETS_DIR = BASE_DIR / "ASSETS"
-IMPLEMENTATION_DIR = BASE_DIR / "IMPLEMENTATION"
+ASSETS_DIR = BASE_DIR / ".ASSETS"
+IMPLEMENTATION_DIR = BASE_DIR / ".IMPLEMENTATION"
 
 
 def number_to_letter(n):

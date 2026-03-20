@@ -1,6 +1,6 @@
 # DIAGRAMS Index - Referencia Rapida
 
-**Localizacao:** `C:\Users\JOSE\.claude\ASSETS\DIAGRAMS`
+**Localizacao:** `C:\Users\JOSE\.claude\.ASSETS\DIAGRAMS`
 
 ## Estrutura de Citacao
 

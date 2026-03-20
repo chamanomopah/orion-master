@@ -5,6 +5,8 @@ argument-hint: [query] [--advanced] [--domain <url>]
 allowed-tools: mcp__tavily-remote-mcp__tavily_search, mcp__tavily-remote-mcp__tavily_extract, Bash(python *), Read, Write
 ---
 
+importante: se o Tavily MCP não funcionar retorne imediatamente um output dizendo o que aconteceu e que não consegui proceguir
+
 # /tavily-search
 
 Skill principal para pesquisas online (usando Tavily MCP).

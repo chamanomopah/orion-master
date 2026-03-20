@@ -10,11 +10,13 @@ vc atualemnte funciona em headless mode (ou seja o usuario não ver o seu progre
 
 seu trabalho é ajudar a desenvolver ideias do usuario em realidade
 
-a menos que o usuario diga pra não criar algum arquivo , vc NUNCA deve pedir permissão pra criar um arquivo ou modificar um. 
+a menos que o usuario diga pra não criar algum arquivo , vc NUNCA deve pedir permissão pra criar um arquivo ou modificar um. sempre edite arquivoos sensiveis com bash caso peça permissão 
+
 
 sempre que o usuario falar pra adicionar na sua memoria/contexto, ele esta se referencido ao arquivo  C:\Users\JOSE\.claude\CLAUDE.md
 
 ---
+
 
 ## Sistema de Referências
 
@@ -38,42 +40,42 @@ Quando usuário citar "agente X", usar `agents/X-nome.md`
 ### Skills (`skills/`)
 Quando usuário citar "skill X", usar pasta numerada correspondente
 
-### ASSETS (Contextos para agentes)
+### .assets (Contextos para agentes)
 
-#### Documentação (`ASSETS/DOCS/`)
+#### Documentação (`.assets/DOCS/`)
 Curso sobre agentes AI (35 arquivos em 5 pastas)
 - A-essentials | B-human-in-a-loop | C-individual_agents | D-orchestration | E-workflows
 - **IMPORTANTE:** Quando usuário citar "documentação X", ler arquivo correspondente automaticamente
-- Referência completa: `ASSETS/DOCS/INDEX.md`
+- Referência completa: `.assets/DOCS/INDEX.md`
 
-#### Diagramas (`ASSETS/DIAGRAMS/`)
+#### Diagramas (`.assets/DIAGRAMS/`)
 Mermaid (.mmd, .mermaid)
 - A-flowcharts | B-sequences | C-architecture | D-mindmaps | E-entity-relationship
-- Referência completa: `ASSETS/DIAGRAMS/INDEX.md`
+- Referência completa: `.assets/DIAGRAMS/INDEX.md`
 
-#### Pesquisas (`ASSETS/RESEARCH/`)
+#### Pesquisas (`.assets/RESEARCH/`)
 Estudos sobre agentes AI
 - A-ai-agents | B-orchestration | C-workflows | D-patterns | E-case-studies
-- Referência completa: `ASSETS/RESEARCH/INDEX.md`
+- Referência completa: `.assets/RESEARCH/INDEX.md`
 
-#### Especificações (`ASSETS/SPECS/`)
+#### Especificações (`.assets/SPECS/`)
 Contextos em inglês para agentes
 - A-minimum-context | [adicionar mais conforme necessário]
 - **IMPORTANTE:** Quando usuário citar "especificação X", ler arquivo correspondente automaticamente
-- Referência completa: `ASSETS/SPECS/INDEX.md`
+- Referência completa: `.assets/SPECS/INDEX.md`
 
-### IMPLEMENTATION (Recursos técnicos)
+### .implementation (Recursos técnicos)
 
 Scripts, workflows N8N, projetos e automações
 
 - n8n-workflows/ | scripts/ | projects/
-- Referência completa: `IMPLEMENTATION/INDEX.md`
+- Referência completa: `.implementation/INDEX.md`
 
 ---
 
 ## Regra de Ouro: Manter Indices Atualizados
 
-**SEMPRE** que adicionar, remover ou mover arquivos em ASSETS/ ou IMPLEMENTATION/, execute:
+**SEMPRE** que adicionar, remover ou mover arquivos em .assets/ ou .implementation/, execute:
 
 ```bash
 /update-index

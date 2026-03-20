@@ -1,6 +1,6 @@
 # SPECS Index - Referencia Rapida
 
-**Localizacao:** `C:\Users\JOSE\.claude\ASSETS\SPECS`
+**Localizacao:** `C:\Users\JOSE\.claude\.ASSETS\SPECS`
 
 ## Estrutura de Citacao
 

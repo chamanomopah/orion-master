@@ -1,6 +1,6 @@
 # RESEARCH Index - Referencia Rapida
 
-**Localizacao:** `C:\Users\JOSE\.claude\ASSETS\RESEARCH`
+**Localizacao:** `C:\Users\JOSE\.claude\.ASSETS\RESEARCH`
 
 ## Estrutura de Citacao
 
