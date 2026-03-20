@@ -4,7 +4,7 @@
 Criar um sistema leve de monitoramento em tempo real que verifica e corrige automaticamente a nomenclatura de arquivos nas pastas do sistema Claude Code, garantindo que sigam o padrão estabelecido (pastas com letras, arquivos com números).
 
 ## Objective
-Desenvolver um script/command que monitore continuamente as pastas críticas (skills/, agents/, .assets/DOCS/, .assets/DIAGRAMS/, .assets/RESEARCH/, .assets/SPECS/) e automaticamente renomeie arquivos novos para seguir o padrão de nomenclatura correto, com um delay de 10 segundos para permitir edição inicial.
+Desenvolver um script/command que monitore continuamente as pastas críticas (skills/, agents/, commands/ .assets/DOCS/, .assets/DIAGRAMS/, .assets/RESEARCH/, .assets/SPECS/) e automaticamente renomeie arquivos novos para seguir o padrão de nomenclatura correto, com um delay de 10 segundos para permitir edição inicial.
 
 ## Problem Statement
 Atualmente, quando agentes ou scripts criam novos arquivos, frequentemente utilizam nomes descritivos em vez do padrão numérico/alfabético estabelecido. Isso quebra o sistema de referências (A1, B2, etc.) que depende de nomenclatura consistente. A correção manual é trabalhosa e sujeita a erros.
@@ -79,6 +79,7 @@ Criar um script Python leve que utiliza watchdog para monitorar eventos de cria�
 ### 5. Configurar pastas monitoradas
 - skills/ (arquivos devem seguir padrão numérico)
 - agents/ (arquivos devem seguir padrão numérico)
+- commands/ (arquivos devem seguir padrão numérico)
 - .assets/DOCS/ (pastas A-Z, arquivos numerados)
 - .assets/DIAGRAMS/ (pastas A-Z, arquivos numerados)
 - .assets/RESEARCH/ (pastas A-Z, arquivos numerados)
@@ -107,6 +108,7 @@ BASE_DIR = Path("C:/Users/JOSE/.claude")
 MONITORED_DIRS = [
     BASE_DIR / "skills",
     BASE_DIR / "agents",
+    BASE_DIR / "commands",
     BASE_DIR / ".assets" / "DOCS",
     BASE_DIR / ".assets" / "DIAGRAMS",
     BASE_DIR / ".assets" / "RESEARCH",
