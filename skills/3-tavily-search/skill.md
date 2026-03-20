@@ -1,6 +1,6 @@
 ---
 name: tavily-search
-description: Realiza pesquisas online usando Tavily MCP. Use para qualquer pesquisa na web, buscar informações atuais, investigar tópicos, ou responder perguntas que requerem dados da internet. Decide automaticamente entre resposta rápida (terminal) ou pesquisa avançada (cria arquivo em ASSETS/RESEARCH/).
+description: Realiza pesquisas online usando Tavily MCP. Use para qualquer pesquisa na web, buscar informações atuais, investigar tópicos, ou responder perguntas que requerem dados da internet. Decide automaticamente entre resposta rápida (terminal) ou pesquisa avançada (cria arquivo em ASSETS/RESEARCH/). sempre que o usuario dizer pra pesquisar online ative essa skill
 argument-hint: [query] [--advanced] [--domain <url>]
 allowed-tools: mcp__tavily-remote-mcp__tavily_search, mcp__tavily-remote-mcp__tavily_extract, Bash(python *), Read, Write
 ---
@@ -11,7 +11,7 @@ Skill principal para pesquisas online (usando Tavily MCP).
 
 ## Modos de operação (automático)
 
-Esta skill decide automaticamente o modo baseado na complexidade da query:
+sempre que o usuario dizer pra pesquisar online ative essa skill. Esta skill decide automaticamente o modo baseado na complexidade da query:
 
 ### 📋 **Modo RÁPIDO** (resposta direta)
 Usado para:
