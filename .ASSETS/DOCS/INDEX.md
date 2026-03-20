@@ -13,18 +13,18 @@
 ## A - ESSENTIALS
 Modulos Claude Code, MCP e fundamentos.
 
-### AA - claude_code_modules
+### A - claude_code_modules
 | Ref | Arquivo |
 |-----|---------|
-| AA1 | 1-claude_code_mcp.md |
-| AA2 | 2-skills.md |
-| AA3 | 3-sub-agents.md |
+| A1 | 1-claude_code_mcp.md |
+| A2 | 2-skills.md |
+| A3 | 3-sub-agents.md |
 
-### AB - mcp
+### B - mcp
 | Ref | Arquivo |
 |-----|---------|
-| AB1 | 1-firecrawl_mcp.md |
-| AB2 | 2-tavily_mcp.md |
+| B1 | 1-firecrawl_mcp.md |
+| B2 | 2-tavily_mcp.md |
 
 ## B - HUMAN-IN-A-LOOP
 Padroes de interacao humana com agentes.

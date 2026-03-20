@@ -187,9 +187,9 @@ Subagentes **nunca spawnam outros subagentes** por padrão, mas remover `Agent` 
 ## Referências
 
 - **Documentação Claude Code:**
-  - `ASSETS/DOCS/A-essentials/1-claude_code_modules/1-claude_code_mcp.md`
-  - `ASSETS/DOCS/A-essentials/1-claude_code_modules/2-skills.md`
-  - `ASSETS/DOCS/A-essentials/1-claude_code_modules/3-sub-agents.md`
+  - `ASSETS/DOCS/A-essentials/A-claude_code_modules/1-claude_code_mcp.md`
+  - `ASSETS/DOCS/A-essentials/A-claude_code_modules/2-skills.md`
+  - `ASSETS/DOCS/A-essentials/A-claude_code_modules/3-sub-agents.md`
 - **MCP Official Docs:** https://modelcontextprotocol.io/docs
 
 ---
