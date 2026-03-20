@@ -3,7 +3,17 @@
   "model": "opus[1m]",
   "effortLevel": "high",
   "autoMemoryEnabled": false,
-  "permissions": { "defaultMode": "bypassPermissions" },
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "allow": [
+      "Edit(~/.claude/**)",
+      "Edit(~/.claude/settings.json)",
+      "Edit(~/.claude/CLAUDE.md)",
+      "Edit(~/.claude/skills/**)",
+      "Read(~/.claude/**)",
+      "Write(~/.claude/**)"
+    ]
+  },
   "hooks": {
     "SessionEnd": [
       {
