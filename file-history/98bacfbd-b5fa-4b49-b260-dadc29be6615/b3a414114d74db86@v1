@@ -1,0 +1,3 @@
+@echo off
+cd C:\Users\JOSE\.claude\.IMPLEMENTATION\projects\B-software\C-hotkey-launcher
+python launcher.py

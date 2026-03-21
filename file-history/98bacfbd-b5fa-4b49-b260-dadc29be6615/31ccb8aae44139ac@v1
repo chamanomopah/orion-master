@@ -1,0 +1,3 @@
+@echo off
+cd C:\Users\JOSE\.claude\.IMPLEMENTATION\projects\B-software\A-n8n_local_trigger
+python trigger.py

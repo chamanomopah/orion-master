@@ -5,3 +5,4 @@ backups/
 plugins/
 sessions/
 history.jsonl
+ide/

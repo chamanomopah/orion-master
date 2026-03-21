@@ -77,6 +77,10 @@ Scripts, workflows N8N, projetos e automações
 
 ---
 
+### Projetos (`.IMPLEMENTATION/projects/`)
+
+dentro tem A-agentics/ e B-software/ e C-/clients
+
 ## Regra de Ouro: Manter Indices Atualizados
 
 **SEMPRE** que adicionar, remover ou mover arquivos em .assets/ ou .implementation/, execute:

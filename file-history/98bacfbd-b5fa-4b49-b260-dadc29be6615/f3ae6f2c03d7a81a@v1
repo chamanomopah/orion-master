@@ -1,0 +1,5 @@
+@echo off
+$env:N8N_ALLOW_EXECUTE_COMMAND = "true"
+$env:NODES_EXCLUDE = ""
+$env:WEBHOOK_URL = https://nell-unlandmarked-gayla.ngrok-free.dev
+n8n start

@@ -1,0 +1,2 @@
+@echo off
+ngrok http --domain=nell-unlandmarked-gayla.ngrok-free.dev 5678
