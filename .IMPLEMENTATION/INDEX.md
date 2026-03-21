@@ -6,7 +6,6 @@
 
 | Pasta | Conteudo |
 |-------|----------|
-| n8n-workflows/ | Workflows do N8N |
 | projects/ | Projetos de codigo |
 
 ## Como Citar
