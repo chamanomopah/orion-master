@@ -8,8 +8,8 @@ Ideias e padrões arquiteturais reutilizáveis.
 
 ```
 CONCEITOS/
-├── ideias/           # Ideias de conceitos e padrões
-└── INDEX.md          # Este arquivo
+├── A-ideias/          # Ideias de conceitos e padrões
+└── INDEX.md           # Este arquivo
 ```
 
 ---
@@ -18,14 +18,10 @@ CONCEITOS/
 
 ### Ideias
 
-| Ref | Arquivo | Descrição |
-|-----|---------|-----------|
-| A1 | [variaveis-globais-dinamicas](ideias/1-variaveis-globais-dinamicas.md) | Sistema de placeholders que atualizam em tempo real |
 
 ---
 
-## Como Adicionar Novo Conceito
+## Evolução
 
-1. Criar arquivo numerado em `ideias/`
-2. Adicionar entrada neste INDEX
-3. Executar `/update-index`
+- **A1 → A2**: Mudança de edição in-place para extração com histórico
+- A2 preserva placeholders e centraliza resultados em histórico organizado

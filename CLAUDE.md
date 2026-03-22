@@ -76,11 +76,18 @@ Contextos em ingles para agentes
 - **IMPORTANTE:** Quando usuario citar "especificacao X", ler arquivo correspondente automaticamente
 - Referencia completa: `.assets/SPECS/INDEX.md`
 
+#### protocolos (`.assets/PROTOCOLOS/`)
+- são arquivos de orquestração de multi-agentes (um agente não consegui fazer tudo sozinho, então varios conseguem)
+
+#### APRENDIZADOS (`.assets/LEARNINGS/`)
+
+- SÃO arquivos aprendidos de aud
+
+
 ### .implementation (Recursos tecnicos)
 
 Scripts, workflows N8N, projetos e automacoes
 
-- n8n-workflows/ | scripts/ | projects/
 - Referencia completa: `.implementation/INDEX.md`
 
 ---

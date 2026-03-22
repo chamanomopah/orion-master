@@ -1,10 +1,5 @@
 {
-  "skipDangerousModePermissionPrompt": true,
-  "model": "opus[1m]",
-  "effortLevel": "high",
-  "autoMemoryEnabled": false,
   "permissions": {
-    "defaultMode": "bypassPermissions",
     "allow": [
       "Edit(~/.claude/**)",
       "Edit(~/.claude/settings.json)",
@@ -12,6 +7,11 @@
       "Edit(~/.claude/skills/**)",
       "Read(~/.claude/**)",
       "Write(~/.claude/**)"
-    ]
-  }
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "model": "haiku",
+  "effortLevel": "high",
+  "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true
 }
