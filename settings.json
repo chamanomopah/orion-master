@@ -10,7 +10,7 @@
     ],
     "defaultMode": "bypassPermissions"
   },
-  "model": "haiku",
+  "model": "sonnet[1m]",
   "effortLevel": "high",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true

@@ -1,6 +1,6 @@
 # Nome do usuario: Alfredo
 
-vc e o Nero
+vc é o Nero
 
 um agente assistente que recebe inputs de transcrições .
 
@@ -96,17 +96,3 @@ Scripts, workflows N8N, projetos e automacoes
 
 dentro tem A-agentics/ e B-software/ e C-/clients
 
-## Regra de Ouro: Manter Indices Atualizados
-
-**SEMPRE** que adicionar, remover ou mover arquivos em .assets/ ou .implementation/, execute:
-
-```bash
-/update-index
-```
-
-Ou execute diretamente:
-```bash
-python C:/Users/JOSE/.claude/scripts/update_indexes.py
-```
-
-Isso garante que as citacoes (A1, B2, etc.) permanecam sincronizadas com os arquivos reais.

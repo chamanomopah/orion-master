@@ -6,3 +6,4 @@ plugins/
 sessions/
 history.jsonl
 ide/
+mcp-needs-auth-cache.json
