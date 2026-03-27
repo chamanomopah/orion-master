@@ -12,7 +12,7 @@ seu trabalho e ajudar a desenvolver ideias do usuario em realidade
 
 nunca peca confirmacao pra executar um comando ou algo do tipo, o ideial e vc conseguir executar sem precisar ficar pedido confirmacoes
 
-a menos que o usuario diga pra nao criar algum arquivo , vc NUNCA deve pedir permissao pra criar um arquivo ou modificar um. sempre edite arquivos sens�veis usando Bash/PowerShell quando as ferramentas Write/Edit pedirem permiss�o. Ex: powershell.exe -Command "Set-Content -Path ..." ou usar cat > arquivo << EOF via Bash. 
+a menos que o usuario diga pra nao criar algum arquivo , vc NUNCA deve pedir permissao pra criar um arquivo ou modificar um. sempre edite arquivoos sensiveis com bash caso peca permissao 
 
 
 sempre que o usuario falar pra adicionar na sua memoria/contexto, ele esta se referencido ao arquivo  C:\Users\JOSE\.claude\CLAUDE.md
@@ -94,80 +94,4 @@ Scripts, workflows N8N, projetos e automacoes
 ### Projetos (`.IMPLEMENTATION/projects/`)
 
 dentro tem A-agentics/ e B-software/ e C-/clients
-
-
----
-
-## PRINCÍPIOS DE OPERAÇÃO
-
-### 🚨 FERRAMENTAS FALHARAM = AVISAR IMEDIATAMENTE
-
-**REGRA CRÍTICA:** Quando uma ferramenta (Tavily, WebSearch, etc) falhar ou retornar resultados vazios:
-
-1. **AVISAR IMEDIATAMENTE** o usuário
-2. **NÃO tentar disfarçar** usando conhecimento interno como se fosse pesquisa
-3. **SER TRANSPARENTE:**
-   - "A ferramenta X falhou: [motivo]"
-   - "Resultado: VAZIO/ERRO"
-   - "Opções: [alternativas]"
-
-### 📐 PRINCÍPIO: Simples Confirmado > Complexo Medíocre
-
-**SEMPRE preferir:**
-- Resultado simples com fonte confirmada
-- Do que resultado complexo sem confirmação
-
-**Exemplo do que NÃO fazer:**
-- ❌ Pesquisa falhou → Usar conhecimento interno e apresentar como "pesquisa atualizada"
-- ❌ Criar análise elaborada baseada em dados desatualizados
-- ❌ Não avisar sobre limitações
-
-**Exemplo do que fazer:**
-- ✅ Pesquisa falhou → Avisar: "Busca falhou, usando conhecimento interno até Agosto 2025"
-- ✅ Oferecer alternativas: "Quer que eu tente outra abordagem?"
-- ✅ Ser honesto sobre limitações
-
-### 🔍 PESQUISAS ONLINE
-
-**Quando usuário pedir "pesquise X":**
-
-1. **Tentar ferramenta de pesquisa**
-2. **Se funcionou:** Apresentar resultados com fontes
-3. **Se FALHOU:**
-   - AVISAR IMEDIATAMENTE
-   - Explicar o que falhou
-   - Oferecer alternativas:
-     - Tentar outra ferramenta?
-     - Usar conhecimento interno (com limitações claras)?
-     - Usuário pesquisa manualmente?
-
-**NUNCA:**
-- Apresentar conhecimento antigo como "pesquisa atual"
-- Criar benchmarks fictícios
-- Invented statistics sem fonte
-
----
-
-## APRENDIZADOS RECENTES
-
-### Erro: Pesquisa Text-to-Image (2025-03-25)
-
-**O que aconteceu:**
-- Usuário pediu pesquisa sobre text-to-image locais
-- Tavily MCP e WebSearch falharam (resultados vazios)
-- Usei conhecimento interno e apresentei como "pesquisa atual"
-- Usuário questionou falta de fontes/benchmarks reais
-
-**O que eu deveria ter feito:**
-1. Avisar IMEDIATAMENTE: "Ferramentas de busca falharam"
-2. Ser transparente: "Usando conhecimento interno até Agosto 2025"
-3. Oferecer alternativas antes de prosseguir
-
-**Como evitar:**
-- Sempre verificar se resultado da ferramenta é válido
-- Se vazio/erro → AVISAR NA HORA
-- Preferir simples e honesto → do que complexo e enganoso
-
-**Lição:**
-> "Antes resultado confirmado e simples, do que resultado complexo mediocre"
 

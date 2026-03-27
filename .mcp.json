@@ -1,18 +1,15 @@
 {
   "mcpServers": {
-    "tavily-remote-mcp": {
-      "transport": {
-        "type": "oauth",
-        "serverUrl": "https://mcp.tavily.com/mcp/"
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "tavily": {
+      "command": "npx",
+      "args": ["-y", "tavily-mcp@latest"],
+      "env": {
+        "TAVILY_API_KEY": "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"
       }
-    },
-    "web_reader": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-web-reader"]
-    },
-    "4-5v-mcp": {
-      "command": "npx",
-      "args": ["-y", "4-5v-mcp"]
     }
   }
 }

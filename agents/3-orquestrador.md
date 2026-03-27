@@ -29,12 +29,13 @@ agentes a sua disposição:
 agente generico
 inves de vc executar comandos peça a esse pra executar por vc 
 lista de comandos:
--
--
--
 
 agente de pesquisa
 
 agente de planejamento 
 
-agente 
+etc
+
+leia pra contexto de orquestação
+@.ASSETS\LEARNINGS\A-TAC\C-workflows\8-rd-framework.md
+@.ASSETS\LEARNINGS\A-TAC\C-workflows\5-multi-agent-context-protection.md

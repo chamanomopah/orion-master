@@ -7,3 +7,5 @@ sessions/
 history.jsonl
 ide/
 mcp-needs-auth-cache.json
+file-history/
+paste-cache/
