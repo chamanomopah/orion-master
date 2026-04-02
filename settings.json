@@ -1,7 +1,4 @@
 {
-  "permissions": {
-    "defaultMode": "bypassPermissions"
-  },
   "enabledMcpjsonServers": [
     "tavily",
     "web_reader",
@@ -11,6 +8,9 @@
   "effortLevel": "high",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
+  "allow": {
+    "bash": ["gh *"]
+  },
   "env": {
     "ANTHROPIC_AUTH_TOKEN": "cca647b9521146308631b59fa378a0ca.cLjlAhcimNddAKtk",
     "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
